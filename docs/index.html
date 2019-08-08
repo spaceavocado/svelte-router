@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-svelte-router.Router.html">Router</a><ul class='methods'><li data-type='method'><a href="module-svelte-router.Router.html#back">back</a></li><li data-type='method'><a href="module-svelte-router.Router.html#forward">forward</a></li><li data-type='method'><a href="module-svelte-router.Router.html#go">go</a></li><li data-type='method'><a href="module-svelte-router.Router.html#navigationGuard">navigationGuard</a></li><li data-type='method'><a href="module-svelte-router.Router.html#onError">onError</a></li><li data-type='method'><a href="module-svelte-router.Router.html#onNavigationChanged">onNavigationChanged</a></li><li data-type='method'><a href="module-svelte-router.Router.html#push">push</a></li><li data-type='method'><a href="module-svelte-router.Router.html#replace">replace</a></li><li data-type='method'><a href="module-svelte-router.Router.html#routeURL">routeURL</a></li><li data-type='method'><a href="module-svelte-router.Router.html#start">start</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-svelte-router.html">svelte-router</a></li><li><a href="module-svelte-router_history.html">svelte-router/history</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_history.html#~history">history</a></li></ul></li><li><a href="module-svelte-router_location.html">svelte-router/location</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_location.html#.createLocation">createLocation</a></li></ul></li><li><a href="module-svelte-router_route.html">svelte-router/route</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_route.html#.cloneRoute">cloneRoute</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRoute">createRoute</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRouteConfig">createRouteConfig</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRouteRecord">createRouteRecord</a></li></ul></li><li><a href="module-svelte-router_utils.html">svelte-router/utils</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_utils.html#.deepClone">deepClone</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.fullURL">fullURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.hasPrefix">hasPrefix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.hasSuffix">hasSuffix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.historyFullURL">historyFullURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.joinPath">joinPath</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.parseURL">parseURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.urlMatch">urlMatch</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+    <section class="package">
+        <h3> </h3>		
+    </section>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+    <section class="readme">
+        <article><h1>Svelte Router</h1><p>Simple Svelte Router for Single Page Applications (SPA), inspired by <a href="https://router.vuejs.org/">Vue Router</a>. Features include:</p>
+<ul>
+<li>Nested route/view mapping.</li>
+<li>Modular, component-based router configuration.</li>
+<li>Route params, query, wildcards <em>(powered by <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>)</em>.</li>
+<li>Navigation guards for navigation control.</li>
+<li>Links with automatic active CSS classes.</li>
+<li>HTML5 history mode or hash mode <em>(powered by <a href="https://github.com/ReactTraining/history">history</a>)</em>.</li>
+</ul>
+<p>Please note: This is a beta release.</p>
+<h2>Installation via NPM or Yarn</h2><pre class="prettyprint source lang-sh"><code>npm install -D @spaceavocado/svelte-router</code></pre><p>or </p>
+<pre class="prettyprint source lang-sh"><code>yarn add @spaceavocado/svelte-router -D</code></pre><h2>Essentials</h2><p>Note: All code below uses ES2015+.</p>
+<h3>Setup the Router</h3><p>All we need to do is map our components to the routes and add root RouterView component, here's a basic example of app component uses as the main Svelte component.</p>
+<p>index.js:</p>
+<pre class="prettyprint source lang-javascript"><code>import App from './app.svelte';
+
+new App({target: document.getElementById(&quot;app&quot;)});</code></pre><p>app.svelve:</p>
+<pre class="prettyprint source lang-html"><code>&lt;script>
+import createRouter, {RouterView} from '@spaceavocado/svelte-router';
+
+// View components
+import ViewHome from './views/home.svelte';
+import View404 from './views/404.svelte';
+
+createRouter({
+  routes: [
+    { 
+      path: '/',
+      name: 'HOME',
+      component: ViewHome,
+    },
+    {
+      path: '*',
+      name: 'NOT_FOUND',
+      component: View404,
+    },
+  ],
+});
+&lt;/script>
+
+&lt;RouterView/></code></pre><p>This is an example of the minimalist plug &amp; play setup of the Svelte Router. For more details:</p>
+<ul>
+<li><a href="#create-router">Create Router</a></li>
+<li><a href="#route-configuration">Route Configuration</a></li>
+<li><a href="#router-view-component">Route View Component</a></li>
+</ul>
+<h3>Route Configuration</h3><p>A route can be configure with these properties:
+| Property  | Description                                                                                                                                                                                          | Type                      |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| path      | A string that equals the path of the current route, always resolved as an absolute path. e.g. &quot;/foo/bar&quot;. Please see <a href="#dynamic-route-configuration">Dynamic Route Configuration</a> for advanced usage. | string                    |
+| name      | The name of the current route, optional.                                                                                                                                                             | string                    |
+| component | Svelte component. It could be be omitted if the route has nested routes.                                                                                                                             | function                  |
+| meta      | Route meta object, meta is used a bucket for your custom data on route object.                                                                                                                       | object                    |
+| props     | Declaration of component properties passed to the component by the route. Please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a> for more details.                       | boolean, object, function |
+| children  | Collection of children/nested routes. Please see <a href="#nested-routes">Nested Routes</a> for more details.                                                                                                   | object[]                  |</p>
+<pre class="prettyprint source lang-javascript"><code>createRouter({
+  routes: [
+    { 
+      path: '/',
+      name: 'HOME',
+      component: ViewHome,
+      meta: {
+        static: 5,
+        dynamic: () => {return 5;},
+      }
+    },
+    { 
+      path: '/services',
+      name: 'SERVICES',
+      children: [
+        { 
+          path: '/',
+          name: 'SERVICES_HOME',
+          component: ViewServices,
+        },
+        { 
+          path: '/design',
+          name: 'SERVICES_DESIGN',
+          component: ViewServicesDesign,
+          props: {
+            title: 'Services / Design',
+          }
+        }
+      ]
+    },
+    { 
+      path: '/users/:id(\\d+)',
+      name: 'USER_PROFILE',
+      component: ViewUserProfile,
+      props: (route) => {
+        return {
+          userId: route.params.id,
+        };
+      },
+    }
+  ],
+});</code></pre><h3>Dynamic Route Configuration</h3><ul>
+<li>The route <strong>path</strong> could contain dynamic parameters, e.g. <code>path: '/users/:id'</code>. Please see <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> for more information how to configure the name, optional, etc,. parameters.</li>
+<li>Special case is <code>path: '*'</code> which means any URL, this route should be the last route in your routes definition.</li>
+<li>All resolved dynamic parameters are accessible on the resolved route object.</li>
+</ul>
+<h3>Passing Props to Route Components</h3><p>By default, props are not automatically passed to the route component, this could be change to:</p>
+<h4>Automatically Pass Route Params as Component Props</h4><p>All route dynamic props are auto-passed to the component.</p>
+<pre class="prettyprint source lang-javascript"><code>// app.svelte
+{ 
+  path: '/users/:id(\\d+)',
+  name: 'USER_PROFILE',
+  component: ViewUserProfile,
+  props: true,
+}
+
+// ViewUserProfile.svelte
+export let id;</code></pre><h4>Pass Custom Object as Component Props</h4><pre class="prettyprint source lang-javascript"><code>// app.svelte
+{ 
+  path: '/',
+  name: 'HOME',
+  component: ViewHome,
+  props: {
+    title: 'Hello World',
+  },
+}
+
+// ViewHome.svelte
+export let title;</code></pre><h4>Use a Function to Resolve the Component Props</h4><p>Please see <a href="#route-object">Route Object</a> for more details.</p>
+<pre class="prettyprint source lang-javascript"><code>// app.svelte
+{ 
+  path: '/users/:id(\\d+)',
+  name: 'USER_PROFILE',
+  component: ViewUserProfile,
+  props: (route) => {
+    return {
+      title: 'User Profile',
+      id: route.params.id,
+    }
+  },
+}
+
+// ViewUserProfile.svelte
+export let title;
+export let id;</code></pre><h3>Nested Routes</h3><ul>
+<li>Please see <a href="#route-configuration">Route Configuration</a> for the base information about the routes configuration.</li>
+<li><p>Nested route has access to its own parameters and all parent's route parameters:</p>
+<pre class="prettyprint source lang-javascript"><code>{ 
+  path: '/users/:id(\\d+)',
+  children: [
+    {
+      path: '/',
+      name: 'USER_DETAIL',
+      component: ViewUserDetail,
+    },
+    {
+      path: '/message/:msgId(\\d+)',
+      name: 'USER_MESSAGE',
+      component: ViewUserMessageDetail,
+    }
+  ],
+},
+{
+  path: '/services',
+  component: ViewServices,
+  children: [
+    path: '/design',
+    component: ViewServicesDesign,
+  ]
+}
+
+// Resolved USER_MESSAGE route will have access to 
+// id, and msgId params.</code></pre></li>
+<li>The <strong>component</strong> could be omitted if the route has nested routes (please see the example above), it this case ViewRouter component will be used to pass through the components, please see <a href="#router-view-component">Router View</a> for more details.</li>
+<li>If the route has nested routes, and it has defined component, than the component must internally use <a href="#router-view-component">Router View</a> component to pass though the routed view components on it's own nested routes.</li>
+<li>All routes should start with trailing slash.</li>
+</ul>
+<h3>Router Link Component</h3><pre class="prettyprint source lang-html"><code>&lt;script>
+import {RouterLink} from '@spaceavocado/svelte-router';
+&lt;/script>
+
+&lt;!-- URL -->
+&lt;RouterLink to='/services/design'>Navigate by URL&lt;/RouterLink>
+
+&lt;!-- Location Object -->
+&lt;RouterLink to={{name: 'USER_DETAIL', params:{id: 5}}>Navigate by Location&lt;/RouterLink></code></pre><p>The route link is the base component for routing action. The route link renders a <strong>&lt; a &gt;</strong> DOM element with click action triggering route change. The active class is auto-resolved. Component parameters:
+| Property    | Description                                                                                             | Type             |
+| ----------- | ------------------------------------------------------------------------------------------------------- | ---------------- |
+| to          | navigation URL or navigation Location, please see <a href="#location-object">Location Object</a> for more details. | string, Location |
+| replace     | Replace rather the than push into the history, defaults to false.                                       | boolean          |
+| activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |</p>
+<h3>Router View Component</h3><pre class="prettyprint source lang-html"><code>&lt;script>
+import {RouterView} from '@spaceavocado/svelte-router';
+&lt;/script>
+
+&lt;RouterView/></code></pre><ul>
+<li>The route view acts as <strong>SLOT</strong> for resolved route component, i.e. it will be replaced run-time with the component defined on the given route.</li>
+<li>For nested routes, if the parent route (the one having nested routes) has defined it's own component, the component must use internally ViewRouter component to pass through the nested route components. If the component is not defined on the parent route, it auto pass through.</li>
+</ul>
+<h2>Advanced</h2><h3>Programmatic Navigation</h3><p>Besides the <a href="#router-link-component">Router Link Component</a>, the route could be changed like so:</p>
+<pre class="prettyprint source lang-javascript"><code>import {router} from '@spaceavocado/svelte-router';
+
+// URL
+$router.push('/services/design');
+
+// Location Object
+$router.push({
+  name: 'USER_DETAIL',
+  params: {
+    id: 5,
+  },
+  query: {
+    code: 'system_code',
+  },
+  hash: 'sidebar',
+});</code></pre><blockquote>
+<p>Note: the <strong>router</strong> can be accessed after the <strong>createRouter</strong> function is executed, and it must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
+</blockquote>
+<p>More information:</p>
+<ul>
+<li><a href="#location-object">Location Object</a></li>
+<li><a href="#router-methods">Router Methods</a></li>
+</ul>
+<h3>Navigation Guard</h3><p>The navigation guards are primarily used to guard navigations either by redirecting it or canceling it.</p>
+<h4>Create a Navigation Guard</h4><pre class="prettyprint source lang-javascript"><code>import {router} from '@spaceavocado/svelte-router';
+
+// The guard callback is called when a navigation occurs,
+// the next function must be called to continue the navigation.
+$router.navigationGuard((to, from, next) => {
+  next();
+});</code></pre><blockquote>
+<p>Note: the <strong>router</strong> can be accessed after the <strong>createRouter</strong> function is executed, and it must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
+</blockquote>
+<p>to, from are <a href="#route-object">Route Object</a>.</p>
+<h4>Navigation Guard Next Action</h4><h5>Continue</h5><pre class="prettyprint source lang-javascript"><code>next();</code></pre><p>Move on to the next hook in the pipeline. If no hooks are left, the navigation is confirmed.</p>
+<h5>Abort</h5><pre class="prettyprint source lang-javascript"><code>next(false);</code></pre><p>Abort the current navigation.</p>
+<h5>Redirect</h5><pre class="prettyprint source lang-javascript"><code>// URL
+next('/services/design');
+
+// Location Object
+next({
+  name: 'USER_DETAIL',
+  params: {
+    id: 5,
+  },
+  query: {
+    code: 'system_code',
+  },
+  hash: 'sidebar',
+});</code></pre><p>Abort the current navigation and redirect to new navigation.</p>
+<p>More information:</p>
+<ul>
+<li><a href="#location-object">Location Object</a></li>
+</ul>
+<h5>Error</h5><pre class="prettyprint source lang-javascript"><code>next(new Error('internal error'));</code></pre><p>Abort the current navigation, and trigger onError event on the router.</p>
+<p>More information:</p>
+<ul>
+<li><a href="#onerror">onError</a></li>
+</ul>
+<h2>API</h2><p>To see the details code documentation, please read the <a href="https://github.com/spaceavocado/svelte-router/tree/master/docs">Code Documentation</a></p>
+<h3>Create Router</h3><pre class="prettyprint source lang-javascript"><code>import createRouter from '@spaceavocado/svelte-router';
+
+// Please see the opts below.
+const routerOpts = {};
+
+// Router is Svelte read-able store, therefore it must be
+// accessed with $ prefix, e.g. $router.
+// To access the router instance in other files, please see &quot;Access Router Instance&quot;.
+const router = createRouter(routerOpts);</code></pre><blockquote>
+<p>Throws when the route options are invalid.</p>
+</blockquote>
+<h4>Router Options</h4><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td>History mode. Supported values: 'HISTORY', 'HASH'.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>basename</td>
+<td>The base URL of the app, defaults to ''.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>hashType</td>
+<td>Hash type. Relevant only for HISTORY_MODE.HASH. Supported values: 'PUSH', 'REPLACE'.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>routes</td>
+<td>router routes.</td>
+<td>object[]</td>
+</tr>
+<tr>
+<td>activeClass</td>
+<td>CSS class applied on the active route link. Defaults to &quot;active&quot;.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Note: History modes could be accessed like so: </p>
+<pre class="prettyprint source lang-javascript"><code>import {ROUTER_MODE} from '@spaceavocado/svelte-router';</code></pre></blockquote>
+<blockquote>
+<p>Note: Hash types could be accessed like so: </p>
+<pre class="prettyprint source lang-javascript"><code>import {HASH_TYPE} from '@spaceavocado/svelte-router';</code></pre></blockquote>
+<p>More information:</p>
+<ul>
+<li><a href="#route-configuration">Route Configuration</a></li>
+</ul>
+<h4>Access Router Instance</h4><pre class="prettyprint source lang-javascript"><code>import {router} from '@spaceavocado/svelte-router';</code></pre><blockquote>
+<p>Note: It must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
+</blockquote>
+<h3>Router Methods</h3><p>All route methods are accessible on the router, please see <a href="#access-router-instance">Access Router Instance</a>.</p>
+<h4>start</h4><pre class="prettyprint source lang-javascript"><code>$router.start();</code></pre><p>This method is auto-called by the root <a href="#router-view-component">Router View Component</a>; it handles the on page load route resolution.</p>
+<h4>push</h4><p>Push to navigation.</p>
+<pre class="prettyprint source lang-javascript"><code>$router.push(rawLocation, onComplete, onAbort);</code></pre><blockquote>
+<p>Throws when the rawLocation is invalid or when the path is invalid.</p>
+</blockquote>
+<p>Parameters:
+| Name        | Description                              | Type                                 |
+| ----------- | ---------------------------------------- | ------------------------------------ |
+| rawLocation | raw path or location object.             | string, <a href="#location-object">Location</a> |
+| onComplete  | On complete callback function. Optional. | function                             |
+| onAbort     | On abort callback function. Optional.    | function                             |</p>
+<h4>replace</h4><p>Replace in navigation.</p>
+<pre class="prettyprint source lang-javascript"><code>$router.replace(rawLocation, onComplete, onAbort);</code></pre><blockquote>
+<p>Throws when the rawLocation is invalid or when the path is invalid.</p>
+</blockquote>
+<p>Parameters:
+| Name        | Description                              | Type                                 |
+| ----------- | ---------------------------------------- | ------------------------------------ |
+| rawLocation | raw path or location object.             | string, <a href="#location-object">Location</a> |
+| onComplete  | On complete callback function. Optional. | function                             |
+| onAbort     | On abort callback function. Optional.    | function                             |</p>
+<h4>back</h4><p>Go one step back in the navigation history.</p>
+<pre class="prettyprint source lang-javascript"><code>$router.back();</code></pre><h4>forward</h4><p>Go one step forward in the navigation history.</p>
+<pre class="prettyprint source lang-javascript"><code>$router.forward();</code></pre><h4>go</h4><p>Go to a specific history position in the navigation history.</p>
+<pre class="prettyprint source lang-javascript"><code>$router.go(n);</code></pre><p>Parameters:
+| Name | Description                                                | Type   |
+| ---- | ---------------------------------------------------------- | ------ |
+| n    | number of steps to forward or backwards (negative number). | number |</p>
+<h4>routeURL</h4><p>Generate route URL from the the raw location.</p>
+<pre class="prettyprint source lang-javascript"><code>const url = $router.routeURL(rawLocation);</code></pre><p>Parameters:
+| Name        | Description          | Type                         |
+| ----------- | -------------------- | ---------------------------- |
+| rawLocation | raw location object. | <a href="#location-object">Location</a> |</p>
+<h4>navigationGuard</h4><p>Register a navigation guard which will be called whenever a navigation is triggered. All registered navigation guards are resolved in sequence. Navigation guard must call the next() function to continue the execution of navigation change. Please see <a href="#navigation-guard">Navigation Guard</a></p>
+<pre class="prettyprint source lang-javascript"><code>const unregister = $router.navigationGuard(guard);
+
+// To unregister the navigation guard:
+unregister();
+unregister = null;
+</code></pre><p>Parameters:
+| Name        | Description          | Type                         |
+| ----------- | -------------------- | ---------------------------- |
+| guard | guard callback function with (to, from, next) signature. Please see <a href="#navigation-guard-next-action">Navigation Guard Next Action</a> | function |</p>
+<p>to, from are <a href="#route-object">Route Object</a>.</p>
+<h4>onNavigationChanged</h4><p>Register a callback which will be called when all navigation guards are resolved, and the final navigation change is resolved.</p>
+<pre class="prettyprint source lang-javascript"><code>const unregister = $router.onNavigationChanged(callback);
+
+// To unregister the event:
+unregister();
+unregister = null;
+</code></pre><p>Parameters:
+| Name        | Description          | Type                         |
+| ----------- | -------------------- | ---------------------------- |
+| callback | callback function with fn(to, from) signature. | function |</p>
+<p>to, from are <a href="#route-object">Route Object</a>.</p>
+<h4>onError</h4><p>Register a callback which will be called when an error is caught during a route navigation.</p>
+<pre class="prettyprint source lang-javascript"><code>const unregister = $router.onError(callback);
+
+// To unregister the event:
+unregister();
+unregister = null;
+</code></pre><p>Parameters:
+| Name        | Description          | Type                         |
+| ----------- | -------------------- | ---------------------------- |
+| callback | callback function with fn(error) signature. | function |</p>
+<h3>Location Object</h3><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>Name of the route.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>params</td>
+<td>Route params dictionary object, if the route has defined dynamic route parameters, this object is required, with valid params to resolve the route URL.</td>
+<td>object</td>
+</tr>
+<tr>
+<td>query</td>
+<td>Route query dictionary object. Optional.</td>
+<td>object</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>Route hash parameter. Optional.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<pre class="prettyprint source lang-javascript"><code>// Location object example
+{
+  name: 'USER_DETAIL',
+  params: {
+    id: 5,
+  },
+  query: {
+    code: 'system_code',
+  },
+  hash: 'sidebar',
+}
+
+// Considering that USER_DETAIL is /user/:id(\\d+)
+// the resolved URL will be:
+// /user/5?code=system_code#sidebar</code></pre><h3>Route Object</h3><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>name of the route.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>path</td>
+<td>location path use to resolve the route.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>url hash.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>fullPath</td>
+<td>the full resolved URL including query and hash.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>params</td>
+<td>route resolved params.</td>
+<td>object</td>
+</tr>
+<tr>
+<td>query</td>
+<td>query parameters.</td>
+<td>object</td>
+</tr>
+<tr>
+<td>meta</td>
+<td>route meta.</td>
+<td>object</td>
+</tr>
+<tr>
+<td>action</td>
+<td>route action.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>matched</td>
+<td>resolved route records, please see <a href="#route-record-object">Route Record Object</a> In the case of nested route, it contains all matched routes, starting from root to the deepest route node.</td>
+<td>object[]</td>
+</tr>
+</tbody>
+</table>
+<h3>Route Record Object</h3><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>location path use to resolve the route.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>name</td>
+<td>name of the route.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>component</td>
+<td>svelte component.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>meta</td>
+<td>route meta.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>params</td>
+<td>route resolved params.</td>
+<td>string</td>
+</tr>
+<tr>
+<td>props</td>
+<td>props passed to component, please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a>.</td>
+<td>boolean, object, function</td>
+</tr>
+</tbody>
+</table>
+<h2>Changes</h2><p>To see the changes that were made in a given release, please lookup the tag on the releases page.</p>
+<h2>About</h2><p>This project was inspired by <a href="https://router.vuejs.org/">Vue Router</a>, designed mainly to explore and test Svelte in SPA realm. Any feedback, contribution to this project is welcomed.</p>
+<p>The project is in a beta phase, therefore there might be major changes in near future, the annotation should stay the same, though.</p>
+<h2>Contributing</h2><p>When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.</p>
+<h3>Pull Request Process</h3><ol>
+<li>Fork it</li>
+<li>Create your feature branch (git checkout -b ft/new-feature-name)</li>
+<li>Commit your changes (git commit -am 'Add some feature')</li>
+<li>Push to the branch (git push origin ft/new-feature-name)</li>
+<li>Create new Pull Request<blockquote>
+<p>Please make an issue first if the change is likely to increase.</p>
+</blockquote>
+</li>
+</ol>
+<h2>License</h2><p>Svelte Router is released under the MIT license. See <a href="https://github.com/spaceavocado/svelte-router/blob/master/LICENSE.txt">LICENSE.txt</a></p></article>
+    </section>
+
+
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Aug 08 2019 10:40:39 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

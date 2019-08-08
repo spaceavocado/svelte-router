@@ -1,0 +1,13 @@
+# Output
+lib
+
+# NPM, YARN
+node_modules
+yarn.lock
+yarn-error.log
+package-lock.json
+npm-debug.log
+
+# VS Code
+*.vscode
+*.code-workspace

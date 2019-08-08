@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Router - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-svelte-router.Router.html">Router</a></li><li><a href="Router_Router.html">Router</a></li></ul><h3>Modules</h3><ul><li><a href="module-svelte-router.html">svelte-router</a></li><li><a href="module-svelte-router_history.html">svelte-router/history</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_history.html#~history">history</a></li></ul></li><li><a href="module-svelte-router_location.html">svelte-router/location</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_location.html#.createLocation">createLocation</a></li></ul></li><li><a href="module-svelte-router_route.html">svelte-router/route</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_route.html#.cloneRoute">cloneRoute</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRoute">createRoute</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRouteConfig">createRouteConfig</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRouteRecord">createRouteRecord</a></li></ul></li><li><a href="module-svelte-router_utils.html">svelte-router/utils</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_utils.html#.deepClone">deepClone</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.fullURL">fullURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.hasPrefix">hasPrefix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.hasSuffix">hasSuffix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.historyFullURL">historyFullURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.joinPath">joinPath</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.parseURL">parseURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.urlMatch">urlMatch</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Router</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        Router
+        </h2>
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+    
+
+    <h4 class="name" id="Router"><span class="type-signature"></span>new Router<span class="signature">(opts)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="router.js.html">router.js</a>, <a href="router.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>opts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>router options.</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-svelte-router_history.html#~HISTORY_MODE">module:svelte-router/history~HISTORY_MODE</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>History mode.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>basename</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The base URL of the app, defaults to ''.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>hashType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-svelte-router_history.html#~HASH_TYPE">module:svelte-router/history~HASH_TYPE</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Hash type.
+Relevant only for HISTORY_MODE.HASH.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>routes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>router routes.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>activeClass</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                    &lt;nullable><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>CSS class applied on the
+active route link. Defaults to &quot;active&quot;.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Aug 07 2019 22:54:43 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
