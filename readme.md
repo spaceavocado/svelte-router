@@ -9,6 +9,55 @@ Simple Svelte Router for Single Page Applications (SPA), inspired by [Vue Router
 
 Please note: This is a beta release.
 
+To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/).
+
+Table of Content
+- [Svelte Router](#svelte-router)
+  - [Installation via NPM or Yarn](#installation-via-npm-or-yarn)
+  - [Essentials](#essentials)
+    - [Setup the Router](#setup-the-router)
+    - [Route Configuration](#route-configuration)
+    - [Dynamic Route Configuration](#dynamic-route-configuration)
+    - [Passing Props to Route Components](#passing-props-to-route-components)
+      - [Automatically Pass Route Params as Component Props](#automatically-pass-route-params-as-component-props)
+      - [Pass Custom Object as Component Props](#pass-custom-object-as-component-props)
+      - [Use a Function to Resolve the Component Props](#use-a-function-to-resolve-the-component-props)
+    - [Nested Routes](#nested-routes)
+    - [Router Link Component](#router-link-component)
+    - [Router View Component](#router-view-component)
+  - [Advanced](#advanced)
+    - [Programmatic Navigation](#programmatic-navigation)
+    - [Navigation Guard](#navigation-guard)
+      - [Create a Navigation Guard](#create-a-navigation-guard)
+      - [Navigation Guard Next Action](#navigation-guard-next-action)
+        - [Continue](#continue)
+        - [Abort](#abort)
+        - [Redirect](#redirect)
+        - [Error](#error)
+  - [API](#api)
+    - [Create Router](#create-router)
+      - [Router Options](#router-options)
+      - [Access Router Instance](#access-router-instance)
+    - [Router Methods](#router-methods)
+      - [start](#start)
+      - [push](#push)
+      - [replace](#replace)
+      - [back](#back)
+      - [forward](#forward)
+      - [go](#go)
+      - [routeURL](#routeurl)
+      - [navigationGuard](#navigationguard)
+      - [onNavigationChanged](#onnavigationchanged)
+      - [onError](#onerror)
+    - [Location Object](#location-object)
+    - [Route Object](#route-object)
+    - [Route Record Object](#route-record-object)
+  - [Changes](#changes)
+  - [About](#about)
+  - [Contributing](#contributing)
+    - [Pull Request Process](#pull-request-process)
+  - [License](#license)
+
 ## Installation via NPM or Yarn
 ```sh
 npm install -D @spaceavocado/svelte-router
@@ -65,14 +114,16 @@ This is an example of the minimalist plug & play setup of the Svelte Router. For
 
 ### Route Configuration
 A route can be configure with these properties:
+
 | Property  | Description                                                                                                                                                                                          | Type                      |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------ |
 | path      | A string that equals the path of the current route, always resolved as an absolute path. e.g. "/foo/bar". Please see [Dynamic Route Configuration](#dynamic-route-configuration) for advanced usage. | string                    |
 | name      | The name of the current route, optional.                                                                                                                                                             | string                    |
 | component | Svelte component. It could be be omitted if the route has nested routes.                                                                                                                             | function                  |
 | meta      | Route meta object, meta is used a bucket for your custom data on route object.                                                                                                                       | object                    |
 | props     | Declaration of component properties passed to the component by the route. Please see [Passing Props to Route Components](#passing-props-to-route-components) for more details.                       | boolean, object, function |
 | children  | Collection of children/nested routes. Please see [Nested Routes](#nested-routes) for more details.                                                                                                   | object[]                  |
+
 ```javascript
 createRouter({
   routes: [
@@ -225,8 +276,9 @@ import {RouterLink} from '@spaceavocado/svelte-router';
 <RouterLink to={{name: 'USER_DETAIL', params:{id: 5}}>Navigate by Location</RouterLink>
 ```
 The route link is the base component for routing action. The route link renders a **< a >** DOM element with click action triggering route change. The active class is auto-resolved. Component parameters:
+
 | Property    | Description                                                                                             | Type             |
-| ----------- | ------------------------------------------------------------------------------------------------------- | ---------------- |
+| :----------- | :------------------------------------------------------------------------------------------------------- | :---------------- |
 | to          | navigation URL or navigation Location, please see [Location Object](#location-object) for more details. | string, Location |
 | replace     | Replace rather the than push into the history, defaults to false.                                       | boolean          |
 | activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |
@@ -328,7 +380,7 @@ More information:
 * [onError](#onerror)
 
 ## API
-To see the details code documentation, please read the [Code Documentation](https://github.com/spaceavocado/svelte-router/tree/master/docs)
+To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/)
 
 ### Create Router
 ```javascript
@@ -347,7 +399,7 @@ const router = createRouter(routerOpts);
 
 #### Router Options
 | Property    | Description                                                                          | Type     |
-| ----------- | ------------------------------------------------------------------------------------ | -------- |
+| :----------- | :------------------------------------------------------------------------------------ | :-------- |
 | mode        | History mode. Supported values: 'HISTORY', 'HASH'.                                   | string   |
 | basename    | The base URL of the app, defaults to ''.                                             | string   |
 | hashType    | Hash type. Relevant only for HISTORY_MODE.HASH. Supported values: 'PUSH', 'REPLACE'. | string   |
@@ -388,8 +440,9 @@ $router.push(rawLocation, onComplete, onAbort);
 > Throws when the rawLocation is invalid or when the path is invalid.
 
 Parameters:
+
 | Name        | Description                              | Type                                 |
-| ----------- | ---------------------------------------- | ------------------------------------ |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | rawLocation | raw path or location object.             | string, [Location](#location-object) |
 | onComplete  | On complete callback function. Optional. | function                             |
 | onAbort     | On abort callback function. Optional.    | function                             |
@@ -402,8 +455,9 @@ $router.replace(rawLocation, onComplete, onAbort);
 > Throws when the rawLocation is invalid or when the path is invalid.
 
 Parameters:
+
 | Name        | Description                              | Type                                 |
-| ----------- | ---------------------------------------- | ------------------------------------ |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | rawLocation | raw path or location object.             | string, [Location](#location-object) |
 | onComplete  | On complete callback function. Optional. | function                             |
 | onAbort     | On abort callback function. Optional.    | function                             |
@@ -426,8 +480,9 @@ Go to a specific history position in the navigation history.
 $router.go(n);
 ```
 Parameters:
+
 | Name | Description                                                | Type   |
-| ---- | ---------------------------------------------------------- | ------ |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | n    | number of steps to forward or backwards (negative number). | number |
 
 #### routeURL
@@ -436,8 +491,9 @@ Generate route URL from the the raw location.
 const url = $router.routeURL(rawLocation);
 ```
 Parameters:
+
 | Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | rawLocation | raw location object. | [Location](#location-object) |
 
 #### navigationGuard
@@ -451,8 +507,9 @@ unregister = null;
 
 ```
 Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
+
+| Name  | Description                                                                                                                       | Type     |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | guard | guard callback function with (to, from, next) signature. Please see [Navigation Guard Next Action](#navigation-guard-next-action) | function |
 
 to, from are [Route Object](#route-object).
@@ -468,8 +525,9 @@ unregister = null;
 
 ```
 Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
+
+| Name     | Description                                    | Type     |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | callback | callback function with fn(to, from) signature. | function |
 
 to, from are [Route Object](#route-object).
@@ -485,13 +543,14 @@ unregister = null;
 
 ```
 Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
+
+| Name     | Description                                 | Type     |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | callback | callback function with fn(error) signature. | function |
 
 ### Location Object
 | Property | Description                                                                                                                                             | Type   |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | name     | Name of the route.                                                                                                                                      | string |
 | params   | Route params dictionary object, if the route has defined dynamic route parameters, this object is required, with valid params to resolve the route URL. | object |
 | query    | Route query dictionary object. Optional.                                                                                                                | object |
@@ -515,7 +574,7 @@ Parameters:
 ```
 ### Route Object
 | Property | Description                                                                                                                                                                               | Type     |
-| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | name     | name of the route.                                                                                                                                                                        | string   |
 | path     | location path use to resolve the route.                                                                                                                                                   | string   |
 | hash     | url hash.                                                                                                                                                                                 | string   |
@@ -527,7 +586,7 @@ Parameters:
 | matched  | resolved route records, please see [Route Record Object](#route-record-object) In the case of nested route, it contains all matched routes, starting from root to the deepest route node. | object[] |
 ### Route Record Object
 | Property  | Description                                                                                                    | Type                      |
-| --------- | -------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| :----------- | :---------------------------------------- | :------------------------------------ |
 | path      | location path use to resolve the route.                                                                        | string                    |
 | name      | name of the route.                                                                                             | string                    |
 | component | svelte component.                                                                                              | string                    |

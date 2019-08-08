@@ -67,6 +67,75 @@
 <li>HTML5 history mode or hash mode <em>(powered by <a href="https://github.com/ReactTraining/history">history</a>)</em>.</li>
 </ul>
 <p>Please note: This is a beta release.</p>
+<p>To see the details code documentation, please read the <a href="https://spaceavocado.github.io/svelte-router/">Code Documentation</a>.</p>
+<p>Table of Content</p>
+<ul>
+<li><a href="#svelte-router">Svelte Router</a><ul>
+<li><a href="#installation-via-npm-or-yarn">Installation via NPM or Yarn</a></li>
+<li><a href="#essentials">Essentials</a><ul>
+<li><a href="#setup-the-router">Setup the Router</a></li>
+<li><a href="#route-configuration">Route Configuration</a></li>
+<li><a href="#dynamic-route-configuration">Dynamic Route Configuration</a></li>
+<li><a href="#passing-props-to-route-components">Passing Props to Route Components</a><ul>
+<li><a href="#automatically-pass-route-params-as-component-props">Automatically Pass Route Params as Component Props</a></li>
+<li><a href="#pass-custom-object-as-component-props">Pass Custom Object as Component Props</a></li>
+<li><a href="#use-a-function-to-resolve-the-component-props">Use a Function to Resolve the Component Props</a></li>
+</ul>
+</li>
+<li><a href="#nested-routes">Nested Routes</a></li>
+<li><a href="#router-link-component">Router Link Component</a></li>
+<li><a href="#router-view-component">Router View Component</a></li>
+</ul>
+</li>
+<li><a href="#advanced">Advanced</a><ul>
+<li><a href="#programmatic-navigation">Programmatic Navigation</a></li>
+<li><a href="#navigation-guard">Navigation Guard</a><ul>
+<li><a href="#create-a-navigation-guard">Create a Navigation Guard</a></li>
+<li><a href="#navigation-guard-next-action">Navigation Guard Next Action</a><ul>
+<li><a href="#continue">Continue</a></li>
+<li><a href="#abort">Abort</a></li>
+<li><a href="#redirect">Redirect</a></li>
+<li><a href="#error">Error</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#api">API</a><ul>
+<li><a href="#create-router">Create Router</a><ul>
+<li><a href="#router-options">Router Options</a></li>
+<li><a href="#access-router-instance">Access Router Instance</a></li>
+</ul>
+</li>
+<li><a href="#router-methods">Router Methods</a><ul>
+<li><a href="#start">start</a></li>
+<li><a href="#push">push</a></li>
+<li><a href="#replace">replace</a></li>
+<li><a href="#back">back</a></li>
+<li><a href="#forward">forward</a></li>
+<li><a href="#go">go</a></li>
+<li><a href="#routeurl">routeURL</a></li>
+<li><a href="#navigationguard">navigationGuard</a></li>
+<li><a href="#onnavigationchanged">onNavigationChanged</a></li>
+<li><a href="#onerror">onError</a></li>
+</ul>
+</li>
+<li><a href="#location-object">Location Object</a></li>
+<li><a href="#route-object">Route Object</a></li>
+<li><a href="#route-record-object">Route Record Object</a></li>
+</ul>
+</li>
+<li><a href="#changes">Changes</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contributing">Contributing</a><ul>
+<li><a href="#pull-request-process">Pull Request Process</a></li>
+</ul>
+</li>
+<li><a href="#license">License</a></li>
+</ul>
+</li>
+</ul>
 <h2>Installation via NPM or Yarn</h2><pre class="prettyprint source lang-sh"><code>npm install -D @spaceavocado/svelte-router</code></pre><p>or </p>
 <pre class="prettyprint source lang-sh"><code>yarn add @spaceavocado/svelte-router -D</code></pre><h2>Essentials</h2><p>Note: All code below uses ES2015+.</p>
 <h3>Setup the Router</h3><p>All we need to do is map our components to the routes and add root RouterView component, here's a basic example of app component uses as the main Svelte component.</p>
@@ -103,15 +172,48 @@ createRouter({
 <li><a href="#route-configuration">Route Configuration</a></li>
 <li><a href="#router-view-component">Route View Component</a></li>
 </ul>
-<h3>Route Configuration</h3><p>A route can be configure with these properties:
-| Property  | Description                                                                                                                                                                                          | Type                      |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| path      | A string that equals the path of the current route, always resolved as an absolute path. e.g. &quot;/foo/bar&quot;. Please see <a href="#dynamic-route-configuration">Dynamic Route Configuration</a> for advanced usage. | string                    |
-| name      | The name of the current route, optional.                                                                                                                                                             | string                    |
-| component | Svelte component. It could be be omitted if the route has nested routes.                                                                                                                             | function                  |
-| meta      | Route meta object, meta is used a bucket for your custom data on route object.                                                                                                                       | object                    |
-| props     | Declaration of component properties passed to the component by the route. Please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a> for more details.                       | boolean, object, function |
-| children  | Collection of children/nested routes. Please see <a href="#nested-routes">Nested Routes</a> for more details.                                                                                                   | object[]                  |</p>
+<h3>Route Configuration</h3><p>A route can be configure with these properties:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">path</td>
+<td style="text-align:left">A string that equals the path of the current route, always resolved as an absolute path. e.g. &quot;/foo/bar&quot;. Please see <a href="#dynamic-route-configuration">Dynamic Route Configuration</a> for advanced usage.</td>
+<td style="text-align:left">string</td>
+</tr>
+<tr>
+<td style="text-align:left">name</td>
+<td style="text-align:left">The name of the current route, optional.</td>
+<td style="text-align:left">string</td>
+</tr>
+<tr>
+<td style="text-align:left">component</td>
+<td style="text-align:left">Svelte component. It could be be omitted if the route has nested routes.</td>
+<td style="text-align:left">function</td>
+</tr>
+<tr>
+<td style="text-align:left">meta</td>
+<td style="text-align:left">Route meta object, meta is used a bucket for your custom data on route object.</td>
+<td style="text-align:left">object</td>
+</tr>
+<tr>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Declaration of component properties passed to the component by the route. Please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a> for more details.</td>
+<td style="text-align:left">boolean, object, function</td>
+</tr>
+<tr>
+<td style="text-align:left">children</td>
+<td style="text-align:left">Collection of children/nested routes. Please see <a href="#nested-routes">Nested Routes</a> for more details.</td>
+<td style="text-align:left">object[]</td>
+</tr>
+</tbody>
+</table>
 <pre class="prettyprint source lang-javascript"><code>createRouter({
   routes: [
     { 
@@ -237,12 +339,33 @@ import {RouterLink} from '@spaceavocado/svelte-router';
 &lt;RouterLink to='/services/design'>Navigate by URL&lt;/RouterLink>
 
 &lt;!-- Location Object -->
-&lt;RouterLink to={{name: 'USER_DETAIL', params:{id: 5}}>Navigate by Location&lt;/RouterLink></code></pre><p>The route link is the base component for routing action. The route link renders a <strong>&lt; a &gt;</strong> DOM element with click action triggering route change. The active class is auto-resolved. Component parameters:
-| Property    | Description                                                                                             | Type             |
-| ----------- | ------------------------------------------------------------------------------------------------------- | ---------------- |
-| to          | navigation URL or navigation Location, please see <a href="#location-object">Location Object</a> for more details. | string, Location |
-| replace     | Replace rather the than push into the history, defaults to false.                                       | boolean          |
-| activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |</p>
+&lt;RouterLink to={{name: 'USER_DETAIL', params:{id: 5}}>Navigate by Location&lt;/RouterLink></code></pre><p>The route link is the base component for routing action. The route link renders a <strong>&lt; a &gt;</strong> DOM element with click action triggering route change. The active class is auto-resolved. Component parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">to</td>
+<td style="text-align:left">navigation URL or navigation Location, please see <a href="#location-object">Location Object</a> for more details.</td>
+<td style="text-align:left">string, Location</td>
+</tr>
+<tr>
+<td style="text-align:left">replace</td>
+<td style="text-align:left">Replace rather the than push into the history, defaults to false.</td>
+<td style="text-align:left">boolean</td>
+</tr>
+<tr>
+<td style="text-align:left">activeClass</td>
+<td style="text-align:left">Link active class name, if not defined, it defaults to the active class defined on the router.</td>
+<td style="text-align:left">string</td>
+</tr>
+</tbody>
+</table>
 <h3>Router View Component</h3><pre class="prettyprint source lang-html"><code>&lt;script>
 import {RouterView} from '@spaceavocado/svelte-router';
 &lt;/script>
@@ -311,7 +434,7 @@ next({
 <ul>
 <li><a href="#onerror">onError</a></li>
 </ul>
-<h2>API</h2><p>To see the details code documentation, please read the <a href="https://github.com/spaceavocado/svelte-router/tree/master/docs">Code Documentation</a></p>
+<h2>API</h2><p>To see the details code documentation, please read the <a href="https://spaceavocado.github.io/svelte-router/">Code Documentation</a></p>
 <h3>Create Router</h3><pre class="prettyprint source lang-javascript"><code>import createRouter from '@spaceavocado/svelte-router';
 
 // Please see the opts below.
@@ -326,36 +449,36 @@ const router = createRouter(routerOpts);</code></pre><blockquote>
 <h4>Router Options</h4><table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Description</th>
-<th>Type</th>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>mode</td>
-<td>History mode. Supported values: 'HISTORY', 'HASH'.</td>
-<td>string</td>
+<td style="text-align:left">mode</td>
+<td style="text-align:left">History mode. Supported values: 'HISTORY', 'HASH'.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>basename</td>
-<td>The base URL of the app, defaults to ''.</td>
-<td>string</td>
+<td style="text-align:left">basename</td>
+<td style="text-align:left">The base URL of the app, defaults to ''.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>hashType</td>
-<td>Hash type. Relevant only for HISTORY_MODE.HASH. Supported values: 'PUSH', 'REPLACE'.</td>
-<td>string</td>
+<td style="text-align:left">hashType</td>
+<td style="text-align:left">Hash type. Relevant only for HISTORY_MODE.HASH. Supported values: 'PUSH', 'REPLACE'.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>routes</td>
-<td>router routes.</td>
-<td>object[]</td>
+<td style="text-align:left">routes</td>
+<td style="text-align:left">router routes.</td>
+<td style="text-align:left">object[]</td>
 </tr>
 <tr>
-<td>activeClass</td>
-<td>CSS class applied on the active route link. Defaults to &quot;active&quot;.</td>
-<td>string</td>
+<td style="text-align:left">activeClass</td>
+<td style="text-align:left">CSS class applied on the active route link. Defaults to &quot;active&quot;.</td>
+<td style="text-align:left">string</td>
 </tr>
 </tbody>
 </table>
@@ -378,44 +501,125 @@ const router = createRouter(routerOpts);</code></pre><blockquote>
 <pre class="prettyprint source lang-javascript"><code>$router.push(rawLocation, onComplete, onAbort);</code></pre><blockquote>
 <p>Throws when the rawLocation is invalid or when the path is invalid.</p>
 </blockquote>
-<p>Parameters:
-| Name        | Description                              | Type                                 |
-| ----------- | ---------------------------------------- | ------------------------------------ |
-| rawLocation | raw path or location object.             | string, <a href="#location-object">Location</a> |
-| onComplete  | On complete callback function. Optional. | function                             |
-| onAbort     | On abort callback function. Optional.    | function                             |</p>
+<p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">rawLocation</td>
+<td style="text-align:left">raw path or location object.</td>
+<td style="text-align:left">string, <a href="#location-object">Location</a></td>
+</tr>
+<tr>
+<td style="text-align:left">onComplete</td>
+<td style="text-align:left">On complete callback function. Optional.</td>
+<td style="text-align:left">function</td>
+</tr>
+<tr>
+<td style="text-align:left">onAbort</td>
+<td style="text-align:left">On abort callback function. Optional.</td>
+<td style="text-align:left">function</td>
+</tr>
+</tbody>
+</table>
 <h4>replace</h4><p>Replace in navigation.</p>
 <pre class="prettyprint source lang-javascript"><code>$router.replace(rawLocation, onComplete, onAbort);</code></pre><blockquote>
 <p>Throws when the rawLocation is invalid or when the path is invalid.</p>
 </blockquote>
-<p>Parameters:
-| Name        | Description                              | Type                                 |
-| ----------- | ---------------------------------------- | ------------------------------------ |
-| rawLocation | raw path or location object.             | string, <a href="#location-object">Location</a> |
-| onComplete  | On complete callback function. Optional. | function                             |
-| onAbort     | On abort callback function. Optional.    | function                             |</p>
+<p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">rawLocation</td>
+<td style="text-align:left">raw path or location object.</td>
+<td style="text-align:left">string, <a href="#location-object">Location</a></td>
+</tr>
+<tr>
+<td style="text-align:left">onComplete</td>
+<td style="text-align:left">On complete callback function. Optional.</td>
+<td style="text-align:left">function</td>
+</tr>
+<tr>
+<td style="text-align:left">onAbort</td>
+<td style="text-align:left">On abort callback function. Optional.</td>
+<td style="text-align:left">function</td>
+</tr>
+</tbody>
+</table>
 <h4>back</h4><p>Go one step back in the navigation history.</p>
 <pre class="prettyprint source lang-javascript"><code>$router.back();</code></pre><h4>forward</h4><p>Go one step forward in the navigation history.</p>
 <pre class="prettyprint source lang-javascript"><code>$router.forward();</code></pre><h4>go</h4><p>Go to a specific history position in the navigation history.</p>
-<pre class="prettyprint source lang-javascript"><code>$router.go(n);</code></pre><p>Parameters:
-| Name | Description                                                | Type   |
-| ---- | ---------------------------------------------------------- | ------ |
-| n    | number of steps to forward or backwards (negative number). | number |</p>
+<pre class="prettyprint source lang-javascript"><code>$router.go(n);</code></pre><p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">n</td>
+<td style="text-align:left">number of steps to forward or backwards (negative number).</td>
+<td style="text-align:left">number</td>
+</tr>
+</tbody>
+</table>
 <h4>routeURL</h4><p>Generate route URL from the the raw location.</p>
-<pre class="prettyprint source lang-javascript"><code>const url = $router.routeURL(rawLocation);</code></pre><p>Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
-| rawLocation | raw location object. | <a href="#location-object">Location</a> |</p>
+<pre class="prettyprint source lang-javascript"><code>const url = $router.routeURL(rawLocation);</code></pre><p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">rawLocation</td>
+<td style="text-align:left">raw location object.</td>
+<td style="text-align:left"><a href="#location-object">Location</a></td>
+</tr>
+</tbody>
+</table>
 <h4>navigationGuard</h4><p>Register a navigation guard which will be called whenever a navigation is triggered. All registered navigation guards are resolved in sequence. Navigation guard must call the next() function to continue the execution of navigation change. Please see <a href="#navigation-guard">Navigation Guard</a></p>
 <pre class="prettyprint source lang-javascript"><code>const unregister = $router.navigationGuard(guard);
 
 // To unregister the navigation guard:
 unregister();
 unregister = null;
-</code></pre><p>Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
-| guard | guard callback function with (to, from, next) signature. Please see <a href="#navigation-guard-next-action">Navigation Guard Next Action</a> | function |</p>
+</code></pre><p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">guard</td>
+<td style="text-align:left">guard callback function with (to, from, next) signature. Please see <a href="#navigation-guard-next-action">Navigation Guard Next Action</a></td>
+<td style="text-align:left">function</td>
+</tr>
+</tbody>
+</table>
 <p>to, from are <a href="#route-object">Route Object</a>.</p>
 <h4>onNavigationChanged</h4><p>Register a callback which will be called when all navigation guards are resolved, and the final navigation change is resolved.</p>
 <pre class="prettyprint source lang-javascript"><code>const unregister = $router.onNavigationChanged(callback);
@@ -423,10 +627,23 @@ unregister = null;
 // To unregister the event:
 unregister();
 unregister = null;
-</code></pre><p>Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
-| callback | callback function with fn(to, from) signature. | function |</p>
+</code></pre><p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">callback</td>
+<td style="text-align:left">callback function with fn(to, from) signature.</td>
+<td style="text-align:left">function</td>
+</tr>
+</tbody>
+</table>
 <p>to, from are <a href="#route-object">Route Object</a>.</p>
 <h4>onError</h4><p>Register a callback which will be called when an error is caught during a route navigation.</p>
 <pre class="prettyprint source lang-javascript"><code>const unregister = $router.onError(callback);
@@ -434,38 +651,51 @@ unregister = null;
 // To unregister the event:
 unregister();
 unregister = null;
-</code></pre><p>Parameters:
-| Name        | Description          | Type                         |
-| ----------- | -------------------- | ---------------------------- |
-| callback | callback function with fn(error) signature. | function |</p>
-<h3>Location Object</h3><table>
+</code></pre><p>Parameters:</p>
+<table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Description</th>
-<th>Type</th>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>name</td>
-<td>Name of the route.</td>
-<td>string</td>
+<td style="text-align:left">callback</td>
+<td style="text-align:left">callback function with fn(error) signature.</td>
+<td style="text-align:left">function</td>
+</tr>
+</tbody>
+</table>
+<h3>Location Object</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">name</td>
+<td style="text-align:left">Name of the route.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>params</td>
-<td>Route params dictionary object, if the route has defined dynamic route parameters, this object is required, with valid params to resolve the route URL.</td>
-<td>object</td>
+<td style="text-align:left">params</td>
+<td style="text-align:left">Route params dictionary object, if the route has defined dynamic route parameters, this object is required, with valid params to resolve the route URL.</td>
+<td style="text-align:left">object</td>
 </tr>
 <tr>
-<td>query</td>
-<td>Route query dictionary object. Optional.</td>
-<td>object</td>
+<td style="text-align:left">query</td>
+<td style="text-align:left">Route query dictionary object. Optional.</td>
+<td style="text-align:left">object</td>
 </tr>
 <tr>
-<td>hash</td>
-<td>Route hash parameter. Optional.</td>
-<td>string</td>
+<td style="text-align:left">hash</td>
+<td style="text-align:left">Route hash parameter. Optional.</td>
+<td style="text-align:left">string</td>
 </tr>
 </tbody>
 </table>
@@ -486,97 +716,97 @@ unregister = null;
 // /user/5?code=system_code#sidebar</code></pre><h3>Route Object</h3><table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Description</th>
-<th>Type</th>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>name</td>
-<td>name of the route.</td>
-<td>string</td>
+<td style="text-align:left">name</td>
+<td style="text-align:left">name of the route.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>path</td>
-<td>location path use to resolve the route.</td>
-<td>string</td>
+<td style="text-align:left">path</td>
+<td style="text-align:left">location path use to resolve the route.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>hash</td>
-<td>url hash.</td>
-<td>string</td>
+<td style="text-align:left">hash</td>
+<td style="text-align:left">url hash.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>fullPath</td>
-<td>the full resolved URL including query and hash.</td>
-<td>string</td>
+<td style="text-align:left">fullPath</td>
+<td style="text-align:left">the full resolved URL including query and hash.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>params</td>
-<td>route resolved params.</td>
-<td>object</td>
+<td style="text-align:left">params</td>
+<td style="text-align:left">route resolved params.</td>
+<td style="text-align:left">object</td>
 </tr>
 <tr>
-<td>query</td>
-<td>query parameters.</td>
-<td>object</td>
+<td style="text-align:left">query</td>
+<td style="text-align:left">query parameters.</td>
+<td style="text-align:left">object</td>
 </tr>
 <tr>
-<td>meta</td>
-<td>route meta.</td>
-<td>object</td>
+<td style="text-align:left">meta</td>
+<td style="text-align:left">route meta.</td>
+<td style="text-align:left">object</td>
 </tr>
 <tr>
-<td>action</td>
-<td>route action.</td>
-<td>string</td>
+<td style="text-align:left">action</td>
+<td style="text-align:left">route action.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>matched</td>
-<td>resolved route records, please see <a href="#route-record-object">Route Record Object</a> In the case of nested route, it contains all matched routes, starting from root to the deepest route node.</td>
-<td>object[]</td>
+<td style="text-align:left">matched</td>
+<td style="text-align:left">resolved route records, please see <a href="#route-record-object">Route Record Object</a> In the case of nested route, it contains all matched routes, starting from root to the deepest route node.</td>
+<td style="text-align:left">object[]</td>
 </tr>
 </tbody>
 </table>
 <h3>Route Record Object</h3><table>
 <thead>
 <tr>
-<th>Property</th>
-<th>Description</th>
-<th>Type</th>
+<th style="text-align:left">Property</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Type</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>path</td>
-<td>location path use to resolve the route.</td>
-<td>string</td>
+<td style="text-align:left">path</td>
+<td style="text-align:left">location path use to resolve the route.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>name</td>
-<td>name of the route.</td>
-<td>string</td>
+<td style="text-align:left">name</td>
+<td style="text-align:left">name of the route.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>component</td>
-<td>svelte component.</td>
-<td>string</td>
+<td style="text-align:left">component</td>
+<td style="text-align:left">svelte component.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>meta</td>
-<td>route meta.</td>
-<td>string</td>
+<td style="text-align:left">meta</td>
+<td style="text-align:left">route meta.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>params</td>
-<td>route resolved params.</td>
-<td>string</td>
+<td style="text-align:left">params</td>
+<td style="text-align:left">route resolved params.</td>
+<td style="text-align:left">string</td>
 </tr>
 <tr>
-<td>props</td>
-<td>props passed to component, please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a>.</td>
-<td>boolean, object, function</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">props passed to component, please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a>.</td>
+<td style="text-align:left">boolean, object, function</td>
 </tr>
 </tbody>
 </table>
@@ -609,7 +839,7 @@ unregister = null;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Aug 08 2019 10:40:39 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Aug 08 2019 11:35:26 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
