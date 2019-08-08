@@ -38,7 +38,6 @@
     // Resolve the on component load view
     if (tc.not.isNullOrUndefined($router.currentRoute)
     && viewDepth < $router.currentRoute.matched.length) {
-      console.log('on laod view');
       viewPropsMethod = $router.currentRoute.matched[viewDepth].props;
       view = $router.currentRoute.matched[viewDepth].component;
     }

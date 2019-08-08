@@ -2,7 +2,7 @@ const path = require('path');
 
 const libraryName = 'svelte-router';
 const extensions = ['.mjs', '.js', '.json', '.svelte', '.html'];
-const mainFields = ['svelte', 'module', 'browser', 'main'];
+const mainFields = ['svelte', 'browser', 'module', 'main'];
 
 module.exports = (env, options) => {
   return {

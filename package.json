@@ -1,8 +1,11 @@
 {
   "name": "@spaceavocado/svelte-router",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple Svelte Router for Single Page Applications (SPA).",
   "main": "lib/svelte-router.js",
+  "files": [
+    "/lib"
+  ],
   "author": "David Horak <info@evokesolutions.com>",
   "license": "MIT",
   "scripts": {
@@ -23,8 +26,10 @@
     "plugins"
   ],
   "dependencies": {
-    "history": "^4.9.0",
-    "svelte": "^3.6.10"
+    "history": "^4.9.0"
+  },
+  "peerDependencies": {
+    "svelte": "^3.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
