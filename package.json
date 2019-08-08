@@ -1,6 +1,6 @@
 {
   "name": "@spaceavocado/svelte-router",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Svelte Router for Single Page Applications (SPA).",
   "main": "lib/svelte-router.js",
   "author": "David Horak <info@evokesolutions.com>",

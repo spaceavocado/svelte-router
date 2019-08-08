@@ -1,5 +1,5 @@
 # Svelte Router
-Simple Svelte Router for Single Page Applications (SPA), inspired by [Vue Router](https://router.vuejs.org/). Features include:
+Simple [Svelte](#https://svelte.dev) Router for Single Page Applications (SPA), inspired by [Vue Router](https://router.vuejs.org/). Features include:
 * Nested route/view mapping.
 * Modular, component-based router configuration.
 * Route params, query, wildcards *(powered by [path-to-regexp](https://github.com/pillarjs/path-to-regexp))*.
@@ -7,11 +7,11 @@ Simple Svelte Router for Single Page Applications (SPA), inspired by [Vue Router
 * Links with automatic active CSS classes.
 * HTML5 history mode or hash mode *(powered by [history](https://github.com/ReactTraining/history))*.
 
-Please note: This is a beta release.
+> Please note: This is a beta release.
 
 To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/).
 
-Table of Content
+**Table of Content**
 - [Svelte Router](#svelte-router)
   - [Installation via NPM or Yarn](#installation-via-npm-or-yarn)
   - [Essentials](#essentials)
@@ -22,8 +22,10 @@ Table of Content
       - [Automatically Pass Route Params as Component Props](#automatically-pass-route-params-as-component-props)
       - [Pass Custom Object as Component Props](#pass-custom-object-as-component-props)
       - [Use a Function to Resolve the Component Props](#use-a-function-to-resolve-the-component-props)
+      - [Auto Passed Route Prop](#auto-passed-route-prop)
     - [Nested Routes](#nested-routes)
     - [Router Link Component](#router-link-component)
+      - [Router Link Events](#router-link-events)
     - [Router View Component](#router-view-component)
   - [Advanced](#advanced)
     - [Programmatic Navigation](#programmatic-navigation)
@@ -70,7 +72,7 @@ yarn add @spaceavocado/svelte-router -D
 Note: All code below uses ES2015+.
 
 ### Setup the Router
-All we need to do is map our components to the routes and add root RouterView component, here's a basic example of app component uses as the main Svelte component.
+All we need to do is map our components to the routes and add root RouterView component, here's a basic example of app component uses as the main [Svelte](#https://svelte.dev) component.
 
 index.js:
 ```javascript
@@ -119,7 +121,7 @@ A route can be configure with these properties:
 | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------ |
 | path      | A string that equals the path of the current route, always resolved as an absolute path. e.g. "/foo/bar". Please see [Dynamic Route Configuration](#dynamic-route-configuration) for advanced usage. | string                    |
 | name      | The name of the current route, optional.                                                                                                                                                             | string                    |
-| component | Svelte component. It could be be omitted if the route has nested routes.                                                                                                                             | function                  |
+| component | [Svelte](#https://svelte.dev) component. It could be be omitted if the route has nested routes.                                                                                                                             | function                  |
 | meta      | Route meta object, meta is used a bucket for your custom data on route object.                                                                                                                       | object                    |
 | props     | Declaration of component properties passed to the component by the route. Please see [Passing Props to Route Components](#passing-props-to-route-components) for more details.                       | boolean, object, function |
 | children  | Collection of children/nested routes. Please see [Nested Routes](#nested-routes) for more details.                                                                                                   | object[]                  |
@@ -228,6 +230,16 @@ export let title;
 export let id;
 ```
 
+#### Auto Passed Route Prop
+Route property of type [Route Object](#route-object) is auto-passed to the route component.
+
+component.svelte:
+```html
+<script>
+export let route;
+</script>
+```
+
 ### Nested Routes
 * Please see [Route Configuration](#route-configuration) for the base information about the routes configuration.
 * Nested route has access to its own parameters and all parent's route parameters:
@@ -282,6 +294,21 @@ The route link is the base component for routing action. The route link renders 
 | to          | navigation URL or navigation Location, please see [Location Object](#location-object) for more details. | string, Location |
 | replace     | Replace rather the than push into the history, defaults to false.                                       | boolean          |
 | activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |
+
+#### Router Link Events
+```html
+<script>
+import {RouterLink} from '@spaceavocado/svelte-router';
+
+// Navigation has been completed
+function handleOnCompleted() {}
+
+// Navigation has been aborted
+function handleOnAborted() {}
+</script>
+
+<RouterLink to='/services/design' on:onCompleted={handleOnCompleted} on:onAborted={handleOnAborted}>Navigate by URL</RouterLink>
+```
 
 ### Router View Component
 ```html
@@ -598,7 +625,7 @@ Parameters:
 To see the changes that were made in a given release, please lookup the tag on the releases page.
 
 ## About
-This project was inspired by [Vue Router](https://router.vuejs.org/), designed mainly to explore and test Svelte in SPA realm. Any feedback, contribution to this project is welcomed.
+This project was inspired by [Vue Router](https://router.vuejs.org/), designed mainly to explore and test [Svelte](#https://svelte.dev) in SPA realm. Any feedback, contribution to this project is welcomed.
 
 The project is in a beta phase, therefore there might be major changes in near future, the annotation should stay the same, though.
 
