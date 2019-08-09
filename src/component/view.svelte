@@ -11,15 +11,39 @@
   const CONTEXT_KEY = 'VIEW_DEPTH';
 
   // Internals
-  let view = null;
+  $: view = null;
+  $: viewPropsMethod = null;
+  $: viewProps = {};
   let viewDepth = 0;
-  let viewPropsMethod = null;
   let navigationChangedListener = null;
 
   // Get closest parent view depth
   let parentViewDepth = getContext(CONTEXT_KEY);
   viewDepth = parentViewDepth || 0;
   setContext(CONTEXT_KEY, viewDepth + 1);
+
+  /**
+   * Get view props based on the route props definition
+   */ 
+  function setViewProps(currentRoute) {
+    // No props
+    if (viewPropsMethod === false) {
+      viewProps = {};
+    // Auto generated props from params
+    } else if (viewPropsMethod === true) {
+      viewProps = currentRoute.params;
+    // Function
+    } else if (tc.isFunction(viewPropsMethod)) {
+      viewProps = viewPropsMethod(currentRoute);
+    // Direct props
+    } else if (tc.isObject(viewPropsMethod)) {
+      viewProps = viewPropsMethod;
+    // Unexpected props method
+    } else {
+      console.error(`svelte-router/view, unexpected route props type.`);
+      return {};
+    }
+  }
 
   onMount(() => {
     // Start the route on the root level
@@ -31,6 +55,7 @@
     navigationChangedListener = $router.onNavigationChanged((from, to) => {
       if (viewDepth < to.matched.length) {
         viewPropsMethod = to.matched[viewDepth].props;
+        setViewProps(to);
         view = to.matched[viewDepth].component;
       }
     });
@@ -39,6 +64,7 @@
     if (tc.not.isNullOrUndefined($router.currentRoute)
     && viewDepth < $router.currentRoute.matched.length) {
       viewPropsMethod = $router.currentRoute.matched[viewDepth].props;
+      setViewProps($router.currentRoute);
       view = $router.currentRoute.matched[viewDepth].component;
     }
   });
@@ -50,31 +76,10 @@
       navigationChangedListener = null;
     }
   });
-
-  /**
-   * Generate view props based on the route props definition
-   */ 
-  function viewProps() {
-    // No props
-    if (viewPropsMethod === false) {
-      return {};
-    // Auto generated props from params
-    } else if (viewPropsMethod === true) {
-      return $router.currentRoute.params;
-    // Function
-    } else if (tc.isFunction(viewPropsMethod)) {
-      return viewPropsMethod($router.currentRoute);
-    // Direct props
-    } else if (tc.isObject(viewPropsMethod)) {
-      return viewPropsMethod;
-    // Unexpected props method
-    } else {
-      console.error(`svelte-router/view, unexpected route props type.`);
-      return {};
-    }
-  }
 </script>
 
-{#if view}
-  <svelte:component this={view} route={$router.currentRoute} {...viewProps()} />
+{#if view !== null}
+  <svelte:component this={view} route={$router.currentRoute} {...viewProps} />
+{:else}
+  <slot></slot>
 {/if}

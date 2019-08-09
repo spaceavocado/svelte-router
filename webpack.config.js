@@ -46,10 +46,8 @@ module.exports = (env, options) => {
       filename: libraryName + '.js',
       library: libraryName,
       libraryTarget: 'umd',
-      globalObject: 'this',
     },
     externals: {
-      svelte: 'svelte',
       history: 'history',
     },
   };

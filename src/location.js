@@ -94,7 +94,7 @@ export function createLocation(rawLocation) {
       location.hash = parsedURL.hash;
     }
   } catch (e) {
-    throw new Error(`invalid URL, ${e.message}`);
+    throw new Error(`invalid URL, ${e.toString()}`);
   }
 
   return location;

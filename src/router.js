@@ -179,7 +179,7 @@ class Router {
         onAbort();
       }
       this._notifyOnError(
-          new Error(`invalid location, ${e.message}`)
+          new Error(`invalid location, ${e.toString()}`)
       );
       return;
     }
@@ -207,7 +207,7 @@ class Router {
         onAbort();
       }
       this._notifyOnError(
-          new Error(`invalid location, ${e.message}`)
+          new Error(`invalid location, ${e.toString()}`)
       );
       return;
     }
@@ -284,7 +284,7 @@ class Router {
     try {
       url = match.generator(rawLocation.params || {});
     } catch (e) {
-      throw new Error(`invalid route parameters, :${e.message}`);
+      throw new Error(`invalid route parameters, :${e.toString()}`);
     }
 
     // Resolve query params
@@ -304,14 +304,18 @@ class Router {
       try {
         routes[i] = createRouteConfig(routes[i]);
       } catch (e) {
-        console.error(new Error(`invalid route, ${e.message}`));
+        console.error(new Error(`invalid route, ${e.toString()}`));
         continue;
       }
 
       // Append parent path prefix
       if (parent != null) {
         routes[i].parent = parent;
-        routes[i].path = joinPath(parent.path, routes[i].path);
+        if (routes[i].path.length > 0) {
+          routes[i].path = joinPath(parent.path, routes[i].path);
+        } else {
+          routes[i].path = parent.path;
+        }
       }
 
       // Generate the regex matcher and params keys
@@ -416,7 +420,7 @@ class Router {
           location.onAbort();
         }
         this._notifyOnError(
-            new Error(`invalid route parameters, :${e.message}`)
+            new Error(`invalid route parameters, :${e.toString()}`)
         );
         return;
       }
@@ -528,7 +532,7 @@ class Router {
       }
       if (err != null) {
         this._notifyOnError(
-            new Error(`navigation guard error, ${err.message}`)
+            new Error(`navigation guard error, ${err.toString()}`)
         );
       }
       // Revert history if needed

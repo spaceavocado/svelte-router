@@ -44,6 +44,7 @@
     "eslint-plugin-svelte3": "^2.7.3",
     "jest": "^24.8.0",
     "path-to-regexp": "^3.0.0",
+    "svelte": "^3.7.1",
     "svelte-loader": "^2.13.6",
     "webpack": "^4.38.0",
     "webpack-cli": "^3.3.6"
