@@ -4,13 +4,14 @@
    * @module svelte-router/component/view
    */
   import tc from '@spaceavocado/type-check';
+  import {router} from '@spaceavocado/svelte-router';
   import {onMount, onDestroy, setContext, getContext} from 'svelte';
-  import {router} from '../router.js';
 
   // View depth context key
   const CONTEXT_KEY = 'VIEW_DEPTH';
 
   // Internals
+  $: self = false;
   $: view = null;
   $: viewPropsMethod = null;
   $: viewProps = {};
@@ -56,7 +57,8 @@
       if (viewDepth < to.matched.length) {
         viewPropsMethod = to.matched[viewDepth].props;
         setViewProps(to);
-        view = to.matched[viewDepth].component;
+        self = to.matched[viewDepth].component === false;
+        view = to.matched[viewDepth].component; 
       }
     });
 
@@ -65,6 +67,7 @@
     && viewDepth < $router.currentRoute.matched.length) {
       viewPropsMethod = $router.currentRoute.matched[viewDepth].props;
       setViewProps($router.currentRoute);
+      self = $router.currentRoute.matched[viewDepth].component === false;
       view = $router.currentRoute.matched[viewDepth].component;
     }
   });
@@ -78,8 +81,8 @@
   });
 </script>
 
-{#if view !== null}
+{#if self}
+  <svelte:self />
+{:else if view}
   <svelte:component this={view} route={$router.currentRoute} {...viewProps} />
-{:else}
-  <slot></slot>
 {/if}

@@ -3,16 +3,10 @@
  * @module svelte-router
  */
 
-// Libs
-import 'core-js/stable';
-
 // Internals
 import {HISTORY_MODE as ROUTER_MODE, HASH_TYPE} from './history';
-import createRouter, {router} from './router.js';
-
-// Components
-import RouterLink from './component/link.svelte';
-import RouterView from './component/view.svelte';
+import createRouter, {router} from './router';
+import {urlMatch} from './utils';
 
 export {
   /**
@@ -35,8 +29,7 @@ export {
    * @type {object}
    */
   router,
-  RouterLink,
-  RouterView,
+  urlMatch,
 };
 
 /**

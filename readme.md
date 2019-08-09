@@ -14,6 +14,8 @@ To see the details code documentation, please read the [Code Documentation](http
 **Table of Content**
 - [Svelte Router](#svelte-router)
   - [Installation via NPM or Yarn](#installation-via-npm-or-yarn)
+  - [Webpack Setup](#webpack-setup)
+  - [Boilerplate Project Template](#boilerplate-project-template)
   - [Essentials](#essentials)
     - [Setup the Router](#setup-the-router)
     - [Route Configuration](#route-configuration)
@@ -68,6 +70,42 @@ or
 ```sh
 yarn add @spaceavocado/svelte-router -D
 ```
+
+## Webpack Setup
+Please see the [Svelte Webpack Template](https://github.com/sveltejs/template-webpack).
+Important setup in the **webpack.config.js**:
+```javascript
+resolve: {
+  // This alias is important to prevent svelte mismatch
+  // between your code, and the 3rd party components.
+  alias: {
+    svelte: path.resolve('node_modules', 'svelte')
+  },
+  extensions: ['.mjs', '.js', '.svelte'],
+  mainFields: ['svelte', 'browser', 'module', 'main']
+},
+
+module: {
+  rules: [
+    {
+      test: /\.svelte$/,
+      // Do not exclude: /(node_modules)/ since the router 
+      // components are located in the node_modules
+      use: {
+        loader: 'svelte-loader',
+        options: {
+          emitCss: true,
+          hotReload: true
+        }
+      }
+    }
+  ]
+}
+```
+
+## Boilerplate Project Template
+For a quick start, you can use [svelte-router-template](https://github.com/spaceavocado/svelte-router-template) - Boilerplate template project for spaceavocado/svelte-router.
+
 ## Essentials
 Note: All code below uses ES2015+.
 
@@ -84,7 +122,8 @@ new App({target: document.getElementById("app")});
 app.svelve:
 ```html
 <script>
-import createRouter, {RouterView} from '@spaceavocado/svelte-router';
+import createRouter from '@spaceavocado/svelte-router';
+import RouterView from '@spaceavocado/svelte-router/component/view';
 
 // View components
 import ViewHome from './views/home.svelte';
@@ -106,7 +145,7 @@ createRouter({
 });
 </script>
 
-<RouterView/>
+<RouterView />
 ```
 
 This is an example of the minimalist plug & play setup of the Svelte Router. For more details:
@@ -278,8 +317,7 @@ export let route;
 ### Router Link Component
 ```html
 <script>
-import {RouterLink} from '@spaceavocado/svelte-router';
-</script>
+import RouterLink from '@spaceavocado/svelte-router/component/link';
 
 <!-- URL -->
 <RouterLink to='/services/design'>Navigate by URL</RouterLink>
@@ -298,7 +336,7 @@ The route link is the base component for routing action. The route link renders 
 #### Router Link Events
 ```html
 <script>
-import {RouterLink} from '@spaceavocado/svelte-router';
+import RouterLink from '@spaceavocado/svelte-router/component/link';
 
 // Navigation has been completed
 function handleOnCompleted() {}
@@ -313,7 +351,7 @@ function handleOnAborted() {}
 ### Router View Component
 ```html
 <script>
-import {RouterView} from '@spaceavocado/svelte-router';
+import RouterView from '@spaceavocado/svelte-router/component/view';
 </script>
 
 <RouterView/>
@@ -622,7 +660,7 @@ Parameters:
 | props     | props passed to component, please see [Passing Props to Route Components](#passing-props-to-route-components). | boolean, object, function |
 
 ## Changes
-To see the changes that were made in a given release, please lookup the tag on the releases page.
+To see the changes that were made in a given release, please lookup the tag on the releases page. The full changelog could be seen here [changelog.md](https://github.com/spaceavocado/svelte-router/blob/master/changelog.md)
 
 ## About
 This project was inspired by [Vue Router](https://router.vuejs.org/), designed mainly to explore and test [Svelte](#https://svelte.dev) in SPA realm. Any feedback, contribution to this project is welcomed.

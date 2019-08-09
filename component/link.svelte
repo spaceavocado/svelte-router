@@ -5,9 +5,8 @@
    */
 
   import tc from '@spaceavocado/type-check';
-  import {router} from '../router.js';
+  import {router, urlMatch} from '@spaceavocado/svelte-router';
   import {onMount, onDestroy, createEventDispatcher} from 'svelte';
-  import {urlMatch} from '../utils';
 
   // Props
   export let to;

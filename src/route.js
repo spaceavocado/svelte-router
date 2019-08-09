@@ -4,7 +4,6 @@
  */
 
 import tc from '@spaceavocado/type-check';
-import RouterView from './component/view.svelte';
 import {fullURL, deepClone} from './utils';
 
 /**
@@ -54,7 +53,7 @@ export function createRouteConfig(prefab) {
 
   return {
     path: prefab.path,
-    component: prefab.component || RouterView,
+    component: prefab.component || false,
     name: prefab.name || null,
     meta: prefab.meta || {},
     props: prefab.props,
