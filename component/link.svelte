@@ -11,6 +11,7 @@
   // Props
   export let to;
   export let replace = false;
+  export let cls = '';
   export let activeClass = null;
 
   // Resolve route object to URL
@@ -27,12 +28,17 @@
   const dispatch = createEventDispatcher();
   let cssClass = '';
   let navigationChangedListener = null;
+  const setCssClass = (active) => {
+    cssClass = cls;
+    cssClass += active
+      ? ` ${activeClass || $router.activeClass}`
+      : '';
+  };
 
   onMount(() => {
+    setCssClass(false);
     navigationChangedListener = $router.onNavigationChanged((fromRoute, toRoute) => {
-      cssClass = urlMatch(toRoute.fullPath, to)
-        ? activeClass || $router.activeClass
-        : '';
+      setCssClass(urlMatch(toRoute.fullPath, to));
     });
   });
   onDestroy(() => {
