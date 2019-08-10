@@ -331,6 +331,7 @@ The route link is the base component for routing action. The route link renders 
 | :----------- | :------------------------------------------------------------------------------------------------------- | :---------------- |
 | to          | navigation URL or navigation Location, please see [Location Object](#location-object) for more details. | string, Location |
 | replace     | Replace rather the than push into the history, defaults to false.                                       | boolean          |
+| cls | Link base class name, defaults to ''.          | string           |
 | activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |
 
 #### Router Link Events
