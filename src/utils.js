@@ -48,6 +48,25 @@ export function hasPrefix(s, prefix) {
 }
 
 /**
+ * Trim prefix
+ * @param {string} s tested string.
+ * @param {string} prefix needle.
+ * @return {string}
+ */
+export function trimPrefix(s, prefix) {
+  if (tc.isNullOrUndefined(s)
+    || tc.isNullOrUndefined(prefix)
+    || tc.not.isString(s)
+    || tc.not.isString(prefix)) {
+    return '';
+  }
+  if (prefix.length > 0 && hasPrefix(s, prefix)) {
+    return s.substr(prefix.length);
+  }
+  return s;
+}
+
+/**
  * Join URL paths.
  * @param {string} a URL path A.
  * @param {string} b URL path B.

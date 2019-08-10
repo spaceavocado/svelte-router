@@ -5,7 +5,7 @@
    */
 
   import tc from '@spaceavocado/type-check';
-  import {router, urlMatch} from '@spaceavocado/svelte-router';
+  import {router, urlMatch, trimPrefix} from '@spaceavocado/svelte-router';
   import {onMount, onDestroy, createEventDispatcher} from 'svelte';
 
   // Props
@@ -27,6 +27,7 @@
   // Internals
   const dispatch = createEventDispatcher();
   let cssClass = '';
+  let matchUrl = trimPrefix(to, $router.basename);
   let navigationChangedListener = null;
   const setCssClass = (active) => {
     cssClass = cls;
@@ -38,7 +39,7 @@
   onMount(() => {
     setCssClass(false);
     navigationChangedListener = $router.onNavigationChanged((fromRoute, toRoute) => {
-      setCssClass(urlMatch(toRoute.fullPath, to));
+      setCssClass(urlMatch(toRoute.fullPath, matchUrl));
     });
   });
   onDestroy(() => {

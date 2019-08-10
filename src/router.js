@@ -3,7 +3,8 @@ import pathToRegexp from 'path-to-regexp';
 import createHistory, {HISTORY_MODE, HISTORY_ACTION, HASH_TYPE}
   from './history';
 import {createLocation} from './location';
-import {joinPath, fullURL, historyFullURL} from './utils';
+import {joinPath, fullURL, historyFullURL, hasPrefix, trimPrefix}
+  from './utils';
 import {createRouteConfig, createRouteRecord, createRoute, cloneRoute}
   from './route';
 import tc from '@spaceavocado/type-check';
@@ -36,6 +37,10 @@ class Router {
     if (tc.not.isString(opts.historyOpts.basename)) {
       throw new Error(`invalid basename, "${opts.historyOpts.basename}"`);
     }
+    if (opts.historyOpts.basename.length > 0
+      && hasPrefix(opts.historyOpts.basename, '/') == false) {
+      opts.historyOpts.basename = '/' + opts.historyOpts.basename;
+    }
 
     if (opts.mode == HISTORY_MODE.HASH) {
       opts.historyOpts.hashType = opts.hashType || HASH_TYPE.SLASH;
@@ -46,6 +51,7 @@ class Router {
     }
 
     this._mode = opts.mode;
+    this._basename = opts.historyOpts.basename;
     this._routes = opts.routes || [];
     this._activeClass = opts.activeClass || 'active';
 
@@ -83,6 +89,14 @@ class Router {
    */
   get mode() {
     return this._mode;
+  }
+
+  /**
+   * Get router basename
+   * @type {string}
+   */
+  get basename() {
+    return this._basename;
   }
 
   /**
@@ -290,6 +304,11 @@ class Router {
     // Resolve query params
     url = fullURL(url, rawLocation.query, rawLocation.hash);
 
+    // Basename
+    if (this._basename.length > 0) {
+      url = joinPath(this._basename, url);
+    }
+
     return url;
   }
 
@@ -397,6 +416,10 @@ class Router {
    */
   _resolveRoute(location, onComplete, onAbort) {
     const matches = [];
+
+    if (this._basename.length > 0) {
+      location.path = trimPrefix(location.path, this._basename);
+    }
 
     // Resolve named route
     if (location.name != null) {

@@ -1,5 +1,9 @@
 # Svelte Router changelog
 
+## 1.0.6
+
+* Bugfix: router properly handles basename passed as router config.
+
 ## 1.0.5
 
 * The navigation is being skipped, if the request is to resolve the same route, respectively, the same full path URL.
