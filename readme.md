@@ -346,7 +346,7 @@ function handleOnCompleted() {}
 function handleOnAborted() {}
 </script>
 
-<RouterLink to='/services/design' on:onCompleted={handleOnCompleted} on:onAborted={handleOnAborted}>Navigate by URL</RouterLink>
+<RouterLink to='/services/design' on:completed={handleOnCompleted} on:aborted={handleOnAborted}>Navigate by URL</RouterLink>
 ```
 
 ### Router View Component

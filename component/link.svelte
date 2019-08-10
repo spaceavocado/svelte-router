@@ -52,12 +52,12 @@
   function navigate(to) {
     if (replace === true) {
       $router.replace(to,
-        () => dispatch('onCompleted'),
-        () => dispatch('onAborted'));
+        () => dispatch('completed'),
+        () => dispatch('aborted'));
     } else {
       $router.push(to,
-        () => dispatch('onCompleted'),
-        () => dispatch('onAborted'));
+        () => dispatch('completed'),
+        () => dispatch('aborted'));
     }
   }
 </script>

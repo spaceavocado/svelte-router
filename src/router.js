@@ -402,8 +402,8 @@ class Router {
     if (location.name != null) {
       const match = this._findRouteByName(location.name, this._routes);
       if (match == null) {
-        if (location.onAbort != null) {
-          location.onAbort();
+        if (onAbort != null) {
+          onAbort();
         }
         this._notifyOnError(
             new Error(`no matching route found for name:${location.name}`)
@@ -416,8 +416,8 @@ class Router {
       try {
         match.generator(location.params);
       } catch (e) {
-        if (location.onAbort != null) {
-          location.onAbort();
+        if (onAbort != null) {
+          onAbort();
         }
         this._notifyOnError(
             new Error(`invalid route parameters, :${e.toString()}`)
@@ -439,8 +439,8 @@ class Router {
     // and generate the route records
     } else {
       if (this._matchRoute(location.path, this._routes, matches) == false) {
-        if (location.onAbort != null) {
-          location.onAbort();
+        if (onAbort != null) {
+          onAbort();
         }
         this._notifyOnError(
             new Error(`no matching route found for path:${location.path}`)
@@ -451,6 +451,16 @@ class Router {
 
     // Create new pending route
     this._pendingRoute = createRoute(location, matches);
+
+    // Skip the same location
+    if (this._currentRoute
+    && this._pendingRoute.fullPath == this._currentRoute.fullPath) {
+      this._pendingRoute = null;
+      if (onComplete != null) {
+        onComplete();
+      }
+      return;
+    }
 
     Object.freeze(this._currentRoute);
     Object.freeze(this._pendingRoute);
