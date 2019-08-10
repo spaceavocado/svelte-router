@@ -106,6 +106,8 @@ module: {
 ## Boilerplate Project Template
 For a quick start, you can use [svelte-router-template](https://github.com/spaceavocado/svelte-router-template) - Boilerplate template project for spaceavocado/svelte-router.
 
+[Live Preview](https://spaceavocado.github.io/svelte-router-template/).
+
 ## Essentials
 Note: All code below uses ES2015+.
 
@@ -680,4 +682,4 @@ When contributing to this repository, please first discuss the change you wish t
 > Please make an issue first if the change is likely to increase.
 
 ## License
-Svelte Router is released under the MIT license. See [LICENSE.txt](https://github.com/spaceavocado/svelte-router/blob/master/LICENSE.txt)
+Svelte Router is released under the MIT license. See [LICENSE.txt](https://github.com/spaceavocado/svelte-router/blob/master/LICENSE.txt).
