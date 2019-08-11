@@ -5,12 +5,13 @@
    */
 
   import tc from '@spaceavocado/type-check';
-  import {router, urlMatch, trimPrefix} from '@spaceavocado/svelte-router';
+  import {router, urlMatch, urlPrefix, trimPrefix} from '@spaceavocado/svelte-router';
   import {onMount, onDestroy, createEventDispatcher} from 'svelte';
 
   // Props
   export let to;
   export let replace = false;
+  export let exact = false;
   export let cls = '';
   export let activeClass = null;
 
@@ -39,7 +40,10 @@
   onMount(() => {
     setCssClass(false);
     navigationChangedListener = $router.onNavigationChanged((fromRoute, toRoute) => {
-      setCssClass(urlMatch(toRoute.fullPath, matchUrl));
+      setCssClass(exact
+        ? urlMatch(toRoute.fullPath, matchUrl)
+        : urlPrefix(toRoute.fullPath, matchUrl)
+      );
     });
   });
   onDestroy(() => {

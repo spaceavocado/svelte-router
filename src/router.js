@@ -322,6 +322,7 @@ class Router {
     for (let i = 0; i < routes.length; i++) {
       try {
         routes[i] = createRouteConfig(routes[i]);
+        routes[i].parent = null;
       } catch (e) {
         console.error(new Error(`invalid route, ${e.toString()}`));
         continue;
@@ -437,7 +438,7 @@ class Router {
       // Try to generate the route URL with the given params
       // to validate the route and to get the params
       try {
-        match.generator(location.params);
+        location.path = match.generator(location.params);
       } catch (e) {
         if (onAbort != null) {
           onAbort();
@@ -474,6 +475,12 @@ class Router {
 
     // Create new pending route
     this._pendingRoute = createRoute(location, matches);
+
+    // Resolve redirect
+    if (this._pendingRoute.redirect != null) {
+      this._resolveRedirect(this._pendingRoute.redirect, onComplete, onAbort);
+      return;
+    }
 
     // Skip the same location
     if (this._currentRoute
@@ -538,6 +545,29 @@ class Router {
       }
     }
     return null;
+  }
+
+  /**
+   * Resolve pending route redirect.
+   * @param {string|object|function} redirect url, route, callback function.
+   * @param {function|null} onComplete navigation change request callback.
+   * @param {function|null} onAbort navigation change request callback.
+   */
+  _resolveRedirect(redirect, onComplete, onAbort) {
+    // Function
+    if (tc.isFunction(redirect)) {
+      redirect = redirect(this._pendingRoute);
+    }
+
+    // External
+    if (tc.isString(redirect) && hasPrefix(redirect, 'http')) {
+      window.location.replace(redirect);
+      return;
+    }
+
+    // URL or Route object
+    this._pendingRoute = null;
+    this.push(redirect, onComplete, onAbort);
   }
 
   /**

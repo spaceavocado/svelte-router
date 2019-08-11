@@ -47,21 +47,22 @@ export function createLocation(rawLocation) {
     action: HISTORY_ACTION.PUSH,
   };
 
-  location.path = rawLocation.path;
-  if (hasPrefix(location.path, '/') == false) {
+  location.path = rawLocation.path || '';
+  if (location.path.length > 0
+    && hasPrefix(location.path, '/') == false) {
     location.path = '/' + location.path;
   }
 
   if (tc.not.isNullOrUndefined(rawLocation.replace)
-  && rawLocation.replace === true) {
+    && rawLocation.replace === true) {
     location.action = HISTORY_ACTION.REPLACE;
   }
   if (tc.not.isNullOrUndefined(rawLocation.name)
-  && tc.isString(rawLocation.name)) {
+    && tc.isString(rawLocation.name)) {
     location.name = rawLocation.name;
   }
   if (tc.not.isNullOrUndefined(rawLocation.hash)
-  && tc.isString(rawLocation.hash)) {
+    && tc.isString(rawLocation.hash)) {
     location.hash = rawLocation.hash.replace('#', '');
   }
 
@@ -83,6 +84,10 @@ export function createLocation(rawLocation) {
         location.query[key] = rawLocation.query[key];
       }
     }
+  }
+
+  if (location.path.length == 0) {
+    return location;
   }
 
   // Query in URL

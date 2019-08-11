@@ -20,6 +20,7 @@ To see the details code documentation, please read the [Code Documentation](http
     - [Setup the Router](#setup-the-router)
     - [Route Configuration](#route-configuration)
     - [Dynamic Route Configuration](#dynamic-route-configuration)
+    - [Route Redirection](#route-redirection)
     - [Passing Props to Route Components](#passing-props-to-route-components)
       - [Automatically Pass Route Params as Component Props](#automatically-pass-route-params-as-component-props)
       - [Pass Custom Object as Component Props](#pass-custom-object-as-component-props)
@@ -161,6 +162,7 @@ A route can be configure with these properties:
 | Property  | Description                                                                                                                                                                                          | Type                      |
 | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------ |
 | path      | A string that equals the path of the current route, always resolved as an absolute path. e.g. "/foo/bar". Please see [Dynamic Route Configuration](#dynamic-route-configuration) for advanced usage. | string                    |
+| redirect      | Redirection to different route, or to external site. Please see [Route Redirection](#route-redirection) for advanced usage. | boolean, object, function                    |
 | name      | The name of the current route, optional.                                                                                                                                                             | string                    |
 | component | [Svelte](#https://svelte.dev) component. It could be be omitted if the route has nested routes.                                                                                                                             | function                  |
 | meta      | Route meta object, meta is used a bucket for your custom data on route object.                                                                                                                       | object                    |
@@ -216,6 +218,44 @@ createRouter({
 * The route **path** could contain dynamic parameters, e.g. ```path: '/users/:id'```. Please see [path-to-regexp](https://github.com/pillarjs/path-to-regexp) for more information how to configure the name, optional, etc,. parameters.
 * Special case is ```path: '*'``` which means any URL, this route should be the last route in your routes definition.
 * All resolved dynamic parameters are accessible on the resolved route object.
+
+### Route Redirection
+To redirect a route, you can configure it like so:
+```javascript
+// Redirect from /a to /b
+{ 
+  path: '/a',
+  redirect: '/b',
+}
+
+// External site redirect
+// Must start with 'http' or 'https'
+{ 
+  path: '/a',
+  redirect: 'https://github.com/spaceavocado/svelte-router',
+}
+
+// Redirect to named route
+{ 
+  path: '/a',
+  redirect: {
+    name: 'ROUTE_NAME',
+  },
+}
+
+// Dynamic redirecting
+// "to" is Route Object
+// Return value must be URL or a Route.
+{ 
+  path: '/a',
+  redirect: (to) => {
+    return {
+      name: 'ROUTE_NAME',
+    }
+  },
+}
+```
+> Please see [Route Object](#route-object) for more details.
 
 ### Passing Props to Route Components
 By default, props are not automatically passed to the route component, this could be change to:
@@ -333,6 +373,7 @@ The route link is the base component for routing action. The route link renders 
 | :----------- | :------------------------------------------------------------------------------------------------------- | :---------------- |
 | to          | navigation URL or navigation Location, please see [Location Object](#location-object) for more details. | string, Location |
 | replace     | Replace rather the than push into the history, defaults to false.                                       | boolean          |
+| exact     | The default active class matching behavior is inclusive match, i.e. it matches if the URL starts with link url. In the exact mode, the url must be be the same (excluding query param and hash param). Defaults to false.                                       | boolean          |
 | cls | Link base class name, defaults to ''.          | string           |
 | activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |
 

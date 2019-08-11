@@ -10,6 +10,10 @@ import {fullURL, deepClone} from './utils';
  * Route config object.
  * @typedef Config
  * @property {string} path location path use to resolve the route.
+ * @property {string|object|function} redirect route redirect.
+ * * string: plain URL.
+ * * object: route name {name: 'ROUTE'}.
+ * * function: callback function fn(to) to resolve the redirect.
  * @property {string} name name of the route.
  * @property {function} component svelte component.
  * @property {object} meta route meta object.
@@ -43,6 +47,14 @@ export function createRouteConfig(prefab) {
     throw new Error('invalid route config meta property');
   }
 
+  if (tc.isNullOrUndefined(prefab.redirect)) {
+    prefab.redirect = null;
+  } else if (tc.not.isString(prefab.redirect)
+    && tc.not.isObject(prefab.redirect)
+    && tc.not.isFunction(prefab.redirect)) {
+    throw new Error('invalid route config redirect property');
+  }
+
   if (tc.isNullOrUndefined(prefab.props)) {
     prefab.props = false;
   } else if (prefab.props !== true
@@ -53,6 +65,7 @@ export function createRouteConfig(prefab) {
 
   return {
     path: prefab.path,
+    redirect: prefab.redirect,
     component: prefab.component || false,
     name: prefab.name || null,
     meta: prefab.meta || {},
@@ -66,6 +79,10 @@ export function createRouteConfig(prefab) {
  * Route record object.
  * @typedef Record
  * @property {string} path location path use to resolve the route.
+ * @property {string|object|function} redirect route redirect.
+ * * string: plain URL.
+ * * object: route name {name: 'ROUTE'}.
+ * * function: callback function fn(to) to resolve the redirect.
  * @property {string?} name name of the route.
  * @property {function} component svelte component.
  * @property {object} meta route meta.
@@ -85,6 +102,7 @@ export function createRouteConfig(prefab) {
 export function createRouteRecord(route, params) {
   const record = {
     path: route.path,
+    redirect: route.redirect,
     name: route.name,
     component: route.component,
     meta: route.meta,
@@ -122,6 +140,10 @@ export function createRouteRecord(route, params) {
  * @typedef Route
  * @property {string} name name of the route.
  * @property {string} path location path use to resolve the route.
+ * @property {string|object|function} redirect route redirect.
+ * * string: plain URL.
+ * * object: route name {name: 'ROUTE'}.
+ * * function: callback function fn(to) to resolve the redirect.
  * @property {string} hash url hash.
  * @property {string} fullPath the full resolved URL including query and hash.
  * @property {object} params params object used to resolve the path params.
@@ -145,6 +167,7 @@ export function createRoute(location, matches) {
     name: route.name,
     action: location.action,
     path: location.path,
+    redirect: route.redirect,
     hash: location.hash,
     fullPath: fullURL(location.path, location.query, location.hash),
     params: route.params,
@@ -164,10 +187,12 @@ export function cloneRoute(route) {
     return {};
   }
   const clone = deepClone(route);
+  clone.redirect = route.redirect;
   for (let i = 0; i < route.matched.length; i++) {
     clone.matched[i].component = route.matched[i].component;
     clone.matched[i].props = route.matched[i].props;
     clone.matched[i].meta = route.matched[i].meta;
+    clone.matched[i].redirect = route.matched[i].redirect;
   }
   return clone;
 }

@@ -1,8 +1,14 @@
 # Svelte Router changelog
 
+## 1.0.7
+
+* New feature: Route redirection.
+* Router View component now supports the exact matching for active class.
+* Bugfix: Navigation to root named route.
+
 ## 1.0.6
 
-* Bugfix: router properly handles basename passed as router config.
+* Bugfix: Router properly handles basename passed as router config.
 
 ## 1.0.5
 

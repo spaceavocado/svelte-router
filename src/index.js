@@ -6,7 +6,7 @@
 // Internals
 import {HISTORY_MODE as ROUTER_MODE, HASH_TYPE} from './history';
 import createRouter, {router} from './router';
-import {urlMatch, trimPrefix} from './utils';
+import {urlMatch, urlPrefix, trimPrefix} from './utils';
 
 export {
   /**
@@ -30,6 +30,7 @@ export {
    */
   router,
   urlMatch,
+  urlPrefix,
   trimPrefix,
 };
 

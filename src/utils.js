@@ -130,6 +130,29 @@ export function urlMatch(a, b) {
 }
 
 /**
+ * URL prefix predicate
+ * @param {string} haystack URL haystack.
+ * @param {string} prefix URL prefix.
+ * @throws an error if the URL is not valid.
+ * @return {boolean}
+ */
+export function urlPrefix(haystack, prefix) {
+  if (tc.isNullOrUndefined(haystack) || tc.not.isString(haystack)
+  || tc.isNullOrUndefined(prefix) || tc.not.isString(prefix)) {
+    return false;
+  }
+
+  if (hasPrefix(haystack, '/') == false) {
+    haystack = `/${haystack}`;
+  }
+  if (hasPrefix(prefix, '/') == false) {
+    prefix = `/${prefix}`;
+  }
+
+  return hasPrefix(haystack, prefix);
+}
+
+/**
  * Parsed URL object.
  * @typedef ParsedURL
  * @property {string} base URL base.
