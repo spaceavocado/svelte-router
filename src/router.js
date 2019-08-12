@@ -54,8 +54,6 @@ class Router {
     this._basename = opts.historyOpts.basename;
     this._routes = opts.routes || [];
     this._activeClass = opts.activeClass || 'active';
-
-    // Expose the history instance on window object
     this._history = createHistory(this._mode, opts.historyOpts || {});
     this._historyListener = this._history.listen(
         this._onHistoryChange.bind(this)
@@ -64,8 +62,8 @@ class Router {
     // Navigation guards and listeners
     this._navigationGuards = [];
     this._listeners = {
-      onError: [],
-      onNavigationChanged: [],
+      onError: new Map(),
+      onNavigationChanged: new Map(),
     };
 
     // Current resolved route and resolved pending route
@@ -147,13 +145,10 @@ class Router {
    */
   onNavigationChanged(callback) {
     const key = Symbol();
-    this._listeners.onNavigationChanged.push({
-      key,
-      callback,
-    });
+    this._listeners.onNavigationChanged.set(key, callback);
     const self = this;
     return () => {
-      self._removeListener(self._listeners.onNavigationChanged, key);
+      self._listeners.onNavigationChanged.delete(key);
     };
   }
 
@@ -166,13 +161,10 @@ class Router {
    */
   onError(callback) {
     const key = Symbol();
-    this._listeners.onError.push({
-      key,
-      callback,
-    });
+    this._listeners.onError.set(key, callback);
     const self = this;
     return () => {
-      self._removeListener(self._listeners.onError, key);
+      self._listeners.onError.delete(key);
     };
   }
 
@@ -636,8 +628,8 @@ class Router {
    * @param {Error} error
    */
   _notifyOnError(error) {
-    for (const l of this._listeners.onError) {
-      l.callback(error);
+    for (const callback of this._listeners.onError.values()) {
+      callback(error);
     }
   }
 
@@ -648,8 +640,8 @@ class Router {
    * @param {svelte-router/route.Record} to route
    */
   _notifyOnNavigationChanged(from, to) {
-    for (const l of this._listeners.onNavigationChanged) {
-      l.callback(from, to);
+    for (const callback of this._listeners.onNavigationChanged.values()) {
+      callback(from, to);
     }
   }
 
