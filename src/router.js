@@ -564,6 +564,7 @@ class Router {
 
   /**
    * Resolve pending route redirect.
+   * @private
    * @param {string|object|function} redirect url, route, callback function.
    * @param {function|null} onComplete navigation change request callback.
    * @param {function|null} onAbort navigation change request callback.
