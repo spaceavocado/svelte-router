@@ -1,5 +1,9 @@
 # Svelte Router changelog
 
+## 1.0.8
+
+* New feature: onBeforeNavigation router event.
+
 ## 1.0.7
 
 * New feature: Route redirection.
