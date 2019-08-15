@@ -504,6 +504,12 @@ class Router {
     Object.freeze(this._currentRoute);
     Object.freeze(this._pendingRoute);
 
+    // Notify all before navigation listeners
+    this._notifyOnBeforeNavigation(
+        Object.freeze(cloneRoute(this._currentRoute)),
+        Object.freeze(cloneRoute(this._pendingRoute))
+    );
+
     // Resolve navigation guards
     this._resolveNavigationGuard(0, onComplete, onAbort);
   }
@@ -647,6 +653,18 @@ class Router {
   _notifyOnError(error) {
     for (const callback of this._listeners.onError.values()) {
       callback(error);
+    }
+  }
+
+  /**
+   * Notify all onBeforeNavigation listeners
+   * @private
+   * @param {svelte-router/route.Record} from route
+   * @param {svelte-router/route.Record} to route
+   */
+  _notifyOnBeforeNavigation(from, to) {
+    for (const callback of this._listeners.onBeforeNavigation.values()) {
+      callback(from, to);
     }
   }
 
