@@ -50,6 +50,7 @@ To see the details code documentation, please read the [Code Documentation](http
       - [go](#go)
       - [routeURL](#routeurl)
       - [navigationGuard](#navigationguard)
+      - [onBeforeNavigation](#onbeforenavigation)
       - [onNavigationChanged](#onnavigationchanged)
       - [onError](#onerror)
     - [Location Object](#location-object)
@@ -620,6 +621,24 @@ Parameters:
 | Name  | Description                                                                                                                       | Type     |
 | :----------- | :---------------------------------------- | :------------------------------------ |
 | guard | guard callback function with (to, from, next) signature. Please see [Navigation Guard Next Action](#navigation-guard-next-action) | function |
+
+to, from are [Route Object](#route-object).
+
+#### onBeforeNavigation
+Register a callback which will be called before execution of navigation guards.
+```javascript
+const unregister = $router.onBeforeNavigation(callback);
+
+// To unregister the event:
+unregister();
+unregister = null;
+
+```
+Parameters:
+
+| Name     | Description                                    | Type     |
+| :----------- | :---------------------------------------- | :------------------------------------ |
+| callback | callback function with fn(to, from) signature. | function |
 
 to, from are [Route Object](#route-object).
 

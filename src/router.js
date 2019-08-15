@@ -63,6 +63,7 @@ class Router {
     this._navigationGuards = [];
     this._listeners = {
       onError: new Map(),
+      onBeforeNavigation: new Map(),
       onNavigationChanged: new Map(),
     };
 
@@ -132,6 +133,22 @@ class Router {
     const self = this;
     return () => {
       self._removeListener(self._navigationGuards, key);
+    };
+  }
+
+  /**
+   * Register a callback which will be called before
+   * execution of navigation guards.
+   * @param {function} callback callback function
+   * with fn(to, from) signature.
+   * @return {function} remove listener function.
+   */
+  onBeforeNavigation(callback) {
+    const key = Symbol();
+    this._listeners.onBeforeNavigation.set(key, callback);
+    const self = this;
+    return () => {
+      self._listeners.onBeforeNavigation.delete(key);
     };
   }
 
@@ -487,6 +504,12 @@ class Router {
     Object.freeze(this._currentRoute);
     Object.freeze(this._pendingRoute);
 
+    // Notify all before navigation listeners
+    this._notifyOnBeforeNavigation(
+        Object.freeze(cloneRoute(this._currentRoute)),
+        Object.freeze(cloneRoute(this._pendingRoute))
+    );
+
     // Resolve navigation guards
     this._resolveNavigationGuard(0, onComplete, onAbort);
   }
@@ -630,6 +653,18 @@ class Router {
   _notifyOnError(error) {
     for (const callback of this._listeners.onError.values()) {
       callback(error);
+    }
+  }
+
+  /**
+   * Notify all onBeforeNavigation listeners
+   * @private
+   * @param {svelte-router/route.Record} from route
+   * @param {svelte-router/route.Record} to route
+   */
+  _notifyOnBeforeNavigation(from, to) {
+    for (const callback of this._listeners.onBeforeNavigation.values()) {
+      callback(from, to);
     }
   }
 
