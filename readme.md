@@ -7,8 +7,6 @@ Simple [Svelte](#https://svelte.dev) Router for Single Page Applications (SPA), 
 * Links with automatic active CSS classes.
 * HTML5 history mode or hash mode *(powered by [history](https://github.com/ReactTraining/history))*.
 
-> Please note: This is a beta release.
-
 To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/).
 
 **Table of Content**
@@ -67,7 +65,6 @@ To see the details code documentation, please read the [Code Documentation](http
 ```sh
 npm install -D @spaceavocado/svelte-router
 ```
-or 
 ```sh
 yarn add @spaceavocado/svelte-router -D
 ```
@@ -117,9 +114,13 @@ All we need to do is map our components to the routes and add root RouterView co
 
 index.js:
 ```javascript
+// The base component
 import App from './app.svelte';
 
-new App({target: document.getElementById("app")});
+// Turn on the engine
+new App({
+  target: document.body,
+});
 ```
 
 app.svelve:
@@ -141,7 +142,6 @@ createRouter({
     },
     {
       path: '*',
-      name: 'NOT_FOUND',
       component: View404,
     },
   ],
@@ -398,7 +398,7 @@ function handleOnAborted() {}
 import RouterView from '@spaceavocado/svelte-router/component/view';
 </script>
 
-<RouterView/>
+<RouterView />
 ```
 * The route view acts as **SLOT** for resolved route component, i.e. it will be replaced run-time with the component defined on the given route.
 * For nested routes, if the parent route (the one having nested routes) has defined it's own component, the component must use internally ViewRouter component to pass through the nested route components. If the component is not defined on the parent route, it auto pass through.
@@ -531,7 +531,7 @@ More information:
 ```javascript
 import {router} from '@spaceavocado/svelte-router';
 ```
-> Note: It must be accessed as **$router** since it is Svelte read-able store object.
+> Note: It must be accessed as **$router** since it is the Svelte read-able store object, to resolved auto subscribe/unsubscribe.
 
 ### Router Methods
 All route methods are accessible on the router, please see [Access Router Instance](#access-router-instance).

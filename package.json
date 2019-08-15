@@ -8,7 +8,7 @@
     "/component",
     "changelog.md"
   ],
-  "author": "David Horak <info@evokesolutions.com>",
+  "author": "David Horak <info@davidhorak.com>",
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode=production",
