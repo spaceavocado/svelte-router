@@ -1,5 +1,9 @@
 # Svelte Router changelog
 
+## 1.0.9
+
+* Build process converted to rollup for better ESM support.
+
 ## 1.0.8
 
 * New feature: onBeforeNavigation router event.

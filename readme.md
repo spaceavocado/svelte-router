@@ -9,11 +9,17 @@ Simple [Svelte](#https://svelte.dev) Router for Single Page Applications (SPA), 
 
 To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/).
 
+**Quick Links**
+* [Webpack Setup](#webpack-setup)
+* [Webpack Boilerplate Project Template](#webpack-boilerplate-project-template)
+* [Rollup Setup](#rollup-setup)
+
 **Table of Content**
 - [Svelte Router](#svelte-router)
   - [Installation via NPM or Yarn](#installation-via-npm-or-yarn)
   - [Webpack Setup](#webpack-setup)
-  - [Boilerplate Project Template](#boilerplate-project-template)
+  - [Webpack Boilerplate Project Template](#webpack-boilerplate-project-template)
+  - [Rollup Setup](#rollup-setup)
   - [Essentials](#essentials)
     - [Setup the Router](#setup-the-router)
     - [Route Configuration](#route-configuration)
@@ -102,10 +108,37 @@ module: {
 }
 ```
 
-## Boilerplate Project Template
-For a quick start, you can use [svelte-router-template](https://github.com/spaceavocado/svelte-router-template) - Boilerplate template project for spaceavocado/svelte-router.
+## Webpack Boilerplate Project Template
+For a quick start, you can use [svelte-router-template](https://github.com/spaceavocado/svelte-router-template) - Webpack boilerplate template project for spaceavocado/svelte-router.
 
 [Live Preview](https://spaceavocado.github.io/svelte-router-template/).
+
+## Rollup Setup
+rollup.config.js:
+```javascript
+import babel from 'rollup-plugin-babel';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+import svelte from 'rollup-plugin-svelte';
+
+export default {
+  input: './src/index.js',
+  output: {
+    file: './dist/bundle.js',
+    format: 'iife'
+  },
+  plugins: [
+    resolve(),
+    commonjs({
+      include: 'node_modules/**',
+    }),
+    svelte(),
+    babel({
+      exclude: 'node_modules/**',
+    }),
+  ]
+}
+```
 
 ## Essentials
 Note: All code below uses ES2015+.
