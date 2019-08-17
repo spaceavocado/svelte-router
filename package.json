@@ -1,6 +1,6 @@
 {
   "name": "@spaceavocado/svelte-router",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Simple Svelte Router for Single Page Applications (SPA).",
   "main": "lib/svelte-router.js",
   "module": "lib/svelte-router.esm.js",
@@ -32,7 +32,7 @@
     "@spaceavocado/type-check": "^1.0.1"
   },
   "peerDependencies": {
-    "svelte": "^3.7.1"
+    "svelte": "^3.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
