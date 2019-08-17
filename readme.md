@@ -671,7 +671,7 @@ Parameters:
 
 | Name     | Description                                    | Type     |
 | :----------- | :---------------------------------------- | :------------------------------------ |
-| callback | callback function with fn(to, from) signature. | function |
+| callback | callback function with fn(from, to) signature. | function |
 
 to, from are [Route Object](#route-object).
 
@@ -689,7 +689,7 @@ Parameters:
 
 | Name     | Description                                    | Type     |
 | :----------- | :---------------------------------------- | :------------------------------------ |
-| callback | callback function with fn(to, from) signature. | function |
+| callback | callback function with fn(from, to) signature. | function |
 
 to, from are [Route Object](#route-object).
 

@@ -140,7 +140,7 @@ class Router {
    * Register a callback which will be called before
    * execution of navigation guards.
    * @param {function} callback callback function
-   * with fn(to, from) signature.
+   * with fn(from, to) signature.
    * @return {function} remove listener function.
    */
   onBeforeNavigation(callback) {
@@ -157,7 +157,7 @@ class Router {
    * all navigation guards are resolved, and the final
    * navigation change is resolved.
    * @param {function} callback callback function
-   * with fn(to, from) signature.
+   * with fn(from, to) signature.
    * @return {function} remove listener function.
    */
   onNavigationChanged(callback) {
