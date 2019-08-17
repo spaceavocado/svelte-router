@@ -14,7 +14,7 @@
   // Internals
   let self = false;
   let view = null;
-  let pedingView = null;
+  let pendingView = null;
   let viewPropsMethod = null;
   let viewProps = {};
   let viewDepth = 0;
@@ -60,7 +60,7 @@
         viewPropsMethod = to.matched[viewDepth].props;
         setViewProps(to);
         self = to.matched[viewDepth].component === false;
-        pedingView = to.matched[viewDepth].component; 
+        pendingView = to.matched[viewDepth].component; 
         view = null; 
       }
     });
@@ -78,9 +78,9 @@
   // This is to trick the update view
   // when the view uses the same component
   afterUpdate(() => {
-    if (pedingView != null) {
-      view = pedingView; 
-      pedingView = null;
+    if (pendingView != null) {
+      view = pendingView; 
+      pendingView = null;
     }
   });
 
