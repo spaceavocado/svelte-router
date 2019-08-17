@@ -5,7 +5,7 @@
    */
   import tc from '@spaceavocado/type-check';
   import {router} from '@spaceavocado/svelte-router';
-  import {onMount, onDestroy, afterUpdate, setContext, getContext}
+  import {onMount, onDestroy, setContext, getContext}
     from 'svelte';
 
   // View depth context key
@@ -14,7 +14,6 @@
   // Internals
   let self = false;
   let view = null;
-  let pendingView = null;
   let viewPropsMethod = null;
   let viewProps = {};
   let viewDepth = 0;
@@ -60,8 +59,7 @@
         viewPropsMethod = to.matched[viewDepth].props;
         setViewProps(to);
         self = to.matched[viewDepth].component === false;
-        pendingView = to.matched[viewDepth].component; 
-        view = null; 
+        view = to.matched[viewDepth].component;
       }
     });
 
@@ -72,15 +70,6 @@
       setViewProps($router.currentRoute);
       self = $router.currentRoute.matched[viewDepth].component === false;
       view = $router.currentRoute.matched[viewDepth].component;
-    }
-  });
-
-  // This is to trick the update view
-  // when the view uses the same component
-  afterUpdate(() => {
-    if (pendingView != null) {
-      view = pendingView; 
-      pendingView = null;
     }
   });
 

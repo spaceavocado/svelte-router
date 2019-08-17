@@ -15,20 +15,10 @@
   export let cls = '';
   export let activeClass = null;
 
-  // Resolve route object to URL
-  if (tc.isObject(to)) {
-    try {
-      to = $router.routeURL(to);
-    } catch (e) {
-      console.error(`svelte-router/link, ${e.message}`);
-      to = '';
-    }
-  }
-
   // Internals
   const dispatch = createEventDispatcher();
   let cssClass = '';
-  let matchUrl = trimPrefix(to, $router.basename);
+  let matchUrl;
   let navigationChangedListener = null;
   const setCssClass = (active) => {
     cssClass = cls;
@@ -36,6 +26,19 @@
       ? ` ${activeClass || $router.activeClass}`
       : '';
   };
+
+  // Resolve route object to URL
+  $: {
+    if (tc.isObject(to)) {
+      try {
+        to = $router.routeURL(to);
+      } catch (e) {
+        console.error(`svelte-router/link, ${e.message}`);
+        to = '';
+      }
+    }
+    matchUrl = trimPrefix(to, $router.basename);
+  }
 
   onMount(() => {
     setCssClass(false);
