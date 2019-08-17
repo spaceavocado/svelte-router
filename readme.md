@@ -472,13 +472,13 @@ import {router} from '@spaceavocado/svelte-router';
 
 // The guard callback is called when a navigation occurs,
 // the next function must be called to continue the navigation.
-$router.navigationGuard((to, from, next) => {
+$router.navigationGuard((from, to, next) => {
   next();
 });
 ```
 > Note: the **router** can be accessed after the **createRouter** function is executed, and it must be accessed as **$router** since it is Svelte read-able store object.
 
-to, from are [Route Object](#route-object).
+"from, to" are [Route Object](#route-object).
 
 #### Navigation Guard Next Action
 ##### Continue
@@ -653,9 +653,9 @@ Parameters:
 
 | Name  | Description                                                                                                                       | Type     |
 | :----------- | :---------------------------------------- | :------------------------------------ |
-| guard | guard callback function with (to, from, next) signature. Please see [Navigation Guard Next Action](#navigation-guard-next-action) | function |
+| guard | guard callback function with (from, to, next) signature. Please see [Navigation Guard Next Action](#navigation-guard-next-action) | function |
 
-to, from are [Route Object](#route-object).
+"from, to" are [Route Object](#route-object).
 
 #### onBeforeNavigation
 Register a callback which will be called before execution of navigation guards.
@@ -673,7 +673,7 @@ Parameters:
 | :----------- | :---------------------------------------- | :------------------------------------ |
 | callback | callback function with fn(from, to) signature. | function |
 
-to, from are [Route Object](#route-object).
+"from, to" are [Route Object](#route-object).
 
 #### onNavigationChanged
 Register a callback which will be called when all navigation guards are resolved, and the final navigation change is resolved.
@@ -691,7 +691,7 @@ Parameters:
 | :----------- | :---------------------------------------- | :------------------------------------ |
 | callback | callback function with fn(from, to) signature. | function |
 
-to, from are [Route Object](#route-object).
+"from, to" are [Route Object](#route-object).
 
 #### onError
 Register a callback which will be called when an error is caught during a route navigation.

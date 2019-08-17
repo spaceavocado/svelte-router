@@ -121,7 +121,7 @@ class Router {
    * Navigation guard must call the next() function to continue
    * the execution of navigation change.
    * @param {function} guard guard callback function
-   * with (to, from, next) signature.
+   * with (from, to, next) signature.
    * @return {function} remove guard function.
    */
   navigationGuard(guard) {
