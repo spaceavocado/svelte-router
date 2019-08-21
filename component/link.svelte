@@ -14,6 +14,7 @@
   export let exact = false;
   export let cls = '';
   export let activeClass = null;
+  export let disabled = false;
 
   // Internals
   const dispatch = createEventDispatcher();
@@ -57,7 +58,10 @@
 	});
 
   // Toggle the collapsed state
-  function navigate(to) {
+  function navigate() {
+    if (disabled) {
+      return;
+    }
     if (replace === true) {
       $router.replace(to,
         () => dispatch('completed'),
@@ -73,7 +77,8 @@
 <a
   href="{to}"
   class="{cssClass}"
-  on:click|preventDefault="{(e) => navigate(to)}"
+  class:disabled
+  on:click|preventDefault="{navigate}"
 >
   <slot></slot>
 </a>

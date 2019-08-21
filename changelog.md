@@ -1,5 +1,9 @@
 # Svelte Router changelog
 
+## 1.0.12
+
+* Link component has not disabled prop, preventing the navigation action.
+
 ## 1.0.11
 
 * Updated components.

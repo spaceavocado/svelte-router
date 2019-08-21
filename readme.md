@@ -410,6 +410,7 @@ The route link is the base component for routing action. The route link renders 
 | exact     | The default active class matching behavior is inclusive match, i.e. it matches if the URL starts with link url. In the exact mode, the url must be be the same (excluding query param and hash param). Defaults to false.                                       | boolean          |
 | cls | Link base class name, defaults to ''.          | string           |
 | activeClass | Link active class name, if not defined, it defaults to the active class defined on the router.          | string           |
+| disabled | Disable navigation action, and set "disabled" css class. Defaults to false.         | boolean           |
 
 #### Router Link Events
 ```html
