@@ -43,6 +43,7 @@ To see the details code documentation, please read the [Code Documentation](http
         - [Abort](#abort)
         - [Redirect](#redirect)
         - [Error](#error)
+    - [Lazy Loaded Component](#lazy-loaded-component)
   - [API](#api)
     - [Create Router](#create-router)
       - [Router Options](#router-options)
@@ -522,6 +523,58 @@ Abort the current navigation, and trigger onError event on the router.
 
 More information:
 * [onError](#onerror)
+
+### Lazy Loaded Component
+View components could be loaded asynchronously, i.e. lazy loading, e.g:
+
+app.svelve
+```html
+<script>
+import createRouter from '@spaceavocado/svelte-router';
+import RouterView from '@spaceavocado/svelte-router/component/view';
+
+// View components
+import ViewHome from './views/home.svelte';
+import View404 from './views/404.svelte';
+
+// Webpack dynamic import
+const asyncView = (view) => {
+  return new Promise((resolve) => {
+    const component = import(/* webpackChunkName: "view-[request]" */ `./view/${view}.svelte`);
+    resolve(component);
+  });
+};
+
+createRouter({
+  routes: [
+    { 
+      path: '/',
+      name: 'HOME',
+      component: ViewHome,
+    },
+    {
+      path: 'some-page',
+      component: asyncView('some-page'),
+    }
+    {
+      path: '*',
+      component: View404,
+    },
+  ],
+});
+</script>
+
+<RouterView />
+```
+
+**Note**: To load async component, the load function must return a Promise, and resolve must return a module object:
+```javascript
+{
+  // The default (default module export function) must the Svelte Component function
+  // Please see the webpack example above.
+  default: function(){}
+}.
+```
 
 ## API
 To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/)

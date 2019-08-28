@@ -9,13 +9,15 @@ import {fullURL, deepClone} from './utils';
 /**
  * Route config object.
  * @typedef Config
+ * @property {Symbol} id route unique ID.
  * @property {string} path location path use to resolve the route.
  * @property {string|object|function} redirect route redirect.
  * * string: plain URL.
  * * object: route name {name: 'ROUTE'}.
  * * function: callback function fn(to) to resolve the redirect.
  * @property {string} name name of the route.
- * @property {function} component svelte component.
+ * @property {function|Promise} component svelte component.
+ * @property {bool} async lazy loaded component flag.
  * @property {object} meta route meta object.
  * @property {boolean|object|function} props props passed to component.
  * * true: auto-resolve props from route params.
@@ -40,7 +42,9 @@ export function createRouteConfig(prefab) {
     throw new Error('invalid route config path property');
   }
   if (tc.not.isNullOrUndefined(prefab.component)
-    && tc.not.isFunction(prefab.component)) {
+    && tc.not.isFunction(prefab.component)
+    && tc.not.isPromise(prefab.component)
+  ) {
     throw new Error('invalid route config component property');
   }
   if (prefab.meta && tc.not.isObject(prefab.meta)) {
@@ -64,9 +68,12 @@ export function createRouteConfig(prefab) {
   }
 
   return {
+    id: Symbol('Route ID'),
     path: prefab.path,
     redirect: prefab.redirect,
     component: prefab.component || false,
+    async: tc.not.isNullOrUndefined(prefab.component)
+      && tc.isPromise(prefab.component),
     name: prefab.name || null,
     meta: prefab.meta || {},
     props: prefab.props,
@@ -78,6 +85,7 @@ export function createRouteConfig(prefab) {
 /**
  * Route record object.
  * @typedef Record
+ * @property {Symbol} id route unique ID.
  * @property {string} path location path use to resolve the route.
  * @property {string|object|function} redirect route redirect.
  * * string: plain URL.
@@ -85,6 +93,7 @@ export function createRouteConfig(prefab) {
  * * function: callback function fn(to) to resolve the redirect.
  * @property {string?} name name of the route.
  * @property {function} component svelte component.
+ * @property {bool} async lazy loaded component flag.
  * @property {object} meta route meta.
  * @property {object} params route resolved params.
  * @property {boolean|object|function} props props passed to component.
@@ -101,10 +110,12 @@ export function createRouteConfig(prefab) {
  */
 export function createRouteRecord(route, params) {
   const record = {
+    id: route.id,
     path: route.path,
     redirect: route.redirect,
     name: route.name,
     component: route.component,
+    async: route.async,
     meta: route.meta,
     props: route.props,
     params: {},
