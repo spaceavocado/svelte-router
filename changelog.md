@@ -1,5 +1,9 @@
 # Svelte Router changelog
 
+## 1.0.14
+
+* Minor fixtures.
+
 ## 1.0.13
 
 * New feature: Lazy loaded view component (async components).

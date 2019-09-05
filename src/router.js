@@ -428,7 +428,7 @@ class Router {
    * @param {function|null} onAbort navigation change request callback.
    */
   _resolveRoute(location, onComplete, onAbort) {
-    const matches = [];
+    let matches = [];
 
     if (this._basename.length > 0) {
       location.path = trimPrefix(location.path, this._basename);
@@ -436,7 +436,7 @@ class Router {
 
     // Resolve named route
     if (location.name != null) {
-      const match = this._findRouteByName(location.name, this._routes);
+      let match = this._findRouteByName(location.name, this._routes);
       if (match == null) {
         if (onAbort != null) {
           onAbort();
