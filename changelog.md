@@ -1,5 +1,9 @@
 # Svelte Router changelog
 
+## 1.0.15
+
+* Bugfix: links have active class on the page load in the URL matches.
+
 ## 1.0.14
 
 * Minor fixtures.

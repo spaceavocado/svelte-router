@@ -41,8 +41,16 @@
     matchUrl = trimPrefix(to, $router.basename);
   }
 
+  /**
+   * Handle the active class on navigation change
+   */
   onMount(() => {
-    setCssClass(false);
+    if (tc.not.isNullOrUndefined($router.currentRoute)) {
+      setCssClass(exact
+        ? urlMatch($router.currentRoute.fullPath, matchUrl)
+        : urlPrefix($router.currentRoute.fullPath, matchUrl)
+      );
+    }
     navigationChangedListener = $router.onNavigationChanged((fromRoute, toRoute) => {
       setCssClass(exact
         ? urlMatch(toRoute.fullPath, matchUrl)
@@ -50,6 +58,10 @@
       );
     });
   });
+
+  /**
+   * Clean up the listeners
+   */
   onDestroy(() => {
 		if (navigationChangedListener != null) {
       navigationChangedListener();
