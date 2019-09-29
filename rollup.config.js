@@ -5,12 +5,14 @@ import replace from 'rollup-plugin-replace';
 import {eslint} from 'rollup-plugin-eslint';
 
 const libraryName = 'svelte-router';
-const input = './src/index.js';
+const input = './src/index.ts';
+const extensions = ['.js', '.ts'];
 const plugins = [
-  resolve(),
+  resolve({extensions}),
   commonjs(),
   eslint(),
   babel({
+    extensions,
     exclude: 'node_modules/**',
   }),
   replace({

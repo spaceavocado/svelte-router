@@ -1,1055 +1,1367 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="default no-js">
 <head>
-    
-    <meta charset="utf-8">
-    <title>Home - Documentation</title>
-    
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
-    <script src="scripts/nav.js" defer></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@spaceavocado/svelte-router</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-
-<input type="checkbox" id="nav-trigger" class="nav-trigger" />
-<label for="nav-trigger" class="navicon-button x">
-  <div class="navicon"></div>
-</label>
-
-<label for="nav-trigger" class="overlay"></label>
-
-<nav >
-    
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-svelte-router.Router.html">Router</a><ul class='methods'><li data-type='method'><a href="module-svelte-router.Router.html#back">back</a></li><li data-type='method'><a href="module-svelte-router.Router.html#forward">forward</a></li><li data-type='method'><a href="module-svelte-router.Router.html#go">go</a></li><li data-type='method'><a href="module-svelte-router.Router.html#navigationGuard">navigationGuard</a></li><li data-type='method'><a href="module-svelte-router.Router.html#onBeforeNavigation">onBeforeNavigation</a></li><li data-type='method'><a href="module-svelte-router.Router.html#onError">onError</a></li><li data-type='method'><a href="module-svelte-router.Router.html#onNavigationChanged">onNavigationChanged</a></li><li data-type='method'><a href="module-svelte-router.Router.html#push">push</a></li><li data-type='method'><a href="module-svelte-router.Router.html#replace">replace</a></li><li data-type='method'><a href="module-svelte-router.Router.html#routeURL">routeURL</a></li><li data-type='method'><a href="module-svelte-router.Router.html#start">start</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-svelte-router.html">svelte-router</a></li><li><a href="module-svelte-router_history.html">svelte-router/history</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_history.html#~history">history</a></li></ul></li><li><a href="module-svelte-router_location.html">svelte-router/location</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_location.html#.createLocation">createLocation</a></li></ul></li><li><a href="module-svelte-router_route.html">svelte-router/route</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_route.html#.cloneRoute">cloneRoute</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRoute">createRoute</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRouteConfig">createRouteConfig</a></li><li data-type='method'><a href="module-svelte-router_route.html#.createRouteRecord">createRouteRecord</a></li></ul></li><li><a href="module-svelte-router_utils.html">svelte-router/utils</a><ul class='methods'><li data-type='method'><a href="module-svelte-router_utils.html#.deepClone">deepClone</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.fullURL">fullURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.hasPrefix">hasPrefix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.hasSuffix">hasSuffix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.historyFullURL">historyFullURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.joinPath">joinPath</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.parseURL">parseURL</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.trimPrefix">trimPrefix</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.urlMatch">urlMatch</a></li><li data-type='method'><a href="module-svelte-router_utils.html#.urlPrefix">urlPrefix</a></li></ul></li></ul>
-</nav>
-
-<div id="main">
-    
-
-    
-
-
-
-    
-
-
-    <section class="package">
-        <h3> </h3>		
-    </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme">
-        <article><h1>Svelte Router</h1><p>Simple <a href="#https://svelte.dev">Svelte</a> Router for Single Page Applications (SPA), inspired by <a href="https://router.vuejs.org/">Vue Router</a>. Features include:</p>
-<ul>
-<li>Nested route/view mapping.</li>
-<li>Modular, component-based router configuration.</li>
-<li>Route params, query, wildcards <em>(powered by <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>)</em>.</li>
-<li>Navigation guards for navigation control.</li>
-<li>Links with automatic active CSS classes.</li>
-<li>HTML5 history mode or hash mode <em>(powered by <a href="https://github.com/ReactTraining/history">history</a>)</em>.</li>
-</ul>
-<p>To see the details code documentation, please read the <a href="https://spaceavocado.github.io/svelte-router/">Code Documentation</a>.</p>
-<p><strong>Quick Links</strong></p>
-<ul>
-<li><a href="#webpack-setup">Webpack Setup</a></li>
-<li><a href="#webpack-boilerplate-project-template">Webpack Boilerplate Project Template</a></li>
-<li><a href="#rollup-setup">Rollup Setup</a></li>
-</ul>
-<p><strong>Table of Content</strong></p>
-<ul>
-<li><a href="#svelte-router">Svelte Router</a><ul>
-<li><a href="#installation-via-npm-or-yarn">Installation via NPM or Yarn</a></li>
-<li><a href="#webpack-setup">Webpack Setup</a></li>
-<li><a href="#webpack-boilerplate-project-template">Webpack Boilerplate Project Template</a></li>
-<li><a href="#rollup-setup">Rollup Setup</a></li>
-<li><a href="#essentials">Essentials</a><ul>
-<li><a href="#setup-the-router">Setup the Router</a></li>
-<li><a href="#route-configuration">Route Configuration</a></li>
-<li><a href="#dynamic-route-configuration">Dynamic Route Configuration</a></li>
-<li><a href="#route-redirection">Route Redirection</a></li>
-<li><a href="#passing-props-to-route-components">Passing Props to Route Components</a><ul>
-<li><a href="#automatically-pass-route-params-as-component-props">Automatically Pass Route Params as Component Props</a></li>
-<li><a href="#pass-custom-object-as-component-props">Pass Custom Object as Component Props</a></li>
-<li><a href="#use-a-function-to-resolve-the-component-props">Use a Function to Resolve the Component Props</a></li>
-<li><a href="#auto-passed-route-prop">Auto Passed Route Prop</a></li>
-</ul>
-</li>
-<li><a href="#nested-routes">Nested Routes</a></li>
-<li><a href="#router-link-component">Router Link Component</a><ul>
-<li><a href="#router-link-events">Router Link Events</a></li>
-</ul>
-</li>
-<li><a href="#router-view-component">Router View Component</a></li>
-</ul>
-</li>
-<li><a href="#advanced">Advanced</a><ul>
-<li><a href="#programmatic-navigation">Programmatic Navigation</a></li>
-<li><a href="#navigation-guard">Navigation Guard</a><ul>
-<li><a href="#create-a-navigation-guard">Create a Navigation Guard</a></li>
-<li><a href="#navigation-guard-next-action">Navigation Guard Next Action</a><ul>
-<li><a href="#continue">Continue</a></li>
-<li><a href="#abort">Abort</a></li>
-<li><a href="#redirect">Redirect</a></li>
-<li><a href="#error">Error</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#lazy-loaded-component">Lazy Loaded Component</a></li>
-</ul>
-</li>
-<li><a href="#api">API</a><ul>
-<li><a href="#create-router">Create Router</a><ul>
-<li><a href="#router-options">Router Options</a></li>
-<li><a href="#access-router-instance">Access Router Instance</a></li>
-</ul>
-</li>
-<li><a href="#router-methods">Router Methods</a><ul>
-<li><a href="#start">start</a></li>
-<li><a href="#push">push</a></li>
-<li><a href="#replace">replace</a></li>
-<li><a href="#back">back</a></li>
-<li><a href="#forward">forward</a></li>
-<li><a href="#go">go</a></li>
-<li><a href="#routeurl">routeURL</a></li>
-<li><a href="#navigationguard">navigationGuard</a></li>
-<li><a href="#onbeforenavigation">onBeforeNavigation</a></li>
-<li><a href="#onnavigationchanged">onNavigationChanged</a></li>
-<li><a href="#onerror">onError</a></li>
-</ul>
-</li>
-<li><a href="#location-object">Location Object</a></li>
-<li><a href="#route-object">Route Object</a></li>
-<li><a href="#route-record-object">Route Record Object</a></li>
-</ul>
-</li>
-<li><a href="#changes">Changes</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#contributing">Contributing</a><ul>
-<li><a href="#pull-request-process">Pull Request Process</a></li>
-</ul>
-</li>
-<li><a href="#license">License</a></li>
-</ul>
-</li>
-</ul>
-<h2>Installation via NPM or Yarn</h2><pre class="prettyprint source lang-sh"><code>npm install -D @spaceavocado/svelte-router</code></pre><pre class="prettyprint source lang-sh"><code>yarn add @spaceavocado/svelte-router -D</code></pre><h2>Webpack Setup</h2><p>Please see the <a href="https://github.com/sveltejs/template-webpack">Svelte Webpack Template</a>.
-Important setup in the <strong>webpack.config.js</strong>:</p>
-<pre class="prettyprint source lang-javascript"><code>resolve: {
-  // This alias is important to prevent svelte mismatch
-  // between your code, and the 3rd party components.
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@spaceavocado/svelte-router</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> @spaceavocado/svelte-router</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#svelte-router" id="svelte-router" style="color: inherit; text-decoration: none;">
+					<h1>Svelte Router</h1>
+				</a>
+				<p>Simple <a href="#https://svelte.dev">Svelte</a> Router for Single Page Applications (SPA), inspired by <a href="https://router.vuejs.org/">Vue Router</a>. Features include:</p>
+				<ul>
+					<li>Nested route/view mapping.</li>
+					<li>Modular, component-based router configuration.</li>
+					<li>Route params, query, wildcards <em>(powered by <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a>)</em>.</li>
+					<li>Navigation guards for navigation control.</li>
+					<li>Links with automatic active CSS classes.</li>
+					<li>HTML5 history mode or hash mode <em>(powered by <a href="https://github.com/ReactTraining/history">history</a>)</em>.</li>
+				</ul>
+				<p>To see the details code documentation, please read the <a href="https://spaceavocado.github.io/svelte-router/">Code Documentation</a>.</p>
+				<p><strong>Quick Links</strong></p>
+				<ul>
+					<li><a href="#webpack-setup">Webpack Setup</a></li>
+					<li><a href="#webpack-boilerplate-project-template">Webpack Boilerplate Project Template</a></li>
+					<li><a href="#rollup-setup">Rollup Setup</a></li>
+				</ul>
+				<p><strong>Table of Content</strong></p>
+				<ul>
+					<li><a href="#svelte-router">Svelte Router</a><ul>
+							<li><a href="#installation-via-npm-or-yarn">Installation via NPM or Yarn</a></li>
+							<li><a href="#webpack-setup">Webpack Setup</a></li>
+							<li><a href="#webpack-boilerplate-project-template">Webpack Boilerplate Project Template</a></li>
+							<li><a href="#rollup-setup">Rollup Setup</a></li>
+							<li><a href="#essentials">Essentials</a><ul>
+									<li><a href="#setup-the-router">Setup the Router</a></li>
+									<li><a href="#route-configuration">Route Configuration</a></li>
+									<li><a href="#dynamic-route-configuration">Dynamic Route Configuration</a></li>
+									<li><a href="#route-redirection">Route Redirection</a></li>
+									<li><a href="#passing-props-to-route-components">Passing Props to Route Components</a><ul>
+											<li><a href="#automatically-pass-route-params-as-component-props">Automatically Pass Route Params as Component Props</a></li>
+											<li><a href="#pass-custom-object-as-component-props">Pass Custom Object as Component Props</a></li>
+											<li><a href="#use-a-function-to-resolve-the-component-props">Use a Function to Resolve the Component Props</a></li>
+											<li><a href="#auto-passed-route-prop">Auto Passed Route Prop</a></li>
+										</ul>
+									</li>
+									<li><a href="#nested-routes">Nested Routes</a></li>
+									<li><a href="#router-link-component">Router Link Component</a><ul>
+											<li><a href="#router-link-events">Router Link Events</a></li>
+										</ul>
+									</li>
+									<li><a href="#router-view-component">Router View Component</a></li>
+								</ul>
+							</li>
+							<li><a href="#advanced">Advanced</a><ul>
+									<li><a href="#programmatic-navigation">Programmatic Navigation</a></li>
+									<li><a href="#navigation-guard">Navigation Guard</a><ul>
+											<li><a href="#create-a-navigation-guard">Create a Navigation Guard</a></li>
+											<li><a href="#navigation-guard-next-action">Navigation Guard Next Action</a><ul>
+													<li><a href="#continue">Continue</a></li>
+													<li><a href="#abort">Abort</a></li>
+													<li><a href="#redirect">Redirect</a></li>
+													<li><a href="#error">Error</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li><a href="#lazy-loaded-component">Lazy Loaded Component</a></li>
+								</ul>
+							</li>
+							<li><a href="#api">API</a><ul>
+									<li><a href="#create-router">Create Router</a><ul>
+											<li><a href="#router-options">Router Options</a></li>
+											<li><a href="#access-router-instance">Access Router Instance</a></li>
+										</ul>
+									</li>
+									<li><a href="#router-methods">Router Methods</a><ul>
+											<li><a href="#start">start</a></li>
+											<li><a href="#push">push</a></li>
+											<li><a href="#replace">replace</a></li>
+											<li><a href="#back">back</a></li>
+											<li><a href="#forward">forward</a></li>
+											<li><a href="#go">go</a></li>
+											<li><a href="#routeurl">routeURL</a></li>
+											<li><a href="#navigationguard">navigationGuard</a></li>
+											<li><a href="#onbeforenavigation">onBeforeNavigation</a></li>
+											<li><a href="#onnavigationchanged">onNavigationChanged</a></li>
+											<li><a href="#onerror">onError</a></li>
+										</ul>
+									</li>
+									<li><a href="#location-object">Location Object</a></li>
+									<li><a href="#route-object">Route Object</a></li>
+									<li><a href="#route-record-object">Route Record Object</a></li>
+								</ul>
+							</li>
+							<li><a href="#changes">Changes</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#contributing">Contributing</a><ul>
+									<li><a href="#pull-request-process">Pull Request Process</a></li>
+								</ul>
+							</li>
+							<li><a href="#license">License</a></li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#installation-via-npm-or-yarn" id="installation-via-npm-or-yarn" style="color: inherit; text-decoration: none;">
+					<h2>Installation via NPM or Yarn</h2>
+				</a>
+				<pre><code class="language-sh">npm install -D @spaceavocado/svelte-router</code></pre>
+				<pre><code class="language-sh">yarn add @spaceavocado/svelte-router -D</code></pre>
+				<a href="#webpack-setup" id="webpack-setup" style="color: inherit; text-decoration: none;">
+					<h2>Webpack Setup</h2>
+				</a>
+				<p>Please see the <a href="https://github.com/sveltejs/template-webpack">Svelte Webpack Template</a>.
+				Important setup in the <strong>webpack.config.js</strong>:</p>
+				<pre><code class="language-javascript">resolve: {
+  <span class="hljs-comment">// This alias is important to prevent svelte mismatch</span>
+  <span class="hljs-comment">// between your code, and the 3rd party components.</span>
   alias: {
-    svelte: path.resolve('node_modules', 'svelte')
+    <span class="hljs-attr">svelte</span>: path.resolve(<span class="hljs-string">'node_modules'</span>, <span class="hljs-string">'svelte'</span>)
   },
-  extensions: ['.mjs', '.js', '.svelte'],
-  mainFields: ['svelte', 'browser', 'module', 'main']
+  <span class="hljs-attr">extensions</span>: [<span class="hljs-string">'.mjs'</span>, <span class="hljs-string">'.js'</span>, <span class="hljs-string">'.svelte'</span>],
+  <span class="hljs-attr">mainFields</span>: [<span class="hljs-string">'svelte'</span>, <span class="hljs-string">'browser'</span>, <span class="hljs-string">'module'</span>, <span class="hljs-string">'main'</span>]
 },
 
-module: {
-  rules: [
+<span class="hljs-attr">module</span>: {
+  <span class="hljs-attr">rules</span>: [
     {
-      test: /\.svelte$/,
-      // Do not exclude: /(node_modules)/ since the router 
-      // components are located in the node_modules
+      <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.svelte$/</span>,
+      <span class="hljs-comment">// Do not exclude: /(node_modules)/ since the router </span>
+      <span class="hljs-comment">// components are located in the node_modules</span>
       use: {
-        loader: 'svelte-loader',
-        options: {
-          emitCss: true,
-          hotReload: true
+        <span class="hljs-attr">loader</span>: <span class="hljs-string">'svelte-loader'</span>,
+        <span class="hljs-attr">options</span>: {
+          <span class="hljs-attr">emitCss</span>: <span class="hljs-literal">true</span>,
+          <span class="hljs-attr">hotReload</span>: <span class="hljs-literal">true</span>
         }
       }
     }
   ]
-}</code></pre><h2>Webpack Boilerplate Project Template</h2><p>For a quick start, you can use <a href="https://github.com/spaceavocado/svelte-router-template">svelte-router-template</a> - Webpack boilerplate template project for spaceavocado/svelte-router.</p>
-<p><a href="https://spaceavocado.github.io/svelte-router-template/">Live Preview</a>.</p>
-<h2>Rollup Setup</h2><p>rollup.config.js:</p>
-<pre class="prettyprint source lang-javascript"><code>import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import svelte from 'rollup-plugin-svelte';
+}</code></pre>
+				<a href="#webpack-boilerplate-project-template" id="webpack-boilerplate-project-template" style="color: inherit; text-decoration: none;">
+					<h2>Webpack Boilerplate Project Template</h2>
+				</a>
+				<p>For a quick start, you can use <a href="https://github.com/spaceavocado/svelte-router-template">svelte-router-template</a> - Webpack boilerplate template project for spaceavocado/svelte-router.</p>
+				<p><a href="https://spaceavocado.github.io/svelte-router-template/">Live Preview</a>.</p>
+				<a href="#rollup-setup" id="rollup-setup" style="color: inherit; text-decoration: none;">
+					<h2>Rollup Setup</h2>
+				</a>
+				<p>rollup.config.js:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> babel <span class="hljs-keyword">from</span> <span class="hljs-string">'rollup-plugin-babel'</span>;
+<span class="hljs-keyword">import</span> resolve <span class="hljs-keyword">from</span> <span class="hljs-string">'rollup-plugin-node-resolve'</span>;
+<span class="hljs-keyword">import</span> commonjs <span class="hljs-keyword">from</span> <span class="hljs-string">'rollup-plugin-commonjs'</span>;
+<span class="hljs-keyword">import</span> svelte <span class="hljs-keyword">from</span> <span class="hljs-string">'rollup-plugin-svelte'</span>;
 
-export default {
-  input: './src/index.js',
-  output: {
-    file: './dist/bundle.js',
-    format: 'iife'
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  <span class="hljs-attr">input</span>: <span class="hljs-string">'./src/index.js'</span>,
+  <span class="hljs-attr">output</span>: {
+    <span class="hljs-attr">file</span>: <span class="hljs-string">'./dist/bundle.js'</span>,
+    <span class="hljs-attr">format</span>: <span class="hljs-string">'iife'</span>
   },
-  plugins: [
+  <span class="hljs-attr">plugins</span>: [
     resolve(),
     commonjs({
-      include: 'node_modules/**',
+      <span class="hljs-attr">include</span>: <span class="hljs-string">'node_modules/**'</span>,
     }),
     svelte(),
     babel({
-      exclude: 'node_modules/**',
+      <span class="hljs-attr">exclude</span>: <span class="hljs-string">'node_modules/**'</span>,
     }),
   ]
-}</code></pre><h2>Essentials</h2><p>Note: All code below uses ES2015+.</p>
-<h3>Setup the Router</h3><p>All we need to do is map our components to the routes and add root RouterView component, here's a basic example of app component uses as the main <a href="#https://svelte.dev">Svelte</a> component.</p>
-<p>index.js:</p>
-<pre class="prettyprint source lang-javascript"><code>// The base component
-import App from './app.svelte';
+}</code></pre>
+				<a href="#essentials" id="essentials" style="color: inherit; text-decoration: none;">
+					<h2>Essentials</h2>
+				</a>
+				<p>Note: All code below uses ES2015+.</p>
+				<a href="#setup-the-router" id="setup-the-router" style="color: inherit; text-decoration: none;">
+					<h3>Setup the Router</h3>
+				</a>
+				<p>All we need to do is map our components to the routes and add root RouterView component, here&#39;s a basic example of app component uses as the main <a href="#https://svelte.dev">Svelte</a> component.</p>
+				<p>index.js:</p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// The base component</span>
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.svelte'</span>;
 
-// Turn on the engine
-new App({
-  target: document.body,
-});</code></pre><p>app.svelve:</p>
-<pre class="prettyprint source lang-html"><code>&lt;script>
-import createRouter from '@spaceavocado/svelte-router';
-import RouterView from '@spaceavocado/svelte-router/component/view';
+<span class="hljs-comment">// Turn on the engine</span>
+<span class="hljs-keyword">new</span> App({
+  <span class="hljs-attr">target</span>: <span class="hljs-built_in">document</span>.body,
+});</code></pre>
+				<p>app.svelve:</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> createRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;
+<span class="hljs-keyword">import</span> RouterView <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router/component/view'</span>;
 
-// View components
-import ViewHome from './views/home.svelte';
-import View404 from './views/404.svelte';
+<span class="hljs-comment">// View components</span>
+<span class="hljs-keyword">import</span> ViewHome <span class="hljs-keyword">from</span> <span class="hljs-string">'./views/home.svelte'</span>;
+<span class="hljs-keyword">import</span> View404 <span class="hljs-keyword">from</span> <span class="hljs-string">'./views/404.svelte'</span>;
 
 createRouter({
-  routes: [
+  <span class="hljs-attr">routes</span>: [
     { 
-      path: '/',
-      name: 'HOME',
-      component: ViewHome,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'HOME'</span>,
+      <span class="hljs-attr">component</span>: ViewHome,
     },
     {
-      path: '*',
-      component: View404,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'*'</span>,
+      <span class="hljs-attr">component</span>: View404,
     },
   ],
 });
-&lt;/script>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
-&lt;RouterView /></code></pre><p>This is an example of the minimalist plug &amp; play setup of the Svelte Router. For more details:</p>
-<ul>
-<li><a href="#create-router">Create Router</a></li>
-<li><a href="#route-configuration">Route Configuration</a></li>
-<li><a href="#router-view-component">Route View Component</a></li>
-</ul>
-<h3>Route Configuration</h3><p>A route can be configure with these properties:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">path</td>
-<td style="text-align:left">A string that equals the path of the current route, always resolved as an absolute path. e.g. &quot;/foo/bar&quot;. Please see <a href="#dynamic-route-configuration">Dynamic Route Configuration</a> for advanced usage.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">redirect</td>
-<td style="text-align:left">Redirection to different route, or to external site. Please see <a href="#route-redirection">Route Redirection</a> for advanced usage.</td>
-<td style="text-align:left">boolean, object, function</td>
-</tr>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">The name of the current route, optional.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">component</td>
-<td style="text-align:left"><a href="#https://svelte.dev">Svelte</a> component. It could be be omitted if the route has nested routes.</td>
-<td style="text-align:left">function</td>
-</tr>
-<tr>
-<td style="text-align:left">meta</td>
-<td style="text-align:left">Route meta object, meta is used a bucket for your custom data on route object.</td>
-<td style="text-align:left">object</td>
-</tr>
-<tr>
-<td style="text-align:left">props</td>
-<td style="text-align:left">Declaration of component properties passed to the component by the route. Please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a> for more details.</td>
-<td style="text-align:left">boolean, object, function</td>
-</tr>
-<tr>
-<td style="text-align:left">children</td>
-<td style="text-align:left">Collection of children/nested routes. Please see <a href="#nested-routes">Nested Routes</a> for more details.</td>
-<td style="text-align:left">object[]</td>
-</tr>
-</tbody>
-</table>
-<pre class="prettyprint source lang-javascript"><code>createRouter({
-  routes: [
+<span class="hljs-tag">&lt;<span class="hljs-name">RouterView</span> /&gt;</span></code></pre>
+				<p>This is an example of the minimalist plug &amp; play setup of the Svelte Router. For more details:</p>
+				<ul>
+					<li><a href="#create-router">Create Router</a></li>
+					<li><a href="#route-configuration">Route Configuration</a></li>
+					<li><a href="#router-view-component">Route View Component</a></li>
+				</ul>
+				<a href="#route-configuration" id="route-configuration" style="color: inherit; text-decoration: none;">
+					<h3>Route Configuration</h3>
+				</a>
+				<p>A route can be configure with these properties:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Property</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">path</td>
+							<td align="left">A string that equals the path of the current route, always resolved as an absolute path. e.g. &quot;/foo/bar&quot;. Please see <a href="#dynamic-route-configuration">Dynamic Route Configuration</a> for advanced usage.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">redirect</td>
+							<td align="left">Redirection to different route, or to external site. Please see <a href="#route-redirection">Route Redirection</a> for advanced usage.</td>
+							<td align="left">boolean, object, function</td>
+						</tr>
+						<tr>
+							<td align="left">name</td>
+							<td align="left">The name of the current route, optional.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">component</td>
+							<td align="left"><a href="#https://svelte.dev">Svelte</a> component. It could be be omitted if the route has nested routes.</td>
+							<td align="left">function</td>
+						</tr>
+						<tr>
+							<td align="left">meta</td>
+							<td align="left">Route meta object, meta is used a bucket for your custom data on route object.</td>
+							<td align="left">object</td>
+						</tr>
+						<tr>
+							<td align="left">props</td>
+							<td align="left">Declaration of component properties passed to the component by the route. Please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a> for more details.</td>
+							<td align="left">boolean, object, function</td>
+						</tr>
+						<tr>
+							<td align="left">children</td>
+							<td align="left">Collection of children/nested routes. Please see <a href="#nested-routes">Nested Routes</a> for more details.</td>
+							<td align="left">object[]</td>
+						</tr>
+				</tbody></table>
+				<pre><code class="language-javascript">createRouter({
+  <span class="hljs-attr">routes</span>: [
     { 
-      path: '/',
-      name: 'HOME',
-      component: ViewHome,
-      meta: {
-        static: 5,
-        dynamic: () => {return 5;},
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'HOME'</span>,
+      <span class="hljs-attr">component</span>: ViewHome,
+      <span class="hljs-attr">meta</span>: {
+        <span class="hljs-attr">static</span>: <span class="hljs-number">5</span>,
+        <span class="hljs-attr">dynamic</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {<span class="hljs-keyword">return</span> <span class="hljs-number">5</span>;},
       }
     },
     { 
-      path: '/services',
-      name: 'SERVICES',
-      children: [
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/services'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'SERVICES'</span>,
+      <span class="hljs-attr">children</span>: [
         { 
-          path: '/',
-          name: 'SERVICES_HOME',
-          component: ViewServices,
+          <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,
+          <span class="hljs-attr">name</span>: <span class="hljs-string">'SERVICES_HOME'</span>,
+          <span class="hljs-attr">component</span>: ViewServices,
         },
         { 
-          path: '/design',
-          name: 'SERVICES_DESIGN',
-          component: ViewServicesDesign,
-          props: {
-            title: 'Services / Design',
+          <span class="hljs-attr">path</span>: <span class="hljs-string">'/design'</span>,
+          <span class="hljs-attr">name</span>: <span class="hljs-string">'SERVICES_DESIGN'</span>,
+          <span class="hljs-attr">component</span>: ViewServicesDesign,
+          <span class="hljs-attr">props</span>: {
+            <span class="hljs-attr">title</span>: <span class="hljs-string">'Services / Design'</span>,
           }
         }
       ]
     },
     { 
-      path: '/users/:id(\\d+)',
-      name: 'USER_PROFILE',
-      component: ViewUserProfile,
-      props: (route) => {
-        return {
-          userId: route.params.id,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/users/:id(\\d+)'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_PROFILE'</span>,
+      <span class="hljs-attr">component</span>: ViewUserProfile,
+      <span class="hljs-attr">props</span>: <span class="hljs-function">(<span class="hljs-params">route</span>) =&gt;</span> {
+        <span class="hljs-keyword">return</span> {
+          <span class="hljs-attr">userId</span>: route.params.id,
         };
       },
     }
   ],
-});</code></pre><h3>Dynamic Route Configuration</h3><ul>
-<li>The route <strong>path</strong> could contain dynamic parameters, e.g. <code>path: '/users/:id'</code>. Please see <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> for more information how to configure the name, optional, etc,. parameters.</li>
-<li>Special case is <code>path: '*'</code> which means any URL, this route should be the last route in your routes definition.</li>
-<li>All resolved dynamic parameters are accessible on the resolved route object.</li>
-</ul>
-<h3>Route Redirection</h3><p>To redirect a route, you can configure it like so:</p>
-<pre class="prettyprint source lang-javascript"><code>// Redirect from /a to /b
+});</code></pre>
+				<a href="#dynamic-route-configuration" id="dynamic-route-configuration" style="color: inherit; text-decoration: none;">
+					<h3>Dynamic Route Configuration</h3>
+				</a>
+				<ul>
+					<li>The route <strong>path</strong> could contain dynamic parameters, e.g. <code>path: &#39;/users/:id&#39;</code>. Please see <a href="https://github.com/pillarjs/path-to-regexp">path-to-regexp</a> for more information how to configure the name, optional, etc,. parameters.</li>
+					<li>Special case is <code>path: &#39;*&#39;</code> which means any URL, this route should be the last route in your routes definition.</li>
+					<li>All resolved dynamic parameters are accessible on the resolved route object.</li>
+				</ul>
+				<a href="#route-redirection" id="route-redirection" style="color: inherit; text-decoration: none;">
+					<h3>Route Redirection</h3>
+				</a>
+				<p>To redirect a route, you can configure it like so:</p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// Redirect from /a to /b</span>
 { 
-  path: '/a',
-  redirect: '/b',
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/a'</span>,
+  <span class="hljs-attr">redirect</span>: <span class="hljs-string">'/b'</span>,
 }
 
-// External site redirect
-// Must start with 'http' or 'https'
+<span class="hljs-comment">// External site redirect</span>
+<span class="hljs-comment">// Must start with 'http' or 'https'</span>
 { 
-  path: '/a',
-  redirect: 'https://github.com/spaceavocado/svelte-router',
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/a'</span>,
+  <span class="hljs-attr">redirect</span>: <span class="hljs-string">'https://github.com/spaceavocado/svelte-router'</span>,
 }
 
-// Redirect to named route
+<span class="hljs-comment">// Redirect to named route</span>
 { 
-  path: '/a',
-  redirect: {
-    name: 'ROUTE_NAME',
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/a'</span>,
+  <span class="hljs-attr">redirect</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'ROUTE_NAME'</span>,
   },
 }
 
-// Dynamic redirecting
-// &quot;to&quot; is Route Object
-// Return value must be URL or a Route.
+<span class="hljs-comment">// Dynamic redirecting</span>
+<span class="hljs-comment">// "to" is Route Object</span>
+<span class="hljs-comment">// Return value must be URL or a Route.</span>
 { 
-  path: '/a',
-  redirect: (to) => {
-    return {
-      name: 'ROUTE_NAME',
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/a'</span>,
+  <span class="hljs-attr">redirect</span>: <span class="hljs-function">(<span class="hljs-params">to</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'ROUTE_NAME'</span>,
     }
   },
-}</code></pre><blockquote>
-<p>Please see <a href="#route-object">Route Object</a> for more details.</p>
-</blockquote>
-<h3>Passing Props to Route Components</h3><p>By default, props are not automatically passed to the route component, this could be change to:</p>
-<h4>Automatically Pass Route Params as Component Props</h4><p>All route dynamic props are auto-passed to the component.</p>
-<pre class="prettyprint source lang-javascript"><code>// app.svelte
+}</code></pre>
+				<blockquote>
+					<p>Please see <a href="#route-object">Route Object</a> for more details.</p>
+				</blockquote>
+				<a href="#passing-props-to-route-components" id="passing-props-to-route-components" style="color: inherit; text-decoration: none;">
+					<h3>Passing Props to Route Components</h3>
+				</a>
+				<p>By default, props are not automatically passed to the route component, this could be change to:</p>
+				<a href="#automatically-pass-route-params-as-component-props" id="automatically-pass-route-params-as-component-props" style="color: inherit; text-decoration: none;">
+					<h4>Automatically Pass Route Params as Component Props</h4>
+				</a>
+				<p>All route dynamic props are auto-passed to the component.</p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// app.svelte</span>
 { 
-  path: '/users/:id(\\d+)',
-  name: 'USER_PROFILE',
-  component: ViewUserProfile,
-  props: true,
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/users/:id(\\d+)'</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_PROFILE'</span>,
+  <span class="hljs-attr">component</span>: ViewUserProfile,
+  <span class="hljs-attr">props</span>: <span class="hljs-literal">true</span>,
 }
 
-// ViewUserProfile.svelte
-export let id;</code></pre><h4>Pass Custom Object as Component Props</h4><pre class="prettyprint source lang-javascript"><code>// app.svelte
+<span class="hljs-comment">// ViewUserProfile.svelte</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> id;</code></pre>
+				<a href="#pass-custom-object-as-component-props" id="pass-custom-object-as-component-props" style="color: inherit; text-decoration: none;">
+					<h4>Pass Custom Object as Component Props</h4>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-comment">// app.svelte</span>
 { 
-  path: '/',
-  name: 'HOME',
-  component: ViewHome,
-  props: {
-    title: 'Hello World',
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'HOME'</span>,
+  <span class="hljs-attr">component</span>: ViewHome,
+  <span class="hljs-attr">props</span>: {
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'Hello World'</span>,
   },
 }
 
-// ViewHome.svelte
-export let title;</code></pre><h4>Use a Function to Resolve the Component Props</h4><p>Please see <a href="#route-object">Route Object</a> for more details.</p>
-<pre class="prettyprint source lang-javascript"><code>// app.svelte
+<span class="hljs-comment">// ViewHome.svelte</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> title;</code></pre>
+				<a href="#use-a-function-to-resolve-the-component-props" id="use-a-function-to-resolve-the-component-props" style="color: inherit; text-decoration: none;">
+					<h4>Use a Function to Resolve the Component Props</h4>
+				</a>
+				<p>Please see <a href="#route-object">Route Object</a> for more details.</p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// app.svelte</span>
 { 
-  path: '/users/:id(\\d+)',
-  name: 'USER_PROFILE',
-  component: ViewUserProfile,
-  props: (route) => {
-    return {
-      title: 'User Profile',
-      id: route.params.id,
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/users/:id(\\d+)'</span>,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_PROFILE'</span>,
+  <span class="hljs-attr">component</span>: ViewUserProfile,
+  <span class="hljs-attr">props</span>: <span class="hljs-function">(<span class="hljs-params">route</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">title</span>: <span class="hljs-string">'User Profile'</span>,
+      <span class="hljs-attr">id</span>: route.params.id,
     }
   },
 }
 
-// ViewUserProfile.svelte
-export let title;
-export let id;</code></pre><h4>Auto Passed Route Prop</h4><p>Route property of type <a href="#route-object">Route Object</a> is auto-passed to the route component.</p>
-<p>component.svelte:</p>
-<pre class="prettyprint source lang-html"><code>&lt;script>
-export let route;
-&lt;/script></code></pre><h3>Nested Routes</h3><ul>
-<li>Please see <a href="#route-configuration">Route Configuration</a> for the base information about the routes configuration.</li>
-<li><p>Nested route has access to its own parameters and all parent's route parameters:</p>
-<pre class="prettyprint source lang-javascript"><code>{ 
-  path: '/users/:id(\\d+)',
-  children: [
+<span class="hljs-comment">// ViewUserProfile.svelte</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> title;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> id;</code></pre>
+				<a href="#auto-passed-route-prop" id="auto-passed-route-prop" style="color: inherit; text-decoration: none;">
+					<h4>Auto Passed Route Prop</h4>
+				</a>
+				<p>Route property of type <a href="#route-object">Route Object</a> is auto-passed to the route component.</p>
+				<p>component.svelte:</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> route;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<a href="#nested-routes" id="nested-routes" style="color: inherit; text-decoration: none;">
+					<h3>Nested Routes</h3>
+				</a>
+				<ul>
+					<li><p>Please see <a href="#route-configuration">Route Configuration</a> for the base information about the routes configuration.</p>
+					</li>
+					<li><p>Nested route has access to its own parameters and all parent&#39;s route parameters:</p>
+						<pre><code class="language-javascript">{
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/users/:id(\\d+)'</span>,
+  <span class="hljs-attr">children</span>: [
     {
-      path: '/',
-      name: 'USER_DETAIL',
-      component: ViewUserDetail,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_DETAIL'</span>,
+      <span class="hljs-attr">component</span>: ViewUserDetail,
     },
     {
-      path: '/message/:msgId(\\d+)',
-      name: 'USER_MESSAGE',
-      component: ViewUserMessageDetail,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/message/:msgId(\\d+)'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_MESSAGE'</span>,
+      <span class="hljs-attr">component</span>: ViewUserMessageDetail,
     }
   ],
 },
 {
-  path: '/services',
-  component: ViewServices,
-  children: [
-    path: '/design',
-    component: ViewServicesDesign,
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/services'</span>,
+  <span class="hljs-attr">component</span>: ViewServices,
+  <span class="hljs-attr">children</span>: [
+    path: <span class="hljs-string">'/design'</span>,
+    <span class="hljs-attr">component</span>: ViewServicesDesign,
   ]
 }
 
-// Resolved USER_MESSAGE route will have access to 
-// id, and msgId params.</code></pre></li>
-<li>The <strong>component</strong> could be omitted if the route has nested routes (please see the example above), it this case ViewRouter component will be used to pass through the components, please see <a href="#router-view-component">Router View</a> for more details.</li>
-<li>If the route has nested routes, and it has defined component, than the component must internally use <a href="#router-view-component">Router View</a> component to pass though the routed view components on it's own nested routes.</li>
-<li>All routes should start with trailing slash.</li>
-</ul>
-<h3>Router Link Component</h3><pre class="prettyprint source lang-html"><code>&lt;script>
-import RouterLink from '@spaceavocado/svelte-router/component/link';
+<span class="hljs-comment">// Resolved USER_MESSAGE route will have access to </span>
+<span class="hljs-comment">// id, and msgId params.</span></code></pre>
+					</li>
+					<li><p>The <strong>component</strong> could be omitted if the route has nested routes (please see the example above), it this case ViewRouter component will be used to pass through the components, please see <a href="#router-view-component">Router View</a> for more details.</p>
+					</li>
+					<li><p>If the route has nested routes, and it has defined component, than the component must internally use <a href="#router-view-component">Router View</a> component to pass though the routed view components on it&#39;s own nested routes.</p>
+					</li>
+					<li><p>All routes should start with trailing slash.</p>
+					</li>
+				</ul>
+				<a href="#router-link-component" id="router-link-component" style="color: inherit; text-decoration: none;">
+					<h3>Router Link Component</h3>
+				</a>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> RouterLink <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router/component/link'</span>;
 
-&lt;!-- URL -->
-&lt;RouterLink to='/services/design'>Navigate by URL&lt;/RouterLink>
+<span class="xml"><span class="hljs-comment">&lt;!-- URL --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">RouterLink</span> <span class="hljs-attr">to</span>=<span class="hljs-string">'/services/design'</span>&gt;</span>Navigate by URL<span class="hljs-tag">&lt;/<span class="hljs-name">RouterLink</span>&gt;</span>
 
-&lt;!-- Location Object -->
-&lt;RouterLink to={{name: 'USER_DETAIL', params:{id: 5}}>Navigate by Location&lt;/RouterLink></code></pre><p>The route link is the base component for routing action. The route link renders a <strong>&lt; a &gt;</strong> DOM element with click action triggering route change. The active class is auto-resolved. Component parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">to</td>
-<td style="text-align:left">navigation URL or navigation Location, please see <a href="#location-object">Location Object</a> for more details.</td>
-<td style="text-align:left">string, Location</td>
-</tr>
-<tr>
-<td style="text-align:left">replace</td>
-<td style="text-align:left">Replace rather the than push into the history, defaults to false.</td>
-<td style="text-align:left">boolean</td>
-</tr>
-<tr>
-<td style="text-align:left">exact</td>
-<td style="text-align:left">The default active class matching behavior is inclusive match, i.e. it matches if the URL starts with link url. In the exact mode, the url must be be the same (excluding query param and hash param). Defaults to false.</td>
-<td style="text-align:left">boolean</td>
-</tr>
-<tr>
-<td style="text-align:left">cls</td>
-<td style="text-align:left">Link base class name, defaults to ''.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">activeClass</td>
-<td style="text-align:left">Link active class name, if not defined, it defaults to the active class defined on the router.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">disabled</td>
-<td style="text-align:left">Disable navigation action, and set &quot;disabled&quot; css class. Defaults to false.</td>
-<td style="text-align:left">boolean</td>
-</tr>
-</tbody>
-</table>
-<h4>Router Link Events</h4><pre class="prettyprint source lang-html"><code>&lt;script>
-import RouterLink from '@spaceavocado/svelte-router/component/link';
+<span class="hljs-comment">&lt;!-- Location Object --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">RouterLink</span> <span class="hljs-attr">to</span>=<span class="hljs-string">{{name:</span> '<span class="hljs-attr">USER_DETAIL</span>', <span class="hljs-attr">params:</span>{<span class="hljs-attr">id:</span> <span class="hljs-attr">5</span>}}&gt;</span>Navigate by Location<span class="hljs-tag">&lt;/<span class="hljs-name">RouterLink</span>&gt;</span></span></span></code></pre>
+				<p>The route link is the base component for routing action. The route link renders a <strong>&lt; a &gt;</strong> DOM element with click action triggering route change. The active class is auto-resolved. Component parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Property</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">to</td>
+							<td align="left">navigation URL or navigation Location, please see <a href="#location-object">Location Object</a> for more details.</td>
+							<td align="left">string, Location</td>
+						</tr>
+						<tr>
+							<td align="left">replace</td>
+							<td align="left">Replace rather the than push into the history, defaults to false.</td>
+							<td align="left">boolean</td>
+						</tr>
+						<tr>
+							<td align="left">exact</td>
+							<td align="left">The default active class matching behavior is inclusive match, i.e. it matches if the URL starts with link url. In the exact mode, the url must be be the same (excluding query param and hash param). Defaults to false.</td>
+							<td align="left">boolean</td>
+						</tr>
+						<tr>
+							<td align="left">cls</td>
+							<td align="left">Link base class name, defaults to &#39;&#39;.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">activeClass</td>
+							<td align="left">Link active class name, if not defined, it defaults to the active class defined on the router.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">disabled</td>
+							<td align="left">Disable navigation action, and set &quot;disabled&quot; css class. Defaults to false.</td>
+							<td align="left">boolean</td>
+						</tr>
+				</tbody></table>
+				<a href="#router-link-events" id="router-link-events" style="color: inherit; text-decoration: none;">
+					<h4>Router Link Events</h4>
+				</a>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> RouterLink <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router/component/link'</span>;
 
-// Navigation has been completed
-function handleOnCompleted() {}
+<span class="hljs-comment">// Navigation has been completed</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOnCompleted</span>(<span class="hljs-params"></span>) </span>{}
 
-// Navigation has been aborted
-function handleOnAborted() {}
-&lt;/script>
+<span class="hljs-comment">// Navigation has been aborted</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleOnAborted</span>(<span class="hljs-params"></span>) </span>{}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
-&lt;RouterLink to='/services/design' on:completed={handleOnCompleted} on:aborted={handleOnAborted}>Navigate by URL&lt;/RouterLink></code></pre><h3>Router View Component</h3><pre class="prettyprint source lang-html"><code>&lt;script>
-import RouterView from '@spaceavocado/svelte-router/component/view';
-&lt;/script>
+<span class="hljs-tag">&lt;<span class="hljs-name">RouterLink</span> <span class="hljs-attr">to</span>=<span class="hljs-string">'/services/design'</span> <span class="hljs-attr">on:completed</span>=<span class="hljs-string">{handleOnCompleted}</span> <span class="hljs-attr">on:aborted</span>=<span class="hljs-string">{handleOnAborted}</span>&gt;</span>Navigate by URL<span class="hljs-tag">&lt;/<span class="hljs-name">RouterLink</span>&gt;</span></code></pre>
+				<a href="#router-view-component" id="router-view-component" style="color: inherit; text-decoration: none;">
+					<h3>Router View Component</h3>
+				</a>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> RouterView <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router/component/view'</span>;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
-&lt;RouterView /></code></pre><ul>
-<li>The route view acts as <strong>SLOT</strong> for resolved route component, i.e. it will be replaced run-time with the component defined on the given route.</li>
-<li>For nested routes, if the parent route (the one having nested routes) has defined it's own component, the component must use internally ViewRouter component to pass through the nested route components. If the component is not defined on the parent route, it auto pass through.</li>
-</ul>
-<h2>Advanced</h2><h3>Programmatic Navigation</h3><p>Besides the <a href="#router-link-component">Router Link Component</a>, the route could be changed like so:</p>
-<pre class="prettyprint source lang-javascript"><code>import {router} from '@spaceavocado/svelte-router';
+<span class="hljs-tag">&lt;<span class="hljs-name">RouterView</span> /&gt;</span></code></pre>
+				<ul>
+					<li>The route view acts as <strong>SLOT</strong> for resolved route component, i.e. it will be replaced run-time with the component defined on the given route.</li>
+					<li>For nested routes, if the parent route (the one having nested routes) has defined it&#39;s own component, the component must use internally ViewRouter component to pass through the nested route components. If the component is not defined on the parent route, it auto pass through.</li>
+				</ul>
+				<a href="#advanced" id="advanced" style="color: inherit; text-decoration: none;">
+					<h2>Advanced</h2>
+				</a>
+				<a href="#programmatic-navigation" id="programmatic-navigation" style="color: inherit; text-decoration: none;">
+					<h3>Programmatic Navigation</h3>
+				</a>
+				<p>Besides the <a href="#router-link-component">Router Link Component</a>, the route could be changed like so:</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;
 
-// URL
-$router.push('/services/design');
+<span class="hljs-comment">// URL</span>
+$router.push(<span class="hljs-string">'/services/design'</span>);
 
-// Location Object
+<span class="hljs-comment">// Location Object</span>
 $router.push({
-  name: 'USER_DETAIL',
-  params: {
-    id: 5,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_DETAIL'</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
   },
-  query: {
-    code: 'system_code',
+  <span class="hljs-attr">query</span>: {
+    <span class="hljs-attr">code</span>: <span class="hljs-string">'system_code'</span>,
   },
-  hash: 'sidebar',
-});</code></pre><blockquote>
-<p>Note: the <strong>router</strong> can be accessed after the <strong>createRouter</strong> function is executed, and it must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
-</blockquote>
-<p>More information:</p>
-<ul>
-<li><a href="#location-object">Location Object</a></li>
-<li><a href="#router-methods">Router Methods</a></li>
-</ul>
-<h3>Navigation Guard</h3><p>The navigation guards are primarily used to guard navigations either by redirecting it or canceling it.</p>
-<h4>Create a Navigation Guard</h4><pre class="prettyprint source lang-javascript"><code>import {router} from '@spaceavocado/svelte-router';
+  <span class="hljs-attr">hash</span>: <span class="hljs-string">'sidebar'</span>,
+});</code></pre>
+				<blockquote>
+					<p>Note: the <strong>router</strong> can be accessed after the <strong>createRouter</strong> function is executed, and it must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
+				</blockquote>
+				<p>More information:</p>
+				<ul>
+					<li><a href="#location-object">Location Object</a></li>
+					<li><a href="#router-methods">Router Methods</a></li>
+				</ul>
+				<a href="#navigation-guard" id="navigation-guard" style="color: inherit; text-decoration: none;">
+					<h3>Navigation Guard</h3>
+				</a>
+				<p>The navigation guards are primarily used to guard navigations either by redirecting it or canceling it.</p>
+				<a href="#create-a-navigation-guard" id="create-a-navigation-guard" style="color: inherit; text-decoration: none;">
+					<h4>Create a Navigation Guard</h4>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;
 
-// The guard callback is called when a navigation occurs,
-// the next function must be called to continue the navigation.
-$router.navigationGuard((from, to, next) => {
+<span class="hljs-comment">// The guard callback is called when a navigation occurs,</span>
+<span class="hljs-comment">// the next function must be called to continue the navigation.</span>
+$router.navigationGuard(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">from</span>, to, next</span>) =&gt;</span> {
   next();
-});</code></pre><blockquote>
-<p>Note: the <strong>router</strong> can be accessed after the <strong>createRouter</strong> function is executed, and it must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
-</blockquote>
-<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
-<h4>Navigation Guard Next Action</h4><h5>Continue</h5><pre class="prettyprint source lang-javascript"><code>next();</code></pre><p>Move on to the next hook in the pipeline. If no hooks are left, the navigation is confirmed.</p>
-<h5>Abort</h5><pre class="prettyprint source lang-javascript"><code>next(false);</code></pre><p>Abort the current navigation.</p>
-<h5>Redirect</h5><pre class="prettyprint source lang-javascript"><code>// URL
-next('/services/design');
+});</code></pre>
+				<blockquote>
+					<p>Note: the <strong>router</strong> can be accessed after the <strong>createRouter</strong> function is executed, and it must be accessed as <strong>$router</strong> since it is Svelte read-able store object.</p>
+				</blockquote>
+				<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
+				<a href="#navigation-guard-next-action" id="navigation-guard-next-action" style="color: inherit; text-decoration: none;">
+					<h4>Navigation Guard Next Action</h4>
+				</a>
+				<a href="#continue" id="continue" style="color: inherit; text-decoration: none;">
+					<h5>Continue</h5>
+				</a>
+				<pre><code class="language-javascript">next();</code></pre>
+				<p>Move on to the next hook in the pipeline. If no hooks are left, the navigation is confirmed.</p>
+				<a href="#abort" id="abort" style="color: inherit; text-decoration: none;">
+					<h5>Abort</h5>
+				</a>
+				<pre><code class="language-javascript">next(<span class="hljs-literal">false</span>);</code></pre>
+				<p>Abort the current navigation.</p>
+				<a href="#redirect" id="redirect" style="color: inherit; text-decoration: none;">
+					<h5>Redirect</h5>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-comment">// URL</span>
+next(<span class="hljs-string">'/services/design'</span>);
 
-// Location Object
+<span class="hljs-comment">// Location Object</span>
 next({
-  name: 'USER_DETAIL',
-  params: {
-    id: 5,
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'USER_DETAIL'</span>,
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">id</span>: <span class="hljs-number">5</span>,
   },
-  query: {
-    code: 'system_code',
+  <span class="hljs-attr">query</span>: {
+    <span class="hljs-attr">code</span>: <span class="hljs-string">'system_code'</span>,
   },
-  hash: 'sidebar',
-});</code></pre><p>Abort the current navigation and redirect to new navigation.</p>
-<p>More information:</p>
-<ul>
-<li><a href="#location-object">Location Object</a></li>
-</ul>
-<h5>Error</h5><pre class="prettyprint source lang-javascript"><code>next(new Error('internal error'));</code></pre><p>Abort the current navigation, and trigger onError event on the router.</p>
-<p>More information:</p>
-<ul>
-<li><a href="#onerror">onError</a></li>
-</ul>
-<h3>Lazy Loaded Component</h3><p>View components could be loaded asynchronously, i.e. lazy loading, e.g:</p>
-<p>app.svelve</p>
-<pre class="prettyprint source lang-html"><code>&lt;script>
-import createRouter from '@spaceavocado/svelte-router';
-import RouterView from '@spaceavocado/svelte-router/component/view';
+  <span class="hljs-attr">hash</span>: <span class="hljs-string">'sidebar'</span>,
+});</code></pre>
+				<p>Abort the current navigation and redirect to new navigation.</p>
+				<p>More information:</p>
+				<ul>
+					<li><a href="#location-object">Location Object</a></li>
+				</ul>
+				<a href="#error" id="error" style="color: inherit; text-decoration: none;">
+					<h5>Error</h5>
+				</a>
+				<pre><code class="language-javascript">next(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'internal error'</span>));</code></pre>
+				<p>Abort the current navigation, and trigger onError event on the router.</p>
+				<p>More information:</p>
+				<ul>
+					<li><a href="#onerror">onError</a></li>
+				</ul>
+				<a href="#lazy-loaded-component" id="lazy-loaded-component" style="color: inherit; text-decoration: none;">
+					<h3>Lazy Loaded Component</h3>
+				</a>
+				<p>View components could be loaded asynchronously, i.e. lazy loading, e.g:</p>
+				<p>app.svelve</p>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-keyword">import</span> createRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;
+<span class="hljs-keyword">import</span> RouterView <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router/component/view'</span>;
 
-// View components
-import ViewHome from './views/home.svelte';
-import View404 from './views/404.svelte';
+<span class="hljs-comment">// View components</span>
+<span class="hljs-keyword">import</span> ViewHome <span class="hljs-keyword">from</span> <span class="hljs-string">'./views/home.svelte'</span>;
+<span class="hljs-keyword">import</span> View404 <span class="hljs-keyword">from</span> <span class="hljs-string">'./views/404.svelte'</span>;
 
-// Webpack dynamic import
-const asyncView = (view) => {
-  return new Promise((resolve) => {
-    const component = import(/* webpackChunkName: &quot;view-[request]&quot; */ `./view/${view}.svelte`);
+<span class="hljs-comment">// Webpack dynamic import</span>
+<span class="hljs-keyword">const</span> asyncView = <span class="hljs-function">(<span class="hljs-params">view</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> component = <span class="hljs-keyword">import</span>(<span class="hljs-comment">/* webpackChunkName: "view-[request]" */</span> <span class="hljs-string">`./view/<span class="hljs-subst">${view}</span>.svelte`</span>);
     resolve(component);
   });
 };
 
 createRouter({
-  routes: [
+  <span class="hljs-attr">routes</span>: [
     { 
-      path: '/',
-      name: 'HOME',
-      component: ViewHome,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'/'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'HOME'</span>,
+      <span class="hljs-attr">component</span>: ViewHome,
     },
     {
-      path: 'some-page',
-      component: asyncView('some-page'),
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'some-page'</span>,
+      <span class="hljs-attr">component</span>: asyncView(<span class="hljs-string">'some-page'</span>),
     }
     {
-      path: '*',
-      component: View404,
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'*'</span>,
+      <span class="hljs-attr">component</span>: View404,
     },
   ],
 });
-&lt;/script>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
-&lt;RouterView /></code></pre><p><strong>Note</strong>: To load async component, the load function must return a Promise, and resolve must return a module object:</p>
-<pre class="prettyprint source lang-javascript"><code>{
-  // The default (default module export function) must the Svelte Component function
-  // Please see the webpack example above.
-  default: function(){}
-}.</code></pre><h2>API</h2><p>To see the details code documentation, please read the <a href="https://spaceavocado.github.io/svelte-router/">Code Documentation</a></p>
-<h3>Create Router</h3><pre class="prettyprint source lang-javascript"><code>import createRouter from '@spaceavocado/svelte-router';
+<span class="hljs-tag">&lt;<span class="hljs-name">RouterView</span> /&gt;</span></code></pre>
+				<p><strong>Note</strong>: To load async component, the load function must return a Promise, and resolve must return a module object:</p>
+				<pre><code class="language-javascript">{
+  <span class="hljs-comment">// The default (default module export function) must the Svelte Component function</span>
+  <span class="hljs-comment">// Please see the webpack example above.</span>
+  <span class="hljs-keyword">default</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{}
+}.</code></pre>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h2>API</h2>
+				</a>
+				<p>To see the details code documentation, please read the <a href="https://spaceavocado.github.io/svelte-router/">Code Documentation</a></p>
+				<a href="#create-router" id="create-router" style="color: inherit; text-decoration: none;">
+					<h3>Create Router</h3>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> createRouter <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;
 
-// Please see the opts below.
-const routerOpts = {};
+<span class="hljs-comment">// Please see the opts below.</span>
+<span class="hljs-keyword">const</span> routerOpts = {};
 
-// Router is Svelte read-able store, therefore it must be
-// accessed with $ prefix, e.g. $router.
-// To access the router instance in other files, please see &quot;Access Router Instance&quot;.
-const router = createRouter(routerOpts);</code></pre><blockquote>
-<p>Throws when the route options are invalid.</p>
-</blockquote>
-<h4>Router Options</h4><table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">mode</td>
-<td style="text-align:left">History mode. Supported values: 'HISTORY', 'HASH'.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">basename</td>
-<td style="text-align:left">The base URL of the app, defaults to ''.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">hashType</td>
-<td style="text-align:left">Hash type. Relevant only for HISTORY_MODE.HASH. Supported values: 'PUSH', 'REPLACE'.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">routes</td>
-<td style="text-align:left">router routes.</td>
-<td style="text-align:left">object[]</td>
-</tr>
-<tr>
-<td style="text-align:left">activeClass</td>
-<td style="text-align:left">CSS class applied on the active route link. Defaults to &quot;active&quot;.</td>
-<td style="text-align:left">string</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>Note: History modes could be accessed like so: </p>
-<pre class="prettyprint source lang-javascript"><code>import {ROUTER_MODE} from '@spaceavocado/svelte-router';</code></pre></blockquote>
-<blockquote>
-<p>Note: Hash types could be accessed like so: </p>
-<pre class="prettyprint source lang-javascript"><code>import {HASH_TYPE} from '@spaceavocado/svelte-router';</code></pre></blockquote>
-<p>More information:</p>
-<ul>
-<li><a href="#route-configuration">Route Configuration</a></li>
-</ul>
-<h4>Access Router Instance</h4><pre class="prettyprint source lang-javascript"><code>import {router} from '@spaceavocado/svelte-router';</code></pre><blockquote>
-<p>Note: It must be accessed as <strong>$router</strong> since it is the Svelte read-able store object, to resolved auto subscribe/unsubscribe.</p>
-</blockquote>
-<h3>Router Methods</h3><p>All route methods are accessible on the router, please see <a href="#access-router-instance">Access Router Instance</a>.</p>
-<h4>start</h4><pre class="prettyprint source lang-javascript"><code>$router.start();</code></pre><p>This method is auto-called by the root <a href="#router-view-component">Router View Component</a>; it handles the on page load route resolution.</p>
-<h4>push</h4><p>Push to navigation.</p>
-<pre class="prettyprint source lang-javascript"><code>$router.push(rawLocation, onComplete, onAbort);</code></pre><blockquote>
-<p>Throws when the rawLocation is invalid or when the path is invalid.</p>
-</blockquote>
-<p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">rawLocation</td>
-<td style="text-align:left">raw path or location object.</td>
-<td style="text-align:left">string, <a href="#location-object">Location</a></td>
-</tr>
-<tr>
-<td style="text-align:left">onComplete</td>
-<td style="text-align:left">On complete callback function. Optional.</td>
-<td style="text-align:left">function</td>
-</tr>
-<tr>
-<td style="text-align:left">onAbort</td>
-<td style="text-align:left">On abort callback function. Optional.</td>
-<td style="text-align:left">function</td>
-</tr>
-</tbody>
-</table>
-<h4>replace</h4><p>Replace in navigation.</p>
-<pre class="prettyprint source lang-javascript"><code>$router.replace(rawLocation, onComplete, onAbort);</code></pre><blockquote>
-<p>Throws when the rawLocation is invalid or when the path is invalid.</p>
-</blockquote>
-<p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">rawLocation</td>
-<td style="text-align:left">raw path or location object.</td>
-<td style="text-align:left">string, <a href="#location-object">Location</a></td>
-</tr>
-<tr>
-<td style="text-align:left">onComplete</td>
-<td style="text-align:left">On complete callback function. Optional.</td>
-<td style="text-align:left">function</td>
-</tr>
-<tr>
-<td style="text-align:left">onAbort</td>
-<td style="text-align:left">On abort callback function. Optional.</td>
-<td style="text-align:left">function</td>
-</tr>
-</tbody>
-</table>
-<h4>back</h4><p>Go one step back in the navigation history.</p>
-<pre class="prettyprint source lang-javascript"><code>$router.back();</code></pre><h4>forward</h4><p>Go one step forward in the navigation history.</p>
-<pre class="prettyprint source lang-javascript"><code>$router.forward();</code></pre><h4>go</h4><p>Go to a specific history position in the navigation history.</p>
-<pre class="prettyprint source lang-javascript"><code>$router.go(n);</code></pre><p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">n</td>
-<td style="text-align:left">number of steps to forward or backwards (negative number).</td>
-<td style="text-align:left">number</td>
-</tr>
-</tbody>
-</table>
-<h4>routeURL</h4><p>Generate route URL from the the raw location.</p>
-<pre class="prettyprint source lang-javascript"><code>const url = $router.routeURL(rawLocation);</code></pre><p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">rawLocation</td>
-<td style="text-align:left">raw location object.</td>
-<td style="text-align:left"><a href="#location-object">Location</a></td>
-</tr>
-</tbody>
-</table>
-<h4>navigationGuard</h4><p>Register a navigation guard which will be called whenever a navigation is triggered. All registered navigation guards are resolved in sequence. Navigation guard must call the next() function to continue the execution of navigation change. Please see <a href="#navigation-guard">Navigation Guard</a></p>
-<pre class="prettyprint source lang-javascript"><code>const unregister = $router.navigationGuard(guard);
+<span class="hljs-comment">// Router is Svelte read-able store, therefore it must be</span>
+<span class="hljs-comment">// accessed with $ prefix, e.g. $router.</span>
+<span class="hljs-comment">// To access the router instance in other files, please see "Access Router Instance".</span>
+<span class="hljs-keyword">const</span> router = createRouter(routerOpts);</code></pre>
+				<blockquote>
+					<p>Throws when the route options are invalid.</p>
+				</blockquote>
+				<a href="#router-options" id="router-options" style="color: inherit; text-decoration: none;">
+					<h4>Router Options</h4>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Property</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">mode</td>
+							<td align="left">History mode. Supported values: &#39;HISTORY&#39;, &#39;HASH&#39;.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">basename</td>
+							<td align="left">The base URL of the app, defaults to &#39;&#39;.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">hashType</td>
+							<td align="left">Hash type. Relevant only for HISTORY_MODE.HASH. Supported values: &#39;PUSH&#39;, &#39;REPLACE&#39;.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">routes</td>
+							<td align="left">router routes.</td>
+							<td align="left">object[]</td>
+						</tr>
+						<tr>
+							<td align="left">activeClass</td>
+							<td align="left">CSS class applied on the active route link. Defaults to &quot;active&quot;.</td>
+							<td align="left">string</td>
+						</tr>
+				</tbody></table>
+				<blockquote>
+					<p>Note: History modes could be accessed like so: </p>
+				</blockquote>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {ROUTER_MODE} <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;</code></pre>
+				<blockquote>
+					<p>Note: Hash types could be accessed like so: </p>
+				</blockquote>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {HASH_TYPE} <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;</code></pre>
+				<p>More information:</p>
+				<ul>
+					<li><a href="#route-configuration">Route Configuration</a></li>
+				</ul>
+				<a href="#access-router-instance" id="access-router-instance" style="color: inherit; text-decoration: none;">
+					<h4>Access Router Instance</h4>
+				</a>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> {router} <span class="hljs-keyword">from</span> <span class="hljs-string">'@spaceavocado/svelte-router'</span>;</code></pre>
+				<blockquote>
+					<p>Note: It must be accessed as <strong>$router</strong> since it is the Svelte read-able store object, to resolved auto subscribe/unsubscribe.</p>
+				</blockquote>
+				<a href="#router-methods" id="router-methods" style="color: inherit; text-decoration: none;">
+					<h3>Router Methods</h3>
+				</a>
+				<p>All route methods are accessible on the router, please see <a href="#access-router-instance">Access Router Instance</a>.</p>
+				<a href="#start" id="start" style="color: inherit; text-decoration: none;">
+					<h4>start</h4>
+				</a>
+				<pre><code class="language-javascript">$router.start();</code></pre>
+				<p>This method is auto-called by the root <a href="#router-view-component">Router View Component</a>; it handles the on page load route resolution.</p>
+				<a href="#push" id="push" style="color: inherit; text-decoration: none;">
+					<h4>push</h4>
+				</a>
+				<p>Push to navigation.</p>
+				<pre><code class="language-javascript">$router.push(rawLocation, onComplete, onAbort);</code></pre>
+				<blockquote>
+					<p>Throws when the rawLocation is invalid or when the path is invalid.</p>
+				</blockquote>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">rawLocation</td>
+							<td align="left">raw path or location object.</td>
+							<td align="left">string, <a href="#location-object">Location</a></td>
+						</tr>
+						<tr>
+							<td align="left">onComplete</td>
+							<td align="left">On complete callback function. Optional.</td>
+							<td align="left">function</td>
+						</tr>
+						<tr>
+							<td align="left">onAbort</td>
+							<td align="left">On abort callback function. Optional.</td>
+							<td align="left">function</td>
+						</tr>
+				</tbody></table>
+				<a href="#replace" id="replace" style="color: inherit; text-decoration: none;">
+					<h4>replace</h4>
+				</a>
+				<p>Replace in navigation.</p>
+				<pre><code class="language-javascript">$router.replace(rawLocation, onComplete, onAbort);</code></pre>
+				<blockquote>
+					<p>Throws when the rawLocation is invalid or when the path is invalid.</p>
+				</blockquote>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">rawLocation</td>
+							<td align="left">raw path or location object.</td>
+							<td align="left">string, <a href="#location-object">Location</a></td>
+						</tr>
+						<tr>
+							<td align="left">onComplete</td>
+							<td align="left">On complete callback function. Optional.</td>
+							<td align="left">function</td>
+						</tr>
+						<tr>
+							<td align="left">onAbort</td>
+							<td align="left">On abort callback function. Optional.</td>
+							<td align="left">function</td>
+						</tr>
+				</tbody></table>
+				<a href="#back" id="back" style="color: inherit; text-decoration: none;">
+					<h4>back</h4>
+				</a>
+				<p>Go one step back in the navigation history.</p>
+				<pre><code class="language-javascript">$router.back();</code></pre>
+				<a href="#forward" id="forward" style="color: inherit; text-decoration: none;">
+					<h4>forward</h4>
+				</a>
+				<p>Go one step forward in the navigation history.</p>
+				<pre><code class="language-javascript">$router.forward();</code></pre>
+				<a href="#go" id="go" style="color: inherit; text-decoration: none;">
+					<h4>go</h4>
+				</a>
+				<p>Go to a specific history position in the navigation history.</p>
+				<pre><code class="language-javascript">$router.go(n);</code></pre>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">n</td>
+							<td align="left">number of steps to forward or backwards (negative number).</td>
+							<td align="left">number</td>
+						</tr>
+				</tbody></table>
+				<a href="#routeurl" id="routeurl" style="color: inherit; text-decoration: none;">
+					<h4>routeURL</h4>
+				</a>
+				<p>Generate route URL from the the raw location.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> url = $router.routeURL(rawLocation);</code></pre>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">rawLocation</td>
+							<td align="left">raw location object.</td>
+							<td align="left"><a href="#location-object">Location</a></td>
+						</tr>
+				</tbody></table>
+				<a href="#navigationguard" id="navigationguard" style="color: inherit; text-decoration: none;">
+					<h4>navigationGuard</h4>
+				</a>
+				<p>Register a navigation guard which will be called whenever a navigation is triggered. All registered navigation guards are resolved in sequence. Navigation guard must call the next() function to continue the execution of navigation change. Please see <a href="#navigation-guard">Navigation Guard</a></p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> unregister = $router.navigationGuard(guard);
 
-// To unregister the navigation guard:
+<span class="hljs-comment">// To unregister the navigation guard:</span>
 unregister();
-unregister = null;
-</code></pre><p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">guard</td>
-<td style="text-align:left">guard callback function with (from, to, next) signature. Please see <a href="#navigation-guard-next-action">Navigation Guard Next Action</a></td>
-<td style="text-align:left">function</td>
-</tr>
-</tbody>
-</table>
-<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
-<h4>onBeforeNavigation</h4><p>Register a callback which will be called before execution of navigation guards.</p>
-<pre class="prettyprint source lang-javascript"><code>const unregister = $router.onBeforeNavigation(callback);
+unregister = <span class="hljs-literal">null</span>;
+</code></pre>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">guard</td>
+							<td align="left">guard callback function with (from, to, next) signature. Please see <a href="#navigation-guard-next-action">Navigation Guard Next Action</a></td>
+							<td align="left">function</td>
+						</tr>
+				</tbody></table>
+				<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
+				<a href="#onbeforenavigation" id="onbeforenavigation" style="color: inherit; text-decoration: none;">
+					<h4>onBeforeNavigation</h4>
+				</a>
+				<p>Register a callback which will be called before execution of navigation guards.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> unregister = $router.onBeforeNavigation(callback);
 
-// To unregister the event:
+<span class="hljs-comment">// To unregister the event:</span>
 unregister();
-unregister = null;
-</code></pre><p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">callback</td>
-<td style="text-align:left">callback function with fn(from, to) signature.</td>
-<td style="text-align:left">function</td>
-</tr>
-</tbody>
-</table>
-<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
-<h4>onNavigationChanged</h4><p>Register a callback which will be called when all navigation guards are resolved, and the final navigation change is resolved.</p>
-<pre class="prettyprint source lang-javascript"><code>const unregister = $router.onNavigationChanged(callback);
+unregister = <span class="hljs-literal">null</span>;
+</code></pre>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">callback</td>
+							<td align="left">callback function with fn(from, to) signature.</td>
+							<td align="left">function</td>
+						</tr>
+				</tbody></table>
+				<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
+				<a href="#onnavigationchanged" id="onnavigationchanged" style="color: inherit; text-decoration: none;">
+					<h4>onNavigationChanged</h4>
+				</a>
+				<p>Register a callback which will be called when all navigation guards are resolved, and the final navigation change is resolved.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> unregister = $router.onNavigationChanged(callback);
 
-// To unregister the event:
+<span class="hljs-comment">// To unregister the event:</span>
 unregister();
-unregister = null;
-</code></pre><p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">callback</td>
-<td style="text-align:left">callback function with fn(from, to) signature.</td>
-<td style="text-align:left">function</td>
-</tr>
-</tbody>
-</table>
-<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
-<h4>onError</h4><p>Register a callback which will be called when an error is caught during a route navigation.</p>
-<pre class="prettyprint source lang-javascript"><code>const unregister = $router.onError(callback);
+unregister = <span class="hljs-literal">null</span>;
+</code></pre>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">callback</td>
+							<td align="left">callback function with fn(from, to) signature.</td>
+							<td align="left">function</td>
+						</tr>
+				</tbody></table>
+				<p>&quot;from, to&quot; are <a href="#route-object">Route Object</a>.</p>
+				<a href="#onerror" id="onerror" style="color: inherit; text-decoration: none;">
+					<h4>onError</h4>
+				</a>
+				<p>Register a callback which will be called when an error is caught during a route navigation.</p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> unregister = $router.onError(callback);
 
-// To unregister the event:
+<span class="hljs-comment">// To unregister the event:</span>
 unregister();
-unregister = null;
-</code></pre><p>Parameters:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">callback</td>
-<td style="text-align:left">callback function with fn(error) signature.</td>
-<td style="text-align:left">function</td>
-</tr>
-</tbody>
-</table>
-<h3>Location Object</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">Name of the route.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">params</td>
-<td style="text-align:left">Route params dictionary object, if the route has defined dynamic route parameters, this object is required, with valid params to resolve the route URL.</td>
-<td style="text-align:left">object</td>
-</tr>
-<tr>
-<td style="text-align:left">query</td>
-<td style="text-align:left">Route query dictionary object. Optional.</td>
-<td style="text-align:left">object</td>
-</tr>
-<tr>
-<td style="text-align:left">hash</td>
-<td style="text-align:left">Route hash parameter. Optional.</td>
-<td style="text-align:left">string</td>
-</tr>
-</tbody>
-</table>
-<pre class="prettyprint source lang-javascript"><code>// Location object example
-{
-  name: 'USER_DETAIL',
-  params: {
-    id: 5,
-  },
-  query: {
-    code: 'system_code',
-  },
-  hash: 'sidebar',
-}
-
-// Considering that USER_DETAIL is /user/:id(\\d+)
-// the resolved URL will be:
-// /user/5?code=system_code#sidebar</code></pre><h3>Route Object</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">name of the route.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">path</td>
-<td style="text-align:left">location path use to resolve the route.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">hash</td>
-<td style="text-align:left">url hash.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">fullPath</td>
-<td style="text-align:left">the full resolved URL including query and hash.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">params</td>
-<td style="text-align:left">route resolved params.</td>
-<td style="text-align:left">object</td>
-</tr>
-<tr>
-<td style="text-align:left">query</td>
-<td style="text-align:left">query parameters.</td>
-<td style="text-align:left">object</td>
-</tr>
-<tr>
-<td style="text-align:left">meta</td>
-<td style="text-align:left">route meta.</td>
-<td style="text-align:left">object</td>
-</tr>
-<tr>
-<td style="text-align:left">action</td>
-<td style="text-align:left">route action.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">matched</td>
-<td style="text-align:left">resolved route records, please see <a href="#route-record-object">Route Record Object</a> In the case of nested route, it contains all matched routes, starting from root to the deepest route node.</td>
-<td style="text-align:left">object[]</td>
-</tr>
-</tbody>
-</table>
-<h3>Route Record Object</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">Property</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">path</td>
-<td style="text-align:left">location path use to resolve the route.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">name of the route.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">component</td>
-<td style="text-align:left">svelte component.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">meta</td>
-<td style="text-align:left">route meta.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">params</td>
-<td style="text-align:left">route resolved params.</td>
-<td style="text-align:left">string</td>
-</tr>
-<tr>
-<td style="text-align:left">props</td>
-<td style="text-align:left">props passed to component, please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a>.</td>
-<td style="text-align:left">boolean, object, function</td>
-</tr>
-</tbody>
-</table>
-<h2>Changes</h2><p>To see the changes that were made in a given release, please lookup the tag on the releases page. The full changelog could be seen here <a href="https://github.com/spaceavocado/svelte-router/blob/master/changelog.md">changelog.md</a></p>
-<h2>About</h2><p>This project was inspired by <a href="https://router.vuejs.org/">Vue Router</a>, designed mainly to explore and test <a href="#https://svelte.dev">Svelte</a> in SPA realm. Any feedback, contribution to this project is welcomed.</p>
-<p>The project is in a beta phase, therefore there might be major changes in near future, the annotation should stay the same, though.</p>
-<h2>Contributing</h2><p>When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.</p>
-<h3>Pull Request Process</h3><ol>
-<li>Fork it</li>
-<li>Create your feature branch (git checkout -b ft/new-feature-name)</li>
-<li>Commit your changes (git commit -am 'Add some feature')</li>
-<li>Push to the branch (git push origin ft/new-feature-name)</li>
-<li>Create new Pull Request<blockquote>
-<p>Please make an issue first if the change is likely to increase.</p>
-</blockquote>
-</li>
-</ol>
-<h2>License</h2><p>Svelte Router is released under the MIT license. See <a href="https://github.com/spaceavocado/svelte-router/blob/master/LICENSE.txt">LICENSE.txt</a>.</p></article>
-    </section>
-
-
-
-
-
-
-    
-    
+unregister = <span class="hljs-literal">null</span>;
+</code></pre>
+				<p>Parameters:</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Name</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">callback</td>
+							<td align="left">callback function with fn(error) signature.</td>
+							<td align="left">function</td>
+						</tr>
+				</tbody></table>
+				<a href="#location-object" id="location-object" style="color: inherit; text-decoration: none;">
+					<h3>Location Object</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Property</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">name</td>
+							<td align="left">Name of the route.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">params</td>
+							<td align="left">Route params dictionary object, if the route has defined dynamic route parameters, this object is required, with valid params to resolve the route URL.</td>
+							<td align="left">object</td>
+						</tr>
+						<tr>
+							<td align="left">query</td>
+							<td align="left">Route query dictionary object. Optional.</td>
+							<td align="left">object</td>
+						</tr>
+						<tr>
+							<td align="left">hash</td>
+							<td align="left">Route hash parameter. Optional.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">```javascript</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">// Location object example</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">{</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">name: &#39;USER_DETAIL&#39;,</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">params: {</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">id: 5,</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">},</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">query: {</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">code: &#39;system_code&#39;,</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">},</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">hash: &#39;sidebar&#39;,</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">}</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+				</tbody></table>
+				<p>// Considering that USER_DETAIL is /user/:id(\d+)
+					// the resolved URL will be:
+				// /user/5?code=system_code#sidebar</p>
+				<p>```</p>
+				<a href="#route-object" id="route-object" style="color: inherit; text-decoration: none;">
+					<h3>Route Object</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Property</th>
+							<th align="left">Description</th>
+							<th align="left">Type</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left">name</td>
+							<td align="left">name of the route.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">path</td>
+							<td align="left">location path use to resolve the route.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">hash</td>
+							<td align="left">url hash.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">fullPath</td>
+							<td align="left">the full resolved URL including query and hash.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">params</td>
+							<td align="left">route resolved params.</td>
+							<td align="left">object</td>
+						</tr>
+						<tr>
+							<td align="left">query</td>
+							<td align="left">query parameters.</td>
+							<td align="left">object</td>
+						</tr>
+						<tr>
+							<td align="left">meta</td>
+							<td align="left">route meta.</td>
+							<td align="left">object</td>
+						</tr>
+						<tr>
+							<td align="left">action</td>
+							<td align="left">route action.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">matched</td>
+							<td align="left">resolved route records, please see <a href="#route-record-object">Route Record Object</a> In the case of nested route, it contains all matched routes, starting from root to the deepest route node.</td>
+							<td align="left">object[]</td>
+						</tr>
+						<tr>
+							<td align="left">### Route Record Object</td>
+							<td align="left"></td>
+							<td align="left"></td>
+						</tr>
+						<tr>
+							<td align="left">Property</td>
+							<td align="left">Description</td>
+							<td align="left">Type</td>
+						</tr>
+						<tr>
+							<td align="left">:-----------</td>
+							<td align="left">:----------------------------------------</td>
+							<td align="left">:------------------------------------</td>
+						</tr>
+						<tr>
+							<td align="left">path</td>
+							<td align="left">location path use to resolve the route.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">name</td>
+							<td align="left">name of the route.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">component</td>
+							<td align="left">svelte component.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">meta</td>
+							<td align="left">route meta.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">params</td>
+							<td align="left">route resolved params.</td>
+							<td align="left">string</td>
+						</tr>
+						<tr>
+							<td align="left">props</td>
+							<td align="left">props passed to component, please see <a href="#passing-props-to-route-components">Passing Props to Route Components</a>.</td>
+							<td align="left">boolean, object, function</td>
+						</tr>
+				</tbody></table>
+				<a href="#changes" id="changes" style="color: inherit; text-decoration: none;">
+					<h2>Changes</h2>
+				</a>
+				<p>To see the changes that were made in a given release, please lookup the tag on the releases page. The full changelog could be seen here <a href="https://github.com/spaceavocado/svelte-router/blob/master/changelog.md">changelog.md</a></p>
+				<a href="#about" id="about" style="color: inherit; text-decoration: none;">
+					<h2>About</h2>
+				</a>
+				<p>This project was inspired by <a href="https://router.vuejs.org/">Vue Router</a>, designed mainly to explore and test <a href="#https://svelte.dev">Svelte</a> in SPA realm. Any feedback, contribution to this project is welcomed.</p>
+				<p>The project is in a beta phase, therefore there might be major changes in near future, the annotation should stay the same, though.</p>
+				<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+					<h2>Contributing</h2>
+				</a>
+				<p>When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.</p>
+				<a href="#pull-request-process" id="pull-request-process" style="color: inherit; text-decoration: none;">
+					<h3>Pull Request Process</h3>
+				</a>
+				<ol>
+					<li>Fork it</li>
+					<li>Create your feature branch (git checkout -b ft/new-feature-name)</li>
+					<li>Commit your changes (git commit -am &#39;Add some feature&#39;)</li>
+					<li>Push to the branch (git push origin ft/new-feature-name)</li>
+					<li>Create new Pull Request<blockquote>
+							<p>Please make an issue first if the change is likely to increase.</p>
+						</blockquote>
+					</li>
+				</ol>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>Svelte Router is released under the MIT license. See <a href="https://github.com/spaceavocado/svelte-router/blob/master/LICENSE.txt">LICENSE.txt</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_history_.html">"history"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_location_.html">"location"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_route_.html">"route"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_router_.html">"router"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_.html">"utils"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
 </div>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Aug 27 2019 20:43:31 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
 </footer>
-
-<script>prettyPrint();</script>
-<script src="scripts/polyfill.js"></script>
-<script src="scripts/linenumber.js"></script>
-
-
-
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

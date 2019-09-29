@@ -6,14 +6,22 @@
   "module": "lib/svelte-router.esm.js",
   "files": [
     "/lib",
+    "/types",
     "/component",
     "changelog.md"
   ],
-  "author": "David Horak <info@davidhorak.com>",
+  "author": {
+    "name": "David Horak",
+    "email": "info@davidhorak.com"
+  },
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "docs": "jsdoc . -r -d docs -c jsdoc.json -R readme.md"
+    "type-check": "tsc --noEmit",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "rollup -c",
+    "build": "npm run build:types && npm run build:js",
+    "docs": "typedoc --out docs --excludePrivate ./src",
+    "test": "jest test"
   },
   "repository": {
     "type": "git",
@@ -36,9 +44,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "babel-eslint": "^10.0.2",
-    "docdash": "^1.1.1",
+    "@babel/preset-typescript": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
     "eslint": "^6.1.0",
     "eslint-config-google": "^0.13.0",
     "history": "^4.9.0",
@@ -48,6 +58,7 @@
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0"
+    "rollup-plugin-replace": "^2.2.0",
+    "typescript": "^3.6.3"
   }
 }

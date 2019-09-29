@@ -1,2 +1,3 @@
-# Lib
-lib/*.js
+/lib/**
+/test/**
+/types/**

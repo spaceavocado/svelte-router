@@ -5,6 +5,6 @@
   },
   "source": {
     "exclude": ["node_modules", "lib"],
-    "excludePattern": ".*mockup.*"
+    "excludePattern": ".*test.*"
   }
 }
