@@ -51,7 +51,7 @@ export interface RouteConfigPrefab {
   meta?: {[k: string]: string};
   props?: routeProps;
   /** Children routes. */
-  children: RouteConfigPrefab[];
+  children?: RouteConfigPrefab[];
 }
 
 /**

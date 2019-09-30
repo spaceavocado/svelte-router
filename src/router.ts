@@ -1,13 +1,23 @@
-import {readable} from 'svelte/store';
 import tc from '@spaceavocado/type-check';
-
 import pathToRegexp from 'path-to-regexp';
-import createHistory, {HISTORY_MODE, HISTORY_ACTION, HASH_TYPE}
-  from './history';
-import {Location, RawLocation, createLocation} from './location';
-import {HistoryLocation} from './utils';
-import {joinPath, fullURL, historyFullURL, hasPrefix, trimPrefix}
-  from './utils';
+import createHistory, {
+  HISTORY_MODE,
+  HISTORY_ACTION,
+  HASH_TYPE,
+} from './history';
+import {
+  Location,
+  RawLocation,
+  createLocation,
+} from './location';
+import {
+  HistoryLocation,
+  joinPath,
+  fullURL,
+  historyFullURL,
+  hasPrefix,
+  trimPrefix,
+} from './utils';
 import {
   Route,
   Record,
@@ -19,8 +29,7 @@ import {
   createRouteRecord,
   createRoute,
   cloneRoute,
-}
-  from './route';
+} from './route';
 
 type historyModule = {
   action: HISTORY_ACTION;
@@ -48,13 +57,13 @@ interface HistoryOptions {
 /**
  * Router configuration.
  */
-interface RouterConfig {
+export interface RouterConfig {
   /** History mode */
-  mode: HISTORY_MODE;
+  mode?: HISTORY_MODE;
   /** The base URL of the app, defaults to ''. */
   basename?: string;
   /** Hash type. */
-  hashType: HASH_TYPE;
+  hashType?: HASH_TYPE;
   /** Router routes. */
   routes: RouteConfigPrefab[];
   /** CSS class applied on the active route link. Defaults to "active". */
@@ -98,7 +107,7 @@ interface EventListeners {
 /**
  * Svelte Router core class.
  */
-class Router {
+export class Router {
   private _mode: HISTORY_MODE;
   private _basename: string;
   private _routes: RouteConfig[];
@@ -189,6 +198,13 @@ class Router {
    */
   get basename(): string {
     return this._basename;
+  }
+
+  /**
+   * Get routes
+   */
+  get routes(): RouteConfig[] {
+    return this._routes;
   }
 
   /**
@@ -452,14 +468,18 @@ class Router {
         route.matcher = pathToRegexp(
             route.path,
             route.paramKeys as pathToRegexp.Key[], {
-              end: prefabs[i].children.length == 0,
+              end: (prefabs[i].children as RouteConfigPrefab[]).length == 0,
             });
         route.generator = pathToRegexp.compile(route.path);
       }
 
       // Process children
-      if (prefabs[i].children.length > 0) {
-        this.preprocessRoutes(route.children, prefabs[i].children, route);
+      if ((prefabs[i].children as RouteConfigPrefab[]).length > 0) {
+        this.preprocessRoutes(
+            route.children,
+            prefabs[i].children as RouteConfigPrefab[],
+            route
+        );
       }
     }
   }
@@ -882,21 +902,4 @@ class Router {
   }
 }
 
-/**
- * Router store.
- * Svelte readable store of type [[Router]].
- */
-export let router: object;
-
-/**
- * Create a router in read-only store.
- * Default module export.
- * @param {RouterConfig} opts Router constructor options.
- * @return {object} Svelte readable store of type [[Router]].
- */
-const createRouter = (opts: RouterConfig): object => {
-  router = readable(new Router(opts));
-  return router;
-};
-
-export default createRouter;
+export default Router;

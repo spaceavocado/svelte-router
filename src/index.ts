@@ -3,9 +3,11 @@
  * @module svelte-router
  */
 
+import {readable} from 'svelte/store';
+
 // Internals
 import {HISTORY_MODE as ROUTER_MODE, HASH_TYPE} from './history';
-import createRouter, {router} from './router';
+import Router, {RouterConfig} from './router';
 import {urlMatch, urlPrefix, trimPrefix} from './utils';
 
 export {
@@ -17,14 +19,26 @@ export {
    * Router supported hash types enum.
    */
   HASH_TYPE,
-  /**
-   * Router store.
-   * Svelte readable of type module:svelte-router.Router.
-   */
-  router,
   urlMatch,
   urlPrefix,
   trimPrefix,
+};
+
+/**
+ * Router store.
+ * Svelte readable store of type [[Router]].
+ */
+export let router: object;
+
+/**
+ * Create a router in read-only store.
+ * Default module export.
+ * @param {RouterConfig} opts Router constructor options.
+ * @return {object} Svelte readable store of type [[Router]].
+ */
+const createRouter = (opts: RouterConfig): object => {
+  router = readable(new Router(opts));
+  return router;
 };
 
 /**

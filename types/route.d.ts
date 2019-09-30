@@ -46,7 +46,7 @@ export interface RouteConfigPrefab {
     };
     props?: routeProps;
     /** Children routes. */
-    children: RouteConfigPrefab[];
+    children?: RouteConfigPrefab[];
 }
 /**
  * Route Config
