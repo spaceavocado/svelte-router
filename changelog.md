@@ -1,5 +1,10 @@
 # Svelte Router changelog
 
+## 1.0.16
+
+* Source code migrated into typescript.
+* Props of number type, are automatically casted to numbers during the params to props auto resolving.
+
 ## 1.0.15
 
 * Bugfix: links have active class on the page load in the URL matches.
