@@ -97,7 +97,19 @@ export interface HistoryLocation {
  * @param {HistoryLocation} location history location objec.
  * @return {string}
  */
-export declare function historyFullURL(location: HistoryLocation): string;
+export declare function historyFullURL(location: Partial<HistoryLocation>): string;
+/**
+ * Is whole number predicate
+ * @param {string} s Tested string.
+ * @return {boolean}
+ */
+export declare function isWholeNumber(s: string): boolean;
+/**
+ * Is float number predicate
+ * @param {string} s Tested string.
+ * @return {boolean}
+ */
+export declare function isFloatNumber(s: string): boolean;
 /**
  * Simple object deep clone.
  * @param {object} o source object.

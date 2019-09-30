@@ -230,8 +230,26 @@ export interface HistoryLocation {
  * @param {HistoryLocation} location history location objec.
  * @return {string}
  */
-export function historyFullURL(location: HistoryLocation): string {
+export function historyFullURL(location: Partial<HistoryLocation>): string {
   return `${location.pathname}${location.search}${location.hash}`;
+}
+
+/**
+ * Is whole number predicate
+ * @param {string} s Tested string.
+ * @return {boolean}
+ */
+export function isWholeNumber(s: string): boolean {
+  return s.match(/^0$|^[1-9]\d*$/) !== null;
+}
+
+/**
+ * Is float number predicate
+ * @param {string} s Tested string.
+ * @return {boolean}
+ */
+export function isFloatNumber(s: string): boolean {
+  return s.match(/^\d*\.\d*$/) !== null;
 }
 
 /**

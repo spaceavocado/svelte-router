@@ -1,16 +1,20 @@
-import {hasPrefix} from '../src/utils';
-import {hasSuffix} from '../src/utils';
-import {trimPrefix} from '../src/utils';
-import {joinPath} from '../src/utils';
-import {urlMatch} from '../src/utils';
-import {urlPrefix} from '../src/utils';
-import {parseURL} from '../src/utils';
-import {fullURL} from '../src/utils';
-import {historyFullURL} from '../src/utils';
-import {deepClone} from  '../src/utils';
+import {
+  hasPrefix,
+  hasSuffix,
+  trimPrefix,
+  joinPath,
+  urlMatch,
+  urlPrefix,
+  parseURL,
+  fullURL,
+  historyFullURL,
+  deepClone,
+  isWholeNumber,
+  isFloatNumber,
+} from  '../src/utils';
 
 test('hasPrefix', () => {
-  const tests = [
+  const tests: [string, string, boolean][] = [
     ['', '', false],
     ['a', '', false],
     ['', 'a', false],
@@ -23,7 +27,7 @@ test('hasPrefix', () => {
 });
 
 test('hasSuffix', () => {
-  const tests = [
+  const tests: [string, string, boolean][] = [
     ['', '', false],
     ['a', '', false],
     ['', 'a', false],
@@ -69,7 +73,7 @@ test('urlMatch', () => {
     ['/path?/?', ''],
     ['', '/path?/?'],
   ];
-  const tests = [
+  const tests: [string, string, boolean][] = [
     ['/a', '', false],
     ['a', '/b', false],
     ['/a?s=term', '', false],
@@ -88,7 +92,7 @@ test('urlMatch', () => {
 });
 
 test('urlPrefix', () => {
-  const tests = [
+  const tests: [string, string, boolean][] = [
     ['', '', false],
     ['sample-page', '', false],
     ['', 'sample', false],
@@ -106,7 +110,7 @@ test('parseURL', () => {
     ['/path#/#'],
     ['/path?/?'],
   ];
-  const tests = [
+  const tests: [string, object][] = [
     ['/a', {base: '/a', hash: '', query: {}}],
     ['/a#anchor-link', {base: '/a', hash: 'anchor-link', query: {}}],
     ['/a?param=value', {base: '/a', hash: '', query: {param: 'value'}}],
@@ -122,7 +126,7 @@ test('parseURL', () => {
 });
 
 test('fullURL', () => {
-  const tests = [
+  const tests: [string, {[k: string]: string} | null | undefined, string, string][] = [
     ['/a', null, '', '/a'],
     ['/a', undefined, '', '/a'],
     ['/a', {}, '', '/a'],
@@ -137,7 +141,7 @@ test('fullURL', () => {
 });
 
 test('historyFullURL', () => {
-  const tests = [
+  const tests: [object, string][] = [
     [{pathname: '/a', search: '', hash: ''}, '/a'],
     [{pathname: '/a', search: '', hash: '#anchor-link'}, '/a#anchor-link'],
     [{pathname: '/a', search: '?param=value', hash: ''}, '/a?param=value'],
@@ -151,4 +155,37 @@ test('historyFullURL', () => {
 test('deepClone', () => {
   const a = {pathname: '/a', search: '', hash: ''};
   expect(deepClone(a)).not.toBe(a);
+});
+
+test('isWholeNumber', () => {
+  const tests: [string, boolean][] = [
+    ['', false],
+    ['a', false],
+    ['01', false],
+    ['a3', false],
+    ['3a', false],
+    ['0', true],
+    ['12', true],
+    ['12.4', false],
+  ];
+  for (const t of tests) {
+    expect(isWholeNumber(t[0])).toBe(t[1]);
+  }
+});
+
+test('isFloatNumber', () => {
+  const tests: [string, boolean][] = [
+    ['', false],
+    ['a', false],
+    ['01', false],
+    ['a3', false],
+    ['3a', false],
+    ['0', false],
+    ['12', false],
+    ['12.4.4', false],
+    ['12.4', true],
+  ];
+  for (const t of tests) {
+    expect(isFloatNumber(t[0])).toBe(t[1]);
+  }
 });

@@ -451,7 +451,7 @@ class Router {
       } else {
         route.matcher = pathToRegexp(
             route.path,
-            route.paramKeys, {
+            route.paramKeys as pathToRegexp.Key[], {
               end: prefabs[i].children.length == 0,
             });
         route.generator = pathToRegexp.compile(route.path);

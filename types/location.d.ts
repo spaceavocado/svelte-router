@@ -16,13 +16,13 @@ interface LocationBase {
 }
 export interface RawLocation extends LocationBase {
     /** Query parameters. */
-    query: {
+    query?: {
         [k: string]: string;
-    } | null | undefined;
+    } | null;
     /** Route parameters */
-    params: {
+    params?: {
         [k: string]: string;
-    } | null | undefined;
+    } | null;
     /** Replace in the history. */
     replace: boolean;
 }

@@ -1,5 +1,5 @@
 import {HISTORY_ACTION} from '../src/history';
-import {createLocation} from '../src/location';
+import {createLocation, RawLocation, Location} from '../src/location';
 
 test('createLocation', () => {
   const invalid = [
@@ -14,7 +14,7 @@ test('createLocation', () => {
     ],
   ];
 
-  const tests = [
+  const tests: [RawLocation, Location][] = [
     [
       {
         path: '/path',

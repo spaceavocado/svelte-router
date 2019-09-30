@@ -21,9 +21,9 @@ interface LocationBase {
 
 export interface RawLocation extends LocationBase {
   /** Query parameters. */
-  query: {[k: string]: string} | null | undefined;
+  query?: {[k: string]: string} | null;
   /** Route parameters */
-  params: {[k: string]: string} | null | undefined;
+  params?: {[k: string]: string} | null;
   /** Replace in the history. */
   replace: boolean;
 }
