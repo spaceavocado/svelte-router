@@ -71,6 +71,10 @@ export interface RouteConfig extends RouteConfigPrefab {
     }) => string;
     /** Children routes. */
     children: RouteConfig[];
+    /** Route meta object. */
+    meta: {
+        [k: string]: string;
+    };
 }
 /**
  * Create route config object.

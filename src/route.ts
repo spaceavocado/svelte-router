@@ -75,6 +75,8 @@ export interface RouteConfig extends RouteConfigPrefab {
   generator: (params: {[k: string]: string}) => string;
   /** Children routes. */
   children: RouteConfig[];
+  /** Route meta object. */
+  meta: {[k: string]: string};
 }
 
 /**
@@ -125,7 +127,7 @@ export function createRouteConfig(prefab: RouteConfigPrefab): RouteConfig {
     async: tc.not.isNullOrUndefined(prefab.component)
       && tc.isPromise(prefab.component),
     name: prefab.name,
-    meta: prefab.meta,
+    meta: prefab.meta || {},
     props: prefab.props,
     children: [],
     parent: null,
