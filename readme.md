@@ -9,6 +9,9 @@ Simple [Svelte](#https://svelte.dev) Router for Single Page Applications (SPA), 
 
 To see the details code documentation, please read the [Code Documentation](https://spaceavocado.github.io/svelte-router/).
 
+## Notice
+> This project is not being actively maintained by the author of package. Any community contribution would be more than welcomed keep this project alive.
+
 **Quick Links**
 * [Webpack Setup](#webpack-setup)
 * [Webpack Boilerplate Project Template](#webpack-boilerplate-project-template)
