@@ -82,7 +82,7 @@ export interface RouterConfig {
  */
 type navigationGuardNextAction = undefined | boolean | Error | string | object;
 type navigationGuardFunction = (from: Route | null, to: Route | null,
-  next: (action: navigationGuardNextAction) => void) => void;
+  next: (action?: navigationGuardNextAction) => void) => void;
 
 /**
  * Navigation Guard entry.

@@ -3,7 +3,7 @@
  * @module svelte-router
  */
 
-import {readable} from 'svelte/store';
+import {Readable, readable} from 'svelte/store';
 
 // Internals
 import {HISTORY_MODE as ROUTER_MODE, HASH_TYPE} from './history';
@@ -32,7 +32,7 @@ export type {RawLocation} from './location';
  * Router store.
  * Svelte readable store of type [[Router]].
  */
-export let router: object;
+export let router: Readable<Router>;
 
 /**
  * Create a router in read-only store.

@@ -32,6 +32,11 @@ export type routeRedirect = null | string | object | ((to: Route) => string);
  */
 type routeProps = boolean | object | ((route: Route) => {[k: string]: string});
 export type componentModule = {default: object};
+export type componentType =
+  | boolean
+  | (() => object)
+  | object
+  | Promise<componentModule>
 
 /**
  * Route config prefab used to generate Route RouteConfig.
@@ -46,7 +51,7 @@ export interface RouteConfigPrefab {
    * Svelte component.
    * Component constructor function or async component resolver
    */
-  component?: boolean | (() => object) | Promise<componentModule>;
+  component?: componentType;
   /** Route meta object. */
   meta?: {[k: string]: string};
   props?: routeProps;
@@ -149,7 +154,7 @@ export interface Record {
   path: string;
   redirect?: routeRedirect;
   /** Svelte component. */
-  component: boolean | (() => object) | Promise<componentModule>;
+  component: componentType;
   /** Lazy loaded component flag. */
   async: boolean;
   /** Route meta object. */
