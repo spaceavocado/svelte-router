@@ -102,7 +102,7 @@ export function createLocation(rawLocation: RawLocation): Location {
     if (parsedURL.hash.length > 0) {
       location.hash = parsedURL.hash;
     }
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`invalid URL, ${e.toString()}`);
   }
 

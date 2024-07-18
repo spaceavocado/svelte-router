@@ -203,7 +203,7 @@ export function createRouteRecord(
       collection: {[k: string]: string | number},
       index: number): void => {
     index++;
-    if (index < params.length) {
+    if (index < (params as string[]).length) {
       collection[key] = resolveNumber((params as string[])[index]);
     }
   };
