@@ -11,3 +11,4 @@ npm-debug.log
 # VS Code
 *.vscode
 *.code-workspace
+types
