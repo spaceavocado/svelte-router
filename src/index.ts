@@ -24,6 +24,10 @@ export {
   trimPrefix,
 };
 
+export type {RouterConfig} from './router';
+export type {Route, RouteConfigPrefab} from './route';
+export type {RawLocation} from './location';
+
 /**
  * Router store.
  * Svelte readable store of type [[Router]].
