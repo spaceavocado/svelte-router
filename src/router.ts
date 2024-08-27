@@ -82,7 +82,7 @@ export interface RouterConfig {
  */
 type navigationGuardNextAction = undefined | boolean | Error | string | object;
 type navigationGuardFunction = (from: Route | null, to: Route | null,
-  next: (action: navigationGuardNextAction) => void) => void;
+  next: (action?: navigationGuardNextAction) => void) => void;
 
 /**
  * Navigation Guard entry.
@@ -298,7 +298,7 @@ export class Router {
     let location;
     try {
       location = this.rawLocationToLocation(rawLocation, false);
-    } catch (e) {
+    } catch (e: any) {
       if (onAbort && tc.isFunction(onAbort)) {
         onAbort();
       }
@@ -328,7 +328,7 @@ export class Router {
     let location;
     try {
       location = this.rawLocationToLocation(rawLocation, true);
-    } catch (e) {
+    } catch (e: any) {
       if (onAbort && tc.isFunction(onAbort)) {
         onAbort();
       }
@@ -410,7 +410,7 @@ export class Router {
     let url = '';
     try {
       url = match.generator(rawLocation.params || {});
-    } catch (e) {
+    } catch (e: any) {
       throw new Error(`invalid route parameters, :${e.toString()}`);
     }
 
@@ -442,7 +442,7 @@ export class Router {
         route = createRouteConfig(prefabs[i]);
         route.parent = null;
         routes.push(route);
-      } catch (e) {
+      } catch (e: any) {
         console.error(new Error(`invalid route, ${e.toString()}`));
         continue;
       }
@@ -521,7 +521,7 @@ export class Router {
     let location;
     try {
       location = createLocation(rawLocation as RawLocation);
-    } catch (e) {
+    } catch (e: any) {
       throw e;
     }
     return location;
@@ -560,7 +560,7 @@ export class Router {
       // to validate the route and to get the params
       try {
         location.path = match.generator(location.params);
-      } catch (e) {
+      } catch (e: any) {
         if (onAbort != null) {
           onAbort();
         }
